@@ -1,0 +1,57 @@
+{
+  "name": "schat",
+  "version": "0.0.0",
+  "description": "Cripted Secure Chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node node_modules/nodemon/bin/nodemon.js --watch server.js --watch app server.js",
+    "front": "webpack-dev-server",
+    "build": "NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptretyakov/schat.git"
+  },
+  "keywords": [
+    "crypted",
+    "secure",
+    "chat"
+  ],
+  "author": "Pavel Tretyakov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ptretyakov/schat/issues"
+  },
+  "homepage": "https://github.com/ptretyakov/schat#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "babel-core": "^6.13.2",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-runtime": "^6.12.0",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.2.2",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-react": "^6.0.0",
+    "node-notifier": "^4.6.1",
+    "nodemon": "^1.11.0",
+    "postcss-loader": "^1.2.2",
+    "precss": "^1.4.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "^0.13.1",
+    "webpack-dev-server": "^1.15.1",
+    "webpack-notifier": "^1.5.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.20.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
