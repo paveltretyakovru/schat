@@ -1,1 +1,1 @@
-# Elementary React Polette With Hot Loader
+# React Polette
