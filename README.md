@@ -1,1 +1,1 @@
-# React Polette
+# React Redux Polette With Hot Loader 
