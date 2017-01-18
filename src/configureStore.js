@@ -1,13 +1,16 @@
-import * as reducers from './reducers'
-import	thunk	from	'redux-thunk'
-import createLogger from 'redux-logger'
-import { createStore, combineReducers, applyMiddleware} from 'redux'
+import * as reducers from './reducers';
+import	thunk	from	'redux-thunk';
+import createLogger from 'redux-logger';
+import { hashHistory } from 'react-router';
+import { createStore, combineReducers, applyMiddleware} from 'redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 
-const logger = createLogger()
+const router = routerMiddleware(hashHistory);
+const logger = createLogger();
 
 let middlewares = (NODE_ENV === 'development')
-  ? applyMiddleware(logger, thunk)
-  : applyMiddleware(thunk)
+  ? applyMiddleware(logger, thunk, router)
+  : applyMiddleware(thunk, router);
 
 export function configureStore() {
 
@@ -15,15 +18,16 @@ export function configureStore() {
   const Store = createStore(
     combineReducers({
       ...reducers,
+      routing: routerReducer,
     }),
     middlewares
-  )
+  );
 
   if	(module.hot)	{
 		module.hot.accept('./reducers',	()	=>	{
-			const	nextRootReducer	=	require('./reducers').default
-			Store.replaceReducer(nextRootReducer)
-		})
+			const	nextRootReducer	=	require('./reducers').default;
+			Store.replaceReducer(nextRootReducer);
+		});
 	}
 
   return Store

@@ -12,6 +12,16 @@ class App extends Component {
 
     return <div>
       <User name={user.name} updateName={updateName} />
+
+      <div>
+        <h1>App container</h1>
+        <div>
+          <p>children containers and components:</p>
+          <div>
+            { this.props.children }
+          </div>
+        </div>
+      </div>
     </div>;
   }
 }
