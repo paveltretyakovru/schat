@@ -27,6 +27,7 @@ ___
 
 > !!! Every application versions using hot loader plugin !!!
 ___
+
 ## Checkout between versions
 
 ### Full React-Router-Redux-Material-Ui version of application
