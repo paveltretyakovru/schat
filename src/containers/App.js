@@ -1,54 +1,42 @@
 // Core imports
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 
 // Material-ui imports
+import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
-// Self system imports
-import User from '../components/User';
-import * as userActions from '../actions/user';
+import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 class App extends Component {
   componentWillMount() {
-    injectTapEventPlugin()
+    injectTapEventPlugin();
   }
   
   render() {
-    const { user } = this.props;
-    const { updateName } = this.props.userActions;
 
     return(<MuiThemeProvider>
-      <div>
-        <User name={user.name} updateName={updateName} />
-
-        <div>
-          <h1>App container</h1>
-          <div>
-            <p>children containers and components:</p>
-            <div>
-              { this.props.children }
-            </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <Card>
+              <CardMedia
+                overlay={<CardTitle title="Encrypted chat" subtitle="Fuck the system!" />}
+              >
+                <img src="http://fabrikadialogov.ru/wp-content/uploads/2011/12/tumblr_lrh6m3fuxV1r372c2.jpeg" />
+              </CardMedia>
+              <CardText>
+                { this.props.children }
+              </CardText>
+              <CardActions>
+                <FlatButton label="Action1" />
+                <FlatButton label="Action2" />
+              </CardActions>
+            </Card>
           </div>
         </div>
-
       </div>
     </MuiThemeProvider>);
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    user: state.user,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    userActions: bindActionCreators(userActions, dispatch),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
