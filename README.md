@@ -1,1 +1,1 @@
-# React Polette
+# React Boilerplate
