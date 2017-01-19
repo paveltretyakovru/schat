@@ -1,1 +1,1 @@
-# React Boilerplate
+# React Router Redux Boilerplate With Hot Loader
