@@ -32,23 +32,28 @@ ___
 
 ### Full React-Router-Redux-Material-Ui version of application
 ```
-$git checkout -b dev origin/dev
+$ git checkout -b dev origin/dev
+$ npm install
 ```
 
 ### React version of application
 ```
 $ git checkout -b elementary-app origin/elementary-app
+$ npm install
 ```
 ### React-Redux version of application
 ```
 $ git checkout -b elementary-redux-app origin/elementary-redux-app
+$ npm install
 ```
 ### React-Router-Redux version of application
 ```
 $ git checkout -b elementary-redux-router-app origin/elementary-redux-router-app
+$ npm install
 ```
 
 ### React-Router-Redux-Material-Ui version of application
 ```
 $ git checkout -b elementary-redux-router-materialui-app origin/elementary-redux-router-materialui-app
+$ npm install
 ```
