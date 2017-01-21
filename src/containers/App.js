@@ -1,14 +1,9 @@
 // Core imports
-import React, { Component } from 'react';
-
-// Material-ui imports
-// import IconButton from 'material-ui/IconButton';
-// import TextField from 'material-ui/TextField';
-// import FlatButton from 'material-ui/FlatButton';
-// import ContentSend from 'material-ui/svg-icons/content/send';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-// import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
+import Header from '../components/Header';
 
 import '../styles/app.css';
 
@@ -21,6 +16,8 @@ class App extends Component {
 
     return(<MuiThemeProvider>
       <div className="container">
+        <Header />
+
         { this.props.children }
       </div>
     </MuiThemeProvider>);
