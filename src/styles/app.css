@@ -1,0 +1,37 @@
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; 
+}
+
+html, body  { 
+	height: 100%;
+	width: 100%;
+}
+
+.eqWrap {
+	display: flex;
+}
+
+/*.eq:nth-of-type(odd) {background: yellow;}
+.eq:nth-of-type(even) {background: lightblue;}*/
+
+.equalHW {
+	flex: 1;
+}
+
+.equalHMWrap {
+	justify-content: space-between;
+}
+
+#message-field-container {
+    bottom: 0;
+    position: fixed;
+}
+
+#message-page-container {
+    position: relative;
+    max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
