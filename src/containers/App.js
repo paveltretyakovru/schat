@@ -1,10 +1,9 @@
 // Core imports
-import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import Header from '../components/Header';
+import Header from './Header';
 
 import '../styles/app.css';
 
@@ -16,7 +15,7 @@ class App extends Component {
   render() {
     return(<MuiThemeProvider>
       <div id="app-container" className="container">
-        <Header title={this.props.headerTitle} />
+        <Header />
         
         <main className="row">
           <div id="app-content" className="col-xs-12 col-md-12">
@@ -29,10 +28,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    headerTitle: state.app.headerTitle,
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

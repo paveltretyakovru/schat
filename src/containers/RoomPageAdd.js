@@ -13,6 +13,7 @@ import '../styles/roomAddPage.css';
 class RoomPageAdd extends Component {
   componentWillMount() {
     this.props.appActions.updateHeaderTitle('Add new crypted chat');
+    this.props.appActions.updateHeaderLeftIcon('close');
   }
 
   render() {

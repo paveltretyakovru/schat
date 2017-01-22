@@ -14,13 +14,14 @@ import * as roomActions from '../actions/room';
 class IndexPage extends Component {
     componentWillMount() {
         this.props.appActions.updateHeaderTitle('Encrypted Chat');
+        this.props.appActions.updateHeaderLeftIcon('menu');
     }
 
     render() {
         const { routeToAddRoom } = this.props.roomActions;
 
         return(<div>
-            <List>
+            <List className="animated fadeInLeft">
                 <Subheader>Rooms List</Subheader>
                 <ListItem
                     primaryText="Brendan Lim"
@@ -46,11 +47,12 @@ class IndexPage extends Component {
 
             <div className="float-button">
                 <FloatingActionButton
-                    secondary={true}
+                    mini={true}
                     onClick={() => routeToAddRoom()}
+                    secondary={true}
                     className="animated zoomIn"
                 >
-                    <ContentAdd />
+                    <ContentAdd className="animated rotateIn" />
                 </FloatingActionButton>
             </div>
         </div>);
