@@ -8,9 +8,14 @@ import {List, ListItem} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
+import * as appActions from '../actions/app';
 import * as roomActions from '../actions/room';
 
 class IndexPage extends Component {
+    componentWillMount() {
+        this.props.appActions.updateHeaderTitle('Encrypted Chat');
+    }
+
     render() {
         const { routeToAddRoom } = this.props.roomActions;
 
@@ -42,7 +47,7 @@ class IndexPage extends Component {
             <div className="float-button">
                 <FloatingActionButton
                     secondary={true}
-                    onClick={ () => routeToAddRoom() }
+                    onClick={() => routeToAddRoom()}
                     className="animated zoomIn"
                 >
                     <ContentAdd />
@@ -58,6 +63,7 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
     return {
+        appActions: bindActionCreators(appActions, dispatch),
         roomActions: bindActionCreators(roomActions, dispatch),
     }
 }
