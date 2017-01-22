@@ -35,9 +35,7 @@ class RoomPageAdd extends Component {
           floatingLabelText="Room Key"
         />
         <div id="room-add-form-buttons">
-          <FlatButton label="Random" />          
-          <FlatButton label="Done" primary={true} />
-          <FlatButton label="Cancel" secondary={true} />
+          <FlatButton label="Random" />
         </div>
       </div>
     </div>);
