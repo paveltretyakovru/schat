@@ -1,0 +1,20 @@
+html, body { height: 100% }
+body { font-family: 'Roboto', sans-serif }
+
+main { display: flex; flex: 6 !important }
+header { max-height: 64px; }
+header, footer { flex: 1 !important }
+
+/* IDS */
+#root { height: 100% }
+#app-container {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+#app-content {
+    flex: 3;
+}
+
+/* CLASSES */

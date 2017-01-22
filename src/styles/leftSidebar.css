@@ -1,0 +1,8 @@
+#left-sidebar {
+    flex: 1;
+    min-width: 250px;
+}
+
+#left-sidebar > img {
+    width: 100%;
+}

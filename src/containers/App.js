@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import Header from '../components/Header';
-import LeftSidebar from '../components/LeftSidebar';
 
 import '../styles/app.css';
 
@@ -14,17 +13,14 @@ class App extends Component {
   }
   
   render() {
-
     return(<MuiThemeProvider>
-      <div className="container">
-        
-        {/* Header component */}
+      <div id="app-container" className="container">
         <Header />
-
-        {/* Main container */}
-        <main>
-          <LeftSidebar />
-          { this.props.children }
+        
+        <main className="row">
+          <div id="app-content" className="col-xs-12 col-md-12">
+            { this.props.children }
+          </div>
         </main>
 
       </div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class IndexPage extends Component {
     render() {
         return(<div>
-            IndexPage content
+            Index page content
         </div>);
     }
 }
