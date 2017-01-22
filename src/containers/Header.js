@@ -10,6 +10,12 @@ import IconSave from '../components/IconSave';
 import IconClose from '../components/IconClose';
 
 class Header extends Component {
+    getStyle() {
+        return {
+            iconStyleRight: { marginTop: 16 },
+        }
+    }
+
     render() {
         let { headerTitle, headerLeftIcon, headerRightIcon } = this.props;
 
