@@ -34,7 +34,7 @@ class IndexPage extends Component {
             </List>
 
             <div className="float-button">
-                <FloatingActionButton mini={true} secondary={true}>
+                <FloatingActionButton secondary={true}>
                     <ContentAdd />
                 </FloatingActionButton>
             </div>

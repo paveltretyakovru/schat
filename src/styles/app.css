@@ -2,7 +2,7 @@ html, body { height: 100% }
 body { font-family: 'Roboto', sans-serif }
 
 main { display: flex; flex: 6 !important }
-header { max-height: 64px; }
+header { max-height: 64px; min-height: 64px; }
 header, footer { flex: 1 !important }
 
 /* IDS */
@@ -18,7 +18,7 @@ header, footer { flex: 1 !important }
 }
 
 .float-button {
-  top: 44px; /* Adjust to where you want it */
+  top: 36px; /* Adjust to where you want it */
   right: 24px; /* Adjust to where you want it */
   z-index: 9999;
   position: fixed;
