@@ -6,7 +6,7 @@ export default class Header extends Component {
         return(<header className="row">
             <AppBar
                 title="Encrypted chat"
-                showMenuIconButton={ false }
+                // showMenuIconButton={ false }
             />
         </header>);
     }
