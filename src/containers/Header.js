@@ -20,7 +20,12 @@ class Header extends Component {
                 iconElementLeft={((type) => {
                     switch(type) {
                         case 'menu': return <IconMenu />;
-                        case 'close': return <IconClose />;
+                        
+                        case 'close':
+                            return <IconClose
+                                action={this.props.appActions.routeToBack}
+                            />;
+                        
                         default: return <IconMenu />;
                     }
                 })(headerLeftIcon)}

@@ -1,3 +1,5 @@
+import { goBack } from 'react-router-redux';
+
 import {
   UPDATE_HEADER_TITLE,
   UPDATE_HEADER_LEFT_ICON,
@@ -12,5 +14,11 @@ export function updateHeaderTitle(title = 'Empty title parameter') {
 export function updateHeaderLeftIcon(title = 'menu') {
   return (dispatch) => {
     return dispatch({ type: UPDATE_HEADER_LEFT_ICON, payload: title});
+  }
+}
+
+export function routeToBack() {
+  return (dispatch) => {
+    return dispatch(goBack());
   }
 }

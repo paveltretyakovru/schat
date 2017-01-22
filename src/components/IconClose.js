@@ -5,7 +5,11 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 class IconClose extends Component {
   render() {
-    return(<IconButton tooltip="Back" className="animated rotateIn">
+    return(<IconButton
+      onClick={this.props.action}
+      tooltip="Back"
+      className="animated rotateIn"
+    >
       <NavigationClose color={white} />
     </IconButton>);
   }
