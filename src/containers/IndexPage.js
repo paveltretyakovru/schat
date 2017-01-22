@@ -43,6 +43,7 @@ class IndexPage extends Component {
                 <FloatingActionButton
                     secondary={true}
                     onClick={ () => routeToAddRoom() }
+                    className="animated zoomIn"
                 >
                     <ContentAdd />
                 </FloatingActionButton>

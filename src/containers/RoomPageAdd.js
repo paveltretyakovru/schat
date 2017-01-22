@@ -7,7 +7,7 @@ import '../styles/roomAddPage.css';
 
 export default class RoomPageAdd extends Component {
   render() {
-    return(<div className="row center-xs">
+    return(<div className="row center-xs animated fadeInLeft">
       <div className="col-md-6 col-xs-6">
         <TextField
           hintText="Room title"
@@ -18,6 +18,11 @@ export default class RoomPageAdd extends Component {
           hintText="Room ID"
           fullWidth={ true }
           floatingLabelText="Room ID"
+        />
+        <TextField
+          hintText="Room Key"
+          fullWidth={ true }
+          floatingLabelText="Room Key"
         />
         <div id="room-add-form-buttons">
           <FlatButton label="Random" />          
