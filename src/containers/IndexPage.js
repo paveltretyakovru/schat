@@ -15,6 +15,7 @@ class IndexPage extends Component {
     componentWillMount() {
         this.props.appActions.updateHeaderTitle('Encrypted Chat');
         this.props.appActions.updateHeaderLeftIcon('menu');
+        this.props.appActions.updateHeaderRightIcon('');
     }
 
     render() {

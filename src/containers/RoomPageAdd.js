@@ -14,6 +14,7 @@ class RoomPageAdd extends Component {
   componentWillMount() {
     this.props.appActions.updateHeaderTitle('Add new crypted chat');
     this.props.appActions.updateHeaderLeftIcon('close');
+    this.props.appActions.updateHeaderRightIcon('save');
   }
 
   render() {

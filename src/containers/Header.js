@@ -1,5 +1,4 @@
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
@@ -7,11 +6,12 @@ import { bindActionCreators } from 'redux';
 import * as appActions from '../actions/app';
 
 import IconMenu from '../components/IconMenu';
+import IconSave from '../components/IconSave';
 import IconClose from '../components/IconClose';
 
 class Header extends Component {
     render() {
-        let { headerTitle, headerLeftIcon } = this.props;
+        let { headerTitle, headerLeftIcon, headerRightIcon } = this.props;
 
         return(<header className="row">
             <AppBar
@@ -30,7 +30,17 @@ class Header extends Component {
                     }
                 })(headerLeftIcon)}
                 
-                iconElementRight={<FlatButton label="Save" />}
+                iconElementRight={((type) => {
+                    switch(type) {
+                        case 'save': return <IconSave />;
+                        
+                        default: return null;
+                    }
+                })(headerRightIcon)}
+
+                iconStyleRight={{
+                    marginTop: 16,
+                }}
             />
         </header>);
     }
@@ -40,6 +50,7 @@ function mapStateToProps(state) {
   return {
     headerTitle: state.app.headerTitle,
     headerLeftIcon: state.app.headerLeftIcon,
+    headerRightIcon: state.app.headerRightIcon,
   }
 }
 
