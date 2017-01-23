@@ -6,11 +6,36 @@ import { bindActionCreators } from 'redux';
 
 // Actions
 import * as appActions from '../actions/app';
+import makeId from '../helpers/makeId';
 
-// STYLE SHEET
+// Style sheets
 import '../styles/roomAddPage.css';
 
+// Array for generating add room form
+const fieldsData = [
+  {
+    key: 'id',
+    hintText: 'Room ID',
+    floatText: 'Room ID for generating room link',
+  },
+  {
+    key: 'key',
+    hintText: 'Room Key',
+    floatText: 'Room Key to encrypt your messages',
+  },
+  {
+    key: 'title',
+    hintText: 'Room title',
+    floatText: 'Room title for your rooms list',
+  },
+];
+
 class RoomPageAdd extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { id: '', key: '', title: '' };
+  }
+
   componentWillMount() {
     this.props.appActions.updateHeaderTitle('Add new room');
     this.props.appActions.updateHeaderLeftIcon('close');
@@ -18,29 +43,55 @@ class RoomPageAdd extends Component {
   }
 
   render() {
+    let fieldsComponents = this.generateFormTextFields();
+
     return(<div className="row center-xs animated fadeInLeft">
       <div className="col-md-4 col-xs-11">
-        <TextField
-          hintText="Room title"
-          fullWidth={ true }
-          floatingLabelText="Room title for your rooms list"
-        />
-        <TextField
-          hintText="Room ID"
-          fullWidth={ true }
-          floatingLabelText="Room ID for generating room link"
-        />
-        <TextField
-          hintText="Room Key"
-          fullWidth={ true }
-          floatingLabelText="Room Key to encrypt your messages"
-        />
+        
+        {/* Listing fieldsComponents array */}
+        {fieldsComponents}
+        
         <div id="room-add-form-buttons">
-          <FlatButton primary={true} label="Generate random data" />
+          <FlatButton
+            label="Generate random data"
+            primary={true}
+            onClick={::this.handleClickGenerateRandomData}
+          />
         </div>
       </div>
     </div>);
   }
+
+  // ============================ Handlers ====================================
+  handleClickGenerateRandomData() {
+    return this.generateRandomFieldsValues();
+  }
+
+  handleChangeInput(key, newValue) {
+    return this.setState({ ...this.state,  [key]: newValue });
+  }
+  // ##########################################################################
+
+  // ============================ Helpers methods =============================
+  generateRandomFieldsValues() {
+    return this.setState({ id: makeId(), key: makeId(), title: makeId() });
+  }
+  
+  generateFormTextFields() {
+    return fieldsData.map((value, key) =>
+      <TextField
+        key={key}
+        value={this.state[value.key]}
+        fullWidth={true}
+        floatingLabelText={value.floatText}
+        floatingLabelFixed={true}
+        
+        onChange={(event, newValue) => 
+          this.handleChangeInput(value.key, newValue)
+        }
+    />);
+  }
+  // ##########################################################################
 }
 
 function mapStateToProps(state) {
