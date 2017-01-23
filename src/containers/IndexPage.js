@@ -21,34 +21,24 @@ class IndexPage extends Component {
     render() {
         const { routeToAddRoom } = this.props.roomActions;
 
-        return(<div>
+        return(<div style={{position: 'relative'}}>
             <List className="animated fadeInLeft">
                 <Subheader>Rooms List</Subheader>
-                <ListItem
-                    primaryText="Brendan Lim"
-                    rightIcon={<CommunicationChatBubble />}
-                />
-                <ListItem
-                    primaryText="Eric Hoffman"
-                    rightIcon={<CommunicationChatBubble />}
-                />
-                <ListItem
-                    primaryText="Grace Ng"
-                    rightIcon={<CommunicationChatBubble />}
-                />
-                <ListItem
-                    primaryText="Kerem Suer"
-                    rightIcon={<CommunicationChatBubble />}
-                />
-                <ListItem
-                    primaryText="Raquel Parrado"
-                    rightIcon={<CommunicationChatBubble />}
-                />
+                {(() => {
+                    for (var room in this.props.rooms) {
+                        if (this.props.rooms.hasOwnProperty(room)) {
+                            return <ListItem
+                                primaryText={this.props.rooms[room].title}
+                                rightIcon={<CommunicationChatBubble />}
+                            />
+                        }
+                    }
+                })()}
             </List>
 
             <div className="float-button">
                 <FloatingActionButton
-                    mini={true}
+                    // mini={true}
                     onClick={() => routeToAddRoom()}
                     secondary={true}
                     className="animated zoomIn"
@@ -60,8 +50,10 @@ class IndexPage extends Component {
     }
 }
 
-function mapStateToProps() {
-    return { }
+function mapStateToProps(state) {
+    return {
+        rooms: state.rooms,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
