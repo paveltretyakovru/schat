@@ -8,8 +8,8 @@ import {List, ListItem} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
-import * as appActions from '../actions/app';
-import * as roomActions from '../actions/room';
+import * as appActions from '../app/AppActions';
+import * as roomActions from '../room/RoomActions';
 
 class IndexContainer extends Component {
     componentWillMount() {
@@ -23,12 +23,12 @@ class IndexContainer extends Component {
 
         return(<div style={{position: 'relative'}}>
             <List className="animated fadeInLeft">
-                <Subheader>Rooms List</Subheader>
+                <Subheader>room List</Subheader>
                 {(() => {
-                    for (var room in this.props.rooms) {
-                        if (this.props.rooms.hasOwnProperty(room)) {
+                    for (var room in this.props.room) {
+                        if (this.props.room.hasOwnProperty(room)) {
                             return <ListItem
-                                primaryText={this.props.rooms[room].title}
+                                primaryText={this.props.room[room].title}
                                 rightIcon={<CommunicationChatBubble />}
                             />
                         }
@@ -52,7 +52,7 @@ class IndexContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        rooms: state.rooms,
+        room: state.room,
     }
 }
 

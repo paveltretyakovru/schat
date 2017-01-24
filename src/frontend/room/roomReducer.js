@@ -1,12 +1,12 @@
 import {
     ADD_ROOM,
-} from '../constants/rooms';
+} from './RoomConstants';
 
 const initState = [
     {
         id: 'idrooom3242342',
         key: 'somekeymessag',
-        title: 'Titile room',
+        title: 'Titile room title',
     },
 ];
 

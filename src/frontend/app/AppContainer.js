@@ -5,7 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import Header from './Header';
 
-import '../styles/app.css';
+import './App.css';
 
 class App extends Component {
   componentWillMount() {

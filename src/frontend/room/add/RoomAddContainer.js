@@ -5,11 +5,11 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import * as appActions from '../actions/app';
-import makeId from '../helpers/makeId';
+import * as appActions from '../../app/AppActions';
+import makeId from '../../../helpers/makeId';
 
 // Style sheets
-import '../styles/roomAddPage.css';
+import './RoomAdd.css';
 
 // Array for generating add room form
 const fieldsData = [
@@ -30,7 +30,7 @@ const fieldsData = [
   },
 ];
 
-class RoomPageAdd extends Component {
+class RoomAddContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { id: '', key: '', title: '' };
@@ -106,4 +106,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPageAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomAddContainer);

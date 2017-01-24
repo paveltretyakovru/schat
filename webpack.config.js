@@ -12,15 +12,16 @@ const ENTRY = (NODE_ENV == 'development')
     'webpack-dev-server/client?http://localhost:8080/',
     'webpack/hot/dev-server',
     'babel-polyfill',
-    './src/index',
+    './src/frontend/app/index',
   ]
   : [
     'babel-polyfill',
-    './src/index',
+    './src/frontend/app/index',
   ]
 
 module.exports = {
-  devtool: NODE_ENV == 'development' ? 'cheap-module-eval-source-map' : null,
+  // devtool: NODE_ENV == 'development' ? 'cheap-module-eval-source-map' : null,
+  devtool: NODE_ENV == 'development' ? '#cheap-module-eval-source-map' : null,
   entry: ENTRY,
   output: {
     path: path.join(__dirname, 'public'),

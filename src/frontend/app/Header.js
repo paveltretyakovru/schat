@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
-import * as appActions from '../actions/app';
+import * as appActions from './AppActions';
 
-import IconMenu from '../components/IconMenu';
-import IconSave from '../components/IconSave';
-import IconClose from '../components/IconClose';
+import IconMenu from './components/IconMenu';
+import IconSave from './components/IconSave';
+import IconClose from './components/IconClose';
 
 class Header extends Component {
     getStyle() {
