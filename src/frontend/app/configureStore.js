@@ -6,7 +6,7 @@ import { routerMiddleware } from 'react-router-redux';
 import { createStore, applyMiddleware} from 'redux';
 
 // Reducers
-import rootReduser from './rootReducer';
+import rootReducer from './rootReducer';
 
 // Init variables 
 const router = routerMiddleware(hashHistory);
@@ -20,7 +20,7 @@ export function configureStore() {
 
   // Add the reducer to your store on the `routing` key
   const Store = createStore(
-    rootReduser,
+    rootReducer,
     middlewares
   );
 
