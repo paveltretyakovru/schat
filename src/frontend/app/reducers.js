@@ -1,1 +1,0 @@
-export rooms from '../rooms/roomsReducer';

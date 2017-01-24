@@ -1,14 +1,14 @@
-// Reducers
-// import * as reducers from './reducers';
-import appReducer from './appReducer';
-import roomsReducer from '../rooms/roomsReducer';
-
+// Libs
 import	thunk	from	'redux-thunk';
 import createLogger from 'redux-logger';
 import { hashHistory } from 'react-router';
-import { createStore, combineReducers, applyMiddleware} from 'redux';
-import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
+import { createStore, applyMiddleware} from 'redux';
 
+// Reducers
+import rootReduser from './rootReducer';
+
+// Init variables 
 const router = routerMiddleware(hashHistory);
 const logger = createLogger();
 
@@ -20,18 +20,13 @@ export function configureStore() {
 
   // Add the reducer to your store on the `routing` key
   const Store = createStore(
-    combineReducers({
-      // ...reducers,
-      app: appReducer,
-      room: roomsReducer,
-      routing: routerReducer,
-    }),
+    rootReduser,
     middlewares
   );
 
   if	(module.hot)	{
-		module.hot.accept('./reducers',	()	=>	{
-			const	nextRootReducer	=	require('./reducers').default;
+		module.hot.accept('./rootReducer',	()	=>	{
+			const	nextRootReducer	=	require('./rootReducer').default;
 			Store.replaceReducer(nextRootReducer);
 		});
 	}
