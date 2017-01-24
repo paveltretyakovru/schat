@@ -9,7 +9,7 @@ import * as appActions from '../../app/AppActions';
 import makeId from '../../../helpers/makeId';
 
 // Style sheets
-import './RoomAdd.css';
+import './RoomsAdd.css';
 
 // Array for generating add room form
 const fieldsData = [

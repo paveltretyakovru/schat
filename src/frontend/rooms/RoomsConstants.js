@@ -1,0 +1,1 @@
+export const ADD_ROOM_ROUTE = '/rooms/add';

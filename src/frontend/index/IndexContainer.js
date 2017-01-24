@@ -9,7 +9,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
 import * as appActions from '../app/AppActions';
-import * as roomActions from '../room/RoomActions';
+import * as roomsActions from '../rooms/RoomsActions';
 
 class IndexContainer extends Component {
     componentWillMount() {
@@ -19,7 +19,7 @@ class IndexContainer extends Component {
     }
 
     render() {
-        const { routeToAddRoom } = this.props.roomActions;
+        const { routeToAddRoom } = this.props.roomsActions;
 
         return(<div style={{position: 'relative'}}>
             <List className="animated fadeInLeft">
@@ -59,7 +59,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         appActions: bindActionCreators(appActions, dispatch),
-        roomActions: bindActionCreators(roomActions, dispatch),
+        roomsActions: bindActionCreators(roomsActions, dispatch),
     }
 }
 

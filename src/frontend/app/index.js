@@ -8,9 +8,9 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 // Containers
 import App from './AppContainer';
-import RoomContainer from '../room/RoomContainer';
+import RoomsContainer from '../rooms/RoomsContainer';
 import IndexContainer from '../index/IndexContainer';
-import RoomAddContainer from '../room/add/RoomAddContainer';
+import RoomsAddContainer from '../rooms/add/RoomsAddContainer';
 
 // Components
 import Page404 from './components/404';
@@ -29,8 +29,8 @@ ReactDOM.render(
                 <IndexRoute component={IndexContainer} />
                 
                 {/* Rooms routes */}
-                <Route path="/room" component={RoomContainer} />                
-                <Route path="/room/add" component={RoomAddContainer} />
+                <Route path="/rooms" component={RoomsContainer} />                
+                <Route path="/rooms/add" component={RoomsAddContainer} />
 
                 <Route path="*" component={Page404} />
             </Route>

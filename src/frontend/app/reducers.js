@@ -1,1 +1,1 @@
-export room from '../room/roomReducer';
+export rooms from '../rooms/roomsReducer';

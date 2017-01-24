@@ -1,7 +1,7 @@
 // Reducers
 // import * as reducers from './reducers';
 import appReducer from './appReducer';
-import roomReducer from '../room/roomReducer';
+import roomsReducer from '../rooms/roomsReducer';
 
 import	thunk	from	'redux-thunk';
 import createLogger from 'redux-logger';
@@ -23,7 +23,7 @@ export function configureStore() {
     combineReducers({
       // ...reducers,
       app: appReducer,
-      room: roomReducer,
+      room: roomsReducer,
       routing: routerReducer,
     }),
     middlewares
