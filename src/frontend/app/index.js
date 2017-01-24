@@ -7,11 +7,10 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 // Containers
-import App from './containers/App';
-import RoomPage from './containers/RoomPage';
-import LoginPage from './containers/LoginPage';
-import IndexPage from './containers/IndexPage';
-import RoomPageAdd from './containers/RoomPageAdd';
+import App from './AppContainer';
+import RoomPage from '../room/RoomContainer';
+import IndexPage from '../index/IndexContainer';
+import RoomPageAdd from './room/add/RoomAddContainer';
 
 // Components
 import Page404 from './components/404';
@@ -28,7 +27,6 @@ ReactDOM.render(
         <Router history={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={IndexPage} />
-                <Route path="/login" component={LoginPage} />
                 
                 {/* Rooms routes */}
                 <Route path="/room" component={RoomPage} />                

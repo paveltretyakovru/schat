@@ -1,4 +1,8 @@
-import * as reducers from './reducers';
+// Reducers
+// import * as reducers from './reducers';
+import appReducer from './appReducer';
+import roomReducer from './roomReducer';
+
 import	thunk	from	'redux-thunk';
 import createLogger from 'redux-logger';
 import { hashHistory } from 'react-router';
@@ -17,7 +21,9 @@ export function configureStore() {
   // Add the reducer to your store on the `routing` key
   const Store = createStore(
     combineReducers({
-      ...reducers,
+      // ...reducers,
+      appReducer,
+      roomReducer,
       routing: routerReducer,
     }),
     middlewares

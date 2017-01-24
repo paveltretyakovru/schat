@@ -11,7 +11,7 @@ import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bu
 import * as appActions from '../actions/app';
 import * as roomActions from '../actions/room';
 
-class IndexPage extends Component {
+class IndexContainer extends Component {
     componentWillMount() {
         this.props.appActions.updateHeaderTitle('Encrypted Chat');
         this.props.appActions.updateHeaderLeftIcon('menu');
@@ -63,4 +63,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);
+export default connect(mapStateToProps, mapDispatchToProps)(IndexContainer);
