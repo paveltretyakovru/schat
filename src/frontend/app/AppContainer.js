@@ -3,7 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import Header from './Header';
+import HeaderContainer from './header/HeaderContainer';
 
 import './App.css';
 
@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return(<MuiThemeProvider>
       <div id="app-container" className="container">
-        <Header />
+        <HeaderContainer />
         
         <main className="row">
           <div id="app-content" className="col-xs-12 col-md-12">

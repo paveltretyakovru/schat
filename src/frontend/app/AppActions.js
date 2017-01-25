@@ -1,26 +1,12 @@
 import { goBack } from 'react-router-redux';
 
 import {
-  UPDATE_HEADER_TITLE,
-  UPDATE_HEADER_LEFT_ICON,
-  UPDATE_HEADER_RIGHT_ICON,
+  EXAMPLE_CONSTANT,
 } from './AppConstants';
 
-export function updateHeaderTitle(title = 'Empty title parameter') {
+export function exampleAction() {
   return (dispatch) => {
-    return dispatch({ type: UPDATE_HEADER_TITLE, payload: title })
-  }
-}
-
-export function updateHeaderLeftIcon(title = 'menu') {
-  return (dispatch) => {
-    return dispatch({ type: UPDATE_HEADER_LEFT_ICON, payload: title});
-  }
-}
-
-export function updateHeaderRightIcon(title = '') {
-  return (dispatch) => {
-    return dispatch({ type: UPDATE_HEADER_RIGHT_ICON, payload: title })
+    return dispatch({ type: EXAMPLE_CONSTANT, payload: 'example payload' });
   }
 }
 

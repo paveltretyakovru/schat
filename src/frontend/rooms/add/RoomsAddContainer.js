@@ -5,7 +5,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import * as appActions from '../../app/AppActions';
+import * as AppActions from '../../app/AppActions';
+import * as HeaderActions from '../../app/header/HeaderActions';
+
+// Helpers
 import makeId from '../../../helpers/makeId';
 
 // Style sheets
@@ -37,9 +40,9 @@ class RoomAddContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.appActions.updateHeaderTitle('Add new room');
-    this.props.appActions.updateHeaderLeftIcon('close');
-    this.props.appActions.updateHeaderRightIcon('save');
+    this.props.headerActions.updateHeaderTitle('Add new room');
+    this.props.headerActions.updateHeaderLeftIcon('close');
+    this.props.headerActions.updateHeaderRightIcon('save');
   }
 
   render() {
@@ -102,7 +105,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    appActions: bindActionCreators(appActions, dispatch),
+    appActions: bindActionCreators(AppActions, dispatch),
+    headerActions: bindActionCreators(HeaderActions, dispatch),
   }
 }
 

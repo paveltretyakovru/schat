@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
-import * as appActions from './AppActions';
+import * as AppActions from '../AppActions';
 
-import IconMenu from './components/IconMenu';
-import IconSave from './components/IconSave';
-import IconClose from './components/IconClose';
+import IconMenu from '../components/IconMenu';
+import IconSave from '../components/IconSave';
+import IconClose from '../components/IconClose';
 
-class Header extends Component {
+class HeaderContainer extends Component {
     getStyle() {
         return {
             iconStyleRight: { marginTop: 16 },
@@ -54,17 +54,17 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    headerTitle: state.app.headerTitle,
-    headerLeftIcon: state.app.headerLeftIcon,
-    headerRightIcon: state.app.headerRightIcon,
+    headerTitle: state.header.headerTitle,
+    headerLeftIcon: state.header.headerLeftIcon,
+    headerRightIcon: state.header.headerRightIcon,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    appActions: bindActionCreators(appActions, dispatch),
+    appActions: bindActionCreators(AppActions, dispatch),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
 

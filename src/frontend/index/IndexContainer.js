@@ -8,18 +8,19 @@ import {List, ListItem} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
-import * as appActions from '../app/AppActions';
-import * as roomsActions from '../rooms/RoomsActions';
+import * as AppActions from '../app/AppActions';
+import * as RoomsActions from '../rooms/RoomsActions';
+import * as HeaderActions from '../app/header/HeaderActions';
 
 class IndexContainer extends Component {
     componentWillMount() {
-        this.props.appActions.updateHeaderTitle('Encrypted Chat');
-        this.props.appActions.updateHeaderLeftIcon('menu');
-        this.props.appActions.updateHeaderRightIcon('');
+        this.props.headerActions.updateHeaderTitle('Encrypted Chat');
+        this.props.headerActions.updateHeaderLeftIcon('menu');
+        this.props.headerActions.updateHeaderRightIcon('');
     }
 
     render() {
-        const { routeToAddRoom } = this.props.roomsActions;
+        const { routeToAddRoom } = this.props.RoomsActions;
 
         return(<div style={{position: 'relative'}}>
             <List className="animated fadeInLeft">
@@ -58,8 +59,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        appActions: bindActionCreators(appActions, dispatch),
-        roomsActions: bindActionCreators(roomsActions, dispatch),
+        appActions: bindActionCreators(AppActions, dispatch),
+        roomsActions: bindActionCreators(RoomsActions, dispatch),
+        headerActions: bindActionCreators(HeaderActions, dispatch),
     }
 }
 
