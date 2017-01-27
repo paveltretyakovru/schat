@@ -24,21 +24,26 @@ class HeaderContainer extends Component {
           title={ headerTitle }
 
           iconElementLeft={
-            ((type) => {
+            ((type) => {              
+              let iconElementLeft = null;
+
               switch(type) {
                 case 'menu':
-                  return <IconMenuComponent />;
+                  iconElementLeft = <IconMenuComponent />;
+                  break;
 
                 case 'close':
-                  return (
-                    <IconCloseComponent
+                   iconElementLeft = <IconCloseComponent
                       action={this.props.appActions.routeToBack}
                     />
-                  );
+                  break;
 
                 default:
-                  return <IconMenuComponent />;
+                  iconElementLeft = <IconMenuComponent />;
+                  break;
               }
+              
+              return iconElementLeft;
               })(headerLeftIcon)
           }
 
