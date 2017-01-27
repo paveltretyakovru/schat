@@ -1,6 +1,6 @@
 import {
     ADD_ROOM,
-} from './RoomsConstants';
+} from './rooms.constants';
 
 const initState = [
     {

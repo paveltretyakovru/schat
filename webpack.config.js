@@ -12,11 +12,11 @@ const ENTRY = (NODE_ENV == 'development')
     'webpack-dev-server/client?http://localhost:8080/',
     'webpack/hot/dev-server',
     'babel-polyfill',
-    './src/frontend/app/index',
+    './src/frontend/index',
   ]
   : [
     'babel-polyfill',
-    './src/frontend/app/index',
+    './src/frontend/index',
   ]
 
 module.exports = {

@@ -5,14 +5,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
 // Actions
-import * as AppActions from '../../app/AppActions';
-import * as HeaderActions from '../../app/header/HeaderActions';
+import * as AppActions from '../../../app.actions';
+import * as HeaderActions from '../../../shared/header/header.actions';
 
 // Helpers
-import makeId from '../../../helpers/makeId';
+import makeId from '../../../../../shared/makeId';
 
 // Style sheets
-import './RoomsAdd.css';
+import './rooms-add.container.css';
 
 // Array for generating add room form
 const fieldsData = [
@@ -34,6 +34,8 @@ const fieldsData = [
 ];
 
 class RoomAddContainer extends Component {
+  static path = '/rooms/add';
+
   constructor(props) {
     super(props);
     this.state = { id: '', key: '', title: '' };

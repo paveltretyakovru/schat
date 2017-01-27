@@ -1,6 +1,6 @@
 import {
   ADD_ROOM_ROUTE,
-} from './RoomsConstants';
+} from './rooms.constants';
 
 import { push } from 'react-router-redux';
 

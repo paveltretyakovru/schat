@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import FlatButton from 'material-ui/FlatButton';
 
-export default class IconSave extends Component {
+export default class IconSaveComponent extends Component {
   getStyles() {
     return {
       labelStyle: {

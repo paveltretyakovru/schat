@@ -3,11 +3,13 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import HeaderContainer from './header/HeaderContainer';
+import HeaderContainer from './shared/header/header.container';
 
-import './App.css';
+import './app.container.css';
 
 class App extends Component {
+  static path = '/';
+
   componentWillMount() {
     injectTapEventPlugin();
   }

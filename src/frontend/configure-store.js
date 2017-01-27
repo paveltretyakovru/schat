@@ -6,7 +6,7 @@ import { routerMiddleware } from 'react-router-redux';
 import { createStore, applyMiddleware} from 'redux';
 
 // Reducers
-import rootReducer from './rootReducer';
+import rootReducer from './reducers';
 
 // Init variables 
 const router = routerMiddleware(hashHistory);
@@ -25,8 +25,8 @@ export function configureStore() {
   );
 
   if	(module.hot)	{
-		module.hot.accept('./rootReducer',	()	=>	{
-			const	nextRootReducer	=	require('./rootReducer').default;
+		module.hot.accept('./reducers',	()	=>	{
+			const	nextRootReducer	=	require('./reducers').default;
 			Store.replaceReducer(nextRootReducer);
 		});
 	}

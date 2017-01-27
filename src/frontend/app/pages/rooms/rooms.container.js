@@ -1,18 +1,23 @@
+// App libs
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
+// material-ui
 import Subheader from 'material-ui/Subheader';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import {List, ListItem} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
-import * as AppActions from '../app/AppActions';
-import * as RoomsActions from '../rooms/RoomsActions';
-import * as HeaderActions from '../app/header/HeaderActions';
+// actions
+import * as AppActions from '../../app.actions';
+import * as RoomsActions from './rooms.actions';
+import * as HeaderActions from '../../shared/header/header.actions';
 
 class IndexContainer extends Component {
+    static path = '/rooms'
+
     componentWillMount() {
         this.props.headerActions.updateHeaderTitle('Encrypted Chat');
         this.props.headerActions.updateHeaderLeftIcon('menu');
@@ -20,7 +25,8 @@ class IndexContainer extends Component {
     }
 
     render() {
-        const { routeToAddRoom } = this.props.RoomsActions;
+        console.log('PROPS!!', this.props);
+        const { routeToAddRoom } = this.props.roomsActions;
 
         return(<div style={{position: 'relative'}}>
             <List className="animated fadeInLeft">

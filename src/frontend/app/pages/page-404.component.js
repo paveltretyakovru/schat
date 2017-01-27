@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Page404 extends Component {
+export default class Page404Component extends Component {
   render() {
     let imgStyle = { width: '50%' }
 

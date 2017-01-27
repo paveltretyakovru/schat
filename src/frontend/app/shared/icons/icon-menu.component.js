@@ -3,7 +3,7 @@ import IconButton from 'material-ui/IconButton';
 import React, { Component } from 'react';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 
-class IconMenu extends Component {
+class IconMenuComponent extends Component {
   render() {
     return(<IconButton className="animated rotateIn" tooltip="Open menu">
       <NavigationMenu color={white} />
@@ -11,4 +11,4 @@ class IconMenu extends Component {
   }
 }
 
-export default IconMenu;
+export default IconMenuComponent;

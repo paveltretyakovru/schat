@@ -3,7 +3,7 @@ import IconButton from 'material-ui/IconButton';
 import React, { Component } from 'react';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
-class IconClose extends Component {
+class IconCloseComponent extends Component {
   render() {
     return(<IconButton
       onClick={this.props.action}
@@ -15,4 +15,4 @@ class IconClose extends Component {
   }
 }
 
-export default IconClose;
+export default IconCloseComponent;

@@ -2,7 +2,7 @@ import {
   UPDATE_HEADER_TITLE,
   UPDATE_HEADER_LEFT_ICON,
   UPDATE_HEADER_RIGHT_ICON,
-} from './HeaderConstants';
+} from './header.constants';
 
 export function updateHeaderTitle(title = 'Empty title parameter') {
   return (dispatch) => {
