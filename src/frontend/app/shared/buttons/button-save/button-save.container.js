@@ -39,4 +39,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(function(){}, mapDispatchToProps)(ButtonSaveComponent);
+export default connect(function(){return {}}, mapDispatchToProps)(ButtonSaveComponent);
