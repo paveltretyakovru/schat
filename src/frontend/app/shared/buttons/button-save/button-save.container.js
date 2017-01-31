@@ -1,9 +1,12 @@
 import { white } from 'material-ui/styles/colors';
-import React, { Component } from 'react';
-
 import FlatButton from 'material-ui/FlatButton';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 
-export default class ButtonSaveComponent extends Component {
+import * as ButtonSaveActions from './button-save.actions';
+
+class ButtonSaveComponent extends Component {
   getStyles() {
     return {
       labelStyle: {
@@ -26,6 +29,14 @@ export default class ButtonSaveComponent extends Component {
   }
 
   handleClick() {
-    console.log('Handle click save button');
+    this.props.buttonActions.updateSaveData();
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    buttonActions: bindActionCreators(ButtonSaveActions, dispatch),
+  }
+}
+
+export default connect(function(){}, mapDispatchToProps)(ButtonSaveComponent);
