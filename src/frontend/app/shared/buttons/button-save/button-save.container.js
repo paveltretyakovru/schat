@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import FlatButton from 'material-ui/FlatButton';
 
-export default class IconSaveComponent extends Component {
+export default class ButtonSaveComponent extends Component {
   getStyles() {
     return {
       labelStyle: {
@@ -17,7 +17,15 @@ export default class IconSaveComponent extends Component {
     let { labelStyle } = this.getStyles();
 
     return(
-      <FlatButton labelStyle={labelStyle} label="Save" />
+      <FlatButton
+        label="Save"
+        onClick={ ::this.handleClick }
+        labelStyle={ labelStyle }
+      />
     );
+  }
+
+  handleClick() {
+    console.log('Handle click save button');
   }
 }

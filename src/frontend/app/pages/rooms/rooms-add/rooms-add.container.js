@@ -17,11 +17,6 @@ import './rooms-add.container.css';
 // Array for generating add room form
 const fieldsData = [
   {
-    key: 'id',
-    hintText: 'Room ID',
-    floatText: 'Room ID for generating room link',
-  },
-  {
     key: 'key',
     hintText: 'Room Key',
     floatText: 'Room Key to encrypt your messages',

@@ -1,64 +1,64 @@
 import AppBar from 'material-ui/AppBar';
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 
 import * as AppActions from '../../app.actions';
-import IconMenuComponent from '../icons/icon-menu.component';
-import IconSaveComponent from '../icons/icon-save.component';
-import IconCloseComponent from '../icons/icon-close.component';
+import ButtonMenuComponent from '../buttons/button-menu.component';
+import ButtonCloseComponent from '../buttons/button-close.component';
+import ButtonSaveContainer from '../buttons/button-save/button-save.container';
 
 class HeaderContainer extends Component {
   getStyle() {
     return {
-      iconStyleRight: { marginTop: 16 },
+      iconStyleRight: {marginTop: 16},
     }
   }
 
   render() {
-    let { headerTitle, headerLeftIcon, headerRightIcon } = this.props;
+    let {headerTitle, headerLeftIcon, headerRightIcon} = this.props;
 
-    return(
+    return (
       <header className="row">
         <AppBar
           title={ headerTitle }
 
           iconElementLeft={
-            ((type) => {              
+            ((type) => {
               let iconElementLeft = null;
 
-              switch(type) {
+              switch (type) {
                 case 'menu':
-                  iconElementLeft = <IconMenuComponent />;
+                  iconElementLeft = <ButtonMenuComponent />;
                   break;
 
                 case 'close':
-                   iconElementLeft = <IconCloseComponent
-                      action={this.props.appActions.routeToBack}
-                    />
+                  iconElementLeft = <ButtonCloseComponent
+                    action={this.props.appActions.routeToBack}
+                  />
                   break;
 
                 default:
-                  iconElementLeft = <IconMenuComponent />;
+                  iconElementLeft = <ButtonMenuComponent />;
                   break;
               }
-              
+
               return iconElementLeft;
-              })(headerLeftIcon)
+            })(headerLeftIcon)
           }
 
           iconElementRight={
             ((type) => {
-              switch(type) {
+              switch (type) {
                 case 'save':
-                  return <IconSaveComponent />;
+                  return <ButtonSaveContainer/>;
 
                 default:
                   return null;
               }
             })(headerRightIcon)}
 
-          iconStyleRight={{ marginTop: 16 }}
+          iconStyleRight={{marginTop: 16}}
         />
       </header>
     );
@@ -78,6 +78,7 @@ function mapDispatchToProps(dispatch) {
     appActions: bindActionCreators(AppActions, dispatch),
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
 

@@ -21,7 +21,13 @@ class App extends Component {
         
         <main className="row">
           <div id="app-content" className="col-xs-12 col-md-12">
-            { this.props.children }
+            {/* { this.props.children } */}
+            {
+              React.cloneElement(
+                this.props.children,
+                { dataTest: 'Test data for children' }
+              )
+            }
           </div>
         </main>
 
