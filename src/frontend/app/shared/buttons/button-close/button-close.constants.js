@@ -1,0 +1,1 @@
+export const UPDATE_CLOSE_DATA = 'UPDATE_CLOSE_DATA';

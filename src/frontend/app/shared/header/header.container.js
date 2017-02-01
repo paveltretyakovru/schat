@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 
 import ButtonSaveContainer from '../buttons/button-save/button-save.container';
 import ButtonMenuComponent from '../buttons/button-menu.component';
-import ButtonCloseComponent from '../buttons/button-close.container.js';
+import ButtonCloseComponent from '../buttons/button-close/button-close.container.js';
 
 const ButtonsList = {
   menu: <ButtonMenuComponent />,
@@ -45,4 +45,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(HeaderContainer);
-

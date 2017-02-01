@@ -5,7 +5,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
-import * as AppActions from '../../app.actions';
+import * as AppActions from '../../../app.actions';
 
 class IconCloseContainer extends Component {
   render() {
