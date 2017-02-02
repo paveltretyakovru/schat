@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
-import * as ButtonSaveActions from './button-save.actions';
+import * as ButtonSaveActions from './header-button-save.actions';
 
 class ButtonSaveComponent extends Component {
   getStyles() {

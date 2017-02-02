@@ -1,6 +1,6 @@
 import {
-    UPDATE_CLOSE_DATA,
-} from './button-close.constants';
+    UPDATE_SAVE_DATA,
+} from './header-button-save.constants';
 
 const initState = {
     data: {
@@ -10,7 +10,7 @@ const initState = {
 
 export default function(state = initState, action) {
     switch(action.type) {
-        case UPDATE_CLOSE_DATA:
+        case UPDATE_SAVE_DATA:
             return { ...state, data: action.payload };
 
         default:

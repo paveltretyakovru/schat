@@ -10,22 +10,38 @@ import './app.container.css';
 class App extends Component {
   static path = '/';
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      headerButtonLeft: null,
+      headerButtonRight: null,
+    }
+  }
+
   componentWillMount() {
     injectTapEventPlugin();
   }
-  
+
   render() {
     return(<MuiThemeProvider>
       <div id="app-container" className="container">
-        <HeaderContainer />
-        
+        <HeaderContainer
+          buttonLeft={this.state.headerButtonLeft}
+          buttonRight={this.state.headerButtonRight}
+        />
+
         <main className="row">
           <div id="app-content" className="col-xs-12 col-md-12">
             {/* { this.props.children } */}
             {
               React.cloneElement(
                 this.props.children,
-                { dataTest: 'Test data for children' }
+                {
+                  setHeaderButtons: ::this.setHeaderButtons,
+                  setHeaderButtonLeft: ::this.setHeaderButtonLeft,
+                  setHeaderButtonRight: ::this.setHeaderButtonRight,
+                }
               )
             }
           </div>
@@ -33,6 +49,22 @@ class App extends Component {
 
       </div>
     </MuiThemeProvider>);
+  }
+
+  setHeaderButtons(headerButtonLeft, headerButtonRight) {
+    this.setState({
+      ...this.state,
+      headerButtonLeft: headerButtonLeft,
+      headerButtonRight: headerButtonRight,
+    });
+  }
+
+  setHeaderButtonLeft(button, callback = () => {}) {
+    this.setState({ ...this.state, headerButtonLeft: button }, callback);
+  }
+
+  setHeaderButtonRight(button, callback = () => {}) {
+    this.setState({ ...this.state, headerButtonRight: button }, callback);
   }
 }
 

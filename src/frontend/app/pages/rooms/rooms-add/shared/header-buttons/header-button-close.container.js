@@ -3,14 +3,12 @@ import IconButton from 'material-ui/IconButton';
 import { connect } from 'react-redux';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+import { goBack } from 'react-router-redux';
 
-import * as AppActions from '../../../app.actions';
-
-class IconCloseContainer extends Component {
+class HeaderButtonCloseContainer extends Component {
   render() {
     return(<IconButton
-      onClick={this.props.appActions.routeToBack}
+      onClick={::this.props.goBack}
       tooltip="Back"
       className="animated rotateIn"
     >
@@ -21,8 +19,13 @@ class IconCloseContainer extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    appActions: bindActionCreators(AppActions, dispatch),
+    goBack: function() {
+      return dispatch(goBack());
+    },
   }
 }
 
-export default connect(function(){return {}}, mapDispatchToProps)(IconCloseContainer);
+export default connect(
+  function(){return {}},
+  mapDispatchToProps
+)(HeaderButtonCloseContainer);

@@ -2,16 +2,6 @@ import AppBar from 'material-ui/AppBar';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 
-import ButtonSaveContainer from '../buttons/button-save/button-save.container';
-import ButtonMenuComponent from '../buttons/button-menu.component';
-import ButtonCloseComponent from '../buttons/button-close/button-close.container.js';
-
-const ButtonsList = {
-  menu: <ButtonMenuComponent />,
-  save: <ButtonSaveContainer />,
-  close: <ButtonCloseComponent />,
-};
-
 class HeaderContainer extends Component {
   getStyle() {
     return {
@@ -21,14 +11,14 @@ class HeaderContainer extends Component {
 
   render() {
     const { iconStyleRight } = this.getStyle();
-    const { headerTitle, headerLeftIcon, headerRightIcon } = this.props;
+    const { headerTitle } = this.props;
 
     return (
       <header className="row">
         <AppBar
           title={ headerTitle }
-          iconElementLeft={ ButtonsList[headerLeftIcon] }
-          iconElementRight={ ButtonsList[headerRightIcon] }
+          iconElementLeft={ this.props.buttonLeft }
+          iconElementRight={ this.props.buttonRight }
           iconStyleRight={ iconStyleRight }
         />
       </header>
@@ -39,8 +29,6 @@ class HeaderContainer extends Component {
 function mapStateToProps(state) {
   return {
     headerTitle: state.header.headerTitle,
-    headerLeftIcon: state.header.headerLeftIcon,
-    headerRightIcon: state.header.headerRightIcon,
   }
 }
 

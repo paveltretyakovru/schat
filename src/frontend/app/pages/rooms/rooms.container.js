@@ -15,17 +15,17 @@ import * as AppActions from '../../app.actions';
 import * as RoomsActions from './rooms.actions';
 import * as HeaderActions from '../../shared/header/header.actions';
 
+import ButtonMenuComponent from './shared/button-menu.component';
+
 class IndexContainer extends Component {
     static path = '/rooms'
 
     componentWillMount() {
-        this.props.headerActions.updateHeaderTitle('Encrypted Chat');
-        this.props.headerActions.updateHeaderLeftIcon('menu');
-        this.props.headerActions.updateHeaderRightIcon('');
+      this.props.setHeaderButtons(<ButtonMenuComponent />, null);
+      this.props.headerActions.updateHeaderTitle('Encrypted chat');
     }
 
     render() {
-        console.log('PROPS!!', this.props);
         const { routeToAddRoom } = this.props.roomsActions;
 
         return(<div style={{position: 'relative'}}>

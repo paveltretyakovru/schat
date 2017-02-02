@@ -4,12 +4,17 @@ import FlatButton from 'material-ui/FlatButton';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
+
 // Actions
 import * as AppActions from '../../../app.actions';
 import * as HeaderActions from '../../../shared/header/header.actions';
 
 // Helpers
 import makeId from '../../../../../shared/makeId';
+
+// Components
+import HeaderButtonSaveContainer from './shared/header-buttons/header-button-save/header-button-save.container';
+import HeaderButtonCloseContainer from './shared/header-buttons/header-button-close.container';
 
 // Style sheets
 import './rooms-add.container.css';
@@ -37,9 +42,11 @@ class RoomAddContainer extends Component {
   }
 
   componentWillMount() {
+    this.props.setHeaderButtons(
+      <HeaderButtonCloseContainer />,
+      <HeaderButtonSaveContainer />
+    );
     this.props.headerActions.updateHeaderTitle('Add new room');
-    this.props.headerActions.updateHeaderLeftIcon('close');
-    this.props.headerActions.updateHeaderRightIcon('save');
   }
 
   render() {
@@ -47,10 +54,10 @@ class RoomAddContainer extends Component {
 
     return(<div className="row center-xs animated fadeInLeft">
       <div className="col-md-4 col-xs-11">
-        
+
         {/* Listing fieldsComponents array */}
         {fieldsComponents}
-        
+
         <div id="room-add-form-buttons">
           <FlatButton
             label="Generate random data"
@@ -76,7 +83,7 @@ class RoomAddContainer extends Component {
   generateRandomFieldsValues() {
     return this.setState({ id: makeId(), key: makeId(), title: makeId() });
   }
-  
+
   generateFormTextFields() {
     return fieldsData.map((value, key) =>
       <TextField
@@ -85,8 +92,8 @@ class RoomAddContainer extends Component {
         fullWidth={true}
         floatingLabelText={value.floatText}
         floatingLabelFixed={true}
-        
-        onChange={(event, newValue) => 
+
+        onChange={(event, newValue) =>
           this.handleChangeInput(value.key, newValue)
         }
     />);
