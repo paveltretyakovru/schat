@@ -17,6 +17,29 @@ import * as HeaderActions from '../../shared/header/header.actions';
 
 import ButtonMenuComponent from './shared/button-menu.component';
 
+import { grey400 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+const iconButtonElement = (
+  <IconButton
+    touch={true}
+    tooltip="more"
+    tooltipPosition="bottom-left"
+  >
+    <MoreVertIcon color={grey400} />
+  </IconButton>
+);
+
+const rightIconMenu = (
+  <IconMenu iconButtonElement={iconButtonElement}>
+    <MenuItem>Clear</MenuItem>
+    <MenuItem>Config</MenuItem>
+    <MenuItem>Delete</MenuItem>
+  </IconMenu>
+);
+
 class IndexContainer extends Component {
     static path = '/rooms'
 
@@ -26,40 +49,42 @@ class IndexContainer extends Component {
     }
 
     render() {
-        const { routeToAddRoom } = this.props.roomsActions;
+      const { routeToAddRoom } = this.props.roomsActions;
 
-        return(<div style={{position: 'relative'}}>
-            <List className="animated fadeInLeft">
-                <Subheader>room List</Subheader>
-                {(() => {
-                    for (var room in this.props.room) {
-                        if (this.props.room.hasOwnProperty(room)) {
-                            return <ListItem
-                                primaryText={this.props.room[room].title}
-                                rightIcon={<CommunicationChatBubble />}
-                            />
-                        }
-                    }
-                })()}
-            </List>
+      const roomsItems = this.props.rooms.list.map(item => {
+        return <ListItem
+          key={item.id}
+          primaryText={item.title}
+          leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
+          rightIconButton={ rightIconMenu }
+        />
+      })
 
-            <div className="float-button">
-                <FloatingActionButton
-                    // mini={true}
-                    onClick={() => routeToAddRoom()}
-                    secondary={true}
-                    className="animated zoomIn"
-                >
-                    <ContentAdd className="animated rotateIn" />
-                </FloatingActionButton>
-            </div>
-        </div>);
+      return(<div style={{position: 'relative'}}>
+          <List
+            className="animated fadeInLeft"
+          >
+            <Subheader>Rooms list</Subheader>
+            { roomsItems }
+          </List>
+
+          <div className="float-button">
+            <FloatingActionButton
+              // mini={true}
+              onClick={() => routeToAddRoom()}
+              secondary={true}
+              className="animated zoomIn"
+            >
+              <ContentAdd className="animated rotateIn" />
+            </FloatingActionButton>
+          </div>
+      </div>);
     }
 }
 
 function mapStateToProps(state) {
     return {
-        room: state.room,
+        rooms: state.rooms,
     }
 }
 

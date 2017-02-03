@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 // Actions
 import * as AppActions from '../../../app.actions';
 import * as HeaderActions from '../../../shared/header/header.actions';
+import * as RoomsActions from '../rooms.actions';
 
 // Helpers
 import makeId from '../../../../../shared/makeId';
@@ -78,6 +79,7 @@ class RoomAddContainer extends Component {
 
   handleSaveClick() {
     console.log('Handle save click');
+    this.props.roomsActions.addRoom(this.state);
   }
 
   // ============================ Helpers methods =============================
@@ -113,6 +115,7 @@ function mapDispatchToProps(dispatch) {
   return {
     appActions: bindActionCreators(AppActions, dispatch),
     headerActions: bindActionCreators(HeaderActions, dispatch),
+    roomsActions: bindActionCreators(RoomsActions, dispatch),
   }
 }
 

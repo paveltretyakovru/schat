@@ -8,7 +8,7 @@ import headerReducer from './app/shared/header/header.reducer';
 
 export default combineReducers({
   // ...reducers,
-  room: roomsReducer,
+  rooms: roomsReducer,
   header: headerReducer,
   routing: routerReducer,
 })
