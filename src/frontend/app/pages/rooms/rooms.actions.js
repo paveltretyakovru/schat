@@ -1,3 +1,5 @@
+import { goBack } from 'react-router-redux';
+
 import {
   ADD_ROOM,
   ADD_ROOM_ROUTE,
@@ -14,9 +16,7 @@ export function routeToAddRoom() {
 
 export function addRoom(data) {
   return dispatch => {
-    return dispatch({
-      type: ADD_ROOM,
-      payload: data,
-    })
+    dispatch({ type: ADD_ROOM, payload: data });
+    dispatch(goBack());
   }
 }

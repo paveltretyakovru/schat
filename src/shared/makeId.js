@@ -1,4 +1,4 @@
-export default function makeId(count = 5)
+export default function makeId(count = 10)
 {
     var text = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
