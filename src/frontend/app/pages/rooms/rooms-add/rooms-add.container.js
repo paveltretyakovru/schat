@@ -4,7 +4,6 @@ import FlatButton from 'material-ui/FlatButton';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
-
 // Actions
 import * as AppActions from '../../../app.actions';
 import * as HeaderActions from '../../../shared/header/header.actions';
@@ -13,8 +12,8 @@ import * as HeaderActions from '../../../shared/header/header.actions';
 import makeId from '../../../../../shared/makeId';
 
 // Components
-import HeaderButtonSaveContainer from './shared/header-buttons/header-button-save/header-button-save.container';
 import HeaderButtonCloseContainer from './shared/header-buttons/header-button-close.container';
+import { HeaderButtonSaveComponent } from './shared/header-buttons/header-button-save.component';
 
 // Style sheets
 import './rooms-add.container.css';
@@ -43,8 +42,8 @@ class RoomAddContainer extends Component {
 
   componentWillMount() {
     this.props.setHeaderButtons(
-      <HeaderButtonCloseContainer />,
-      <HeaderButtonSaveContainer />
+      <HeaderButtonCloseContainer / >,
+      <HeaderButtonSaveComponent handleClick={::this.handleSaveClick} / > ,
     );
     this.props.headerActions.updateHeaderTitle('Add new room');
   }
@@ -52,21 +51,20 @@ class RoomAddContainer extends Component {
   render() {
     let fieldsComponents = this.generateFormTextFields();
 
-    return(<div className="row center-xs animated fadeInLeft">
-      <div className="col-md-4 col-xs-11">
-
-        {/* Listing fieldsComponents array */}
-        {fieldsComponents}
-
-        <div id="room-add-form-buttons">
-          <FlatButton
-            label="Generate random data"
-            primary={true}
-            onClick={::this.handleClickGenerateRandomData}
-          />
+    return (
+      <div className = "row center-xs animated fadeInLeft">
+        <div className = "col-md-4 col-xs-11" >
+          { /* Listing fieldsComponents array */ }
+          { fieldsComponents }
+          <div id = "room-add-form-buttons" >
+            <FlatButton
+              label = "Generate random data"
+              primary = { true }
+              onClick = {::this.handleClickGenerateRandomData }
+            />
+          </div>
         </div>
-      </div>
-    </div>);
+      </div>);
   }
 
   // ============================ Handlers ====================================
@@ -75,9 +73,12 @@ class RoomAddContainer extends Component {
   }
 
   handleChangeInput(key, newValue) {
-    return this.setState({ ...this.state,  [key]: newValue });
+    return this.setState({...this.state, [key]: newValue });
   }
-  // ##########################################################################
+
+  handleSaveClick() {
+    console.log('Handle save click');
+  }
 
   // ============================ Helpers methods =============================
   generateRandomFieldsValues() {
@@ -86,24 +87,25 @@ class RoomAddContainer extends Component {
 
   generateFormTextFields() {
     return fieldsData.map((value, key) =>
-      <TextField
-        key={key}
-        value={this.state[value.key]}
-        fullWidth={true}
-        floatingLabelText={value.floatText}
-        floatingLabelFixed={true}
+      <TextField key = { key }
+        value = { this.state[value.key] }
+        fullWidth = { true }
+        floatingLabelText = { value.floatText }
+        floatingLabelFixed = { true }
 
-        onChange={(event, newValue) =>
+        onChange = {
+          (event, newValue) =>
           this.handleChangeInput(value.key, newValue)
         }
-    />);
+      />
+    );
   }
-  // ##########################################################################
+          // ##########################################################################
 }
 
 function mapStateToProps(state) {
   return {
-    app: state.app,
+      app: state.app,
   }
 }
 
@@ -114,4 +116,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomAddContainer);
+    export default connect(mapStateToProps, mapDispatchToProps)(RoomAddContainer);

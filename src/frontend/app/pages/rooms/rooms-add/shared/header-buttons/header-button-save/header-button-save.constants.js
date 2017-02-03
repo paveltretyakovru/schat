@@ -1,1 +1,0 @@
-export const UPDATE_SAVE_DATA = 'UPDATE_SAVE_DATA';
