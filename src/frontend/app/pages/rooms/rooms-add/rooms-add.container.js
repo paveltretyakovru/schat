@@ -38,13 +38,28 @@ class RoomAddContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { id: '', key: '', title: '' };
-  }
+    this.state = { 
+      id: {
+        valid: true,
+        value: '',
+      },
+      key: {
+        valid: true,
+        value: '',
+      },
+      title: {
+        valid: true,
+        value: '',
+      },
+    };
+  }  
 
   componentWillMount() {
     this.props.setHeaderButtons(
       <HeaderButtonCloseContainer / >,
-      <HeaderButtonSaveComponent handleClick={::this.handleSaveClick} / > ,
+      <HeaderButtonSaveComponent
+        handleClick={ this.handleSaveClick.bind(this) }
+      / > ,
     );
     this.props.headerActions.updateHeaderTitle('Add new room');
   }
@@ -61,11 +76,12 @@ class RoomAddContainer extends Component {
             <FlatButton
               label = "Generate random data"
               primary = { true }
-              onClick = {::this.handleClickGenerateRandomData }
+              onClick = { this.handleClickGenerateRandomData.bind(this) }
             />
           </div>
         </div>
-      </div>);
+      </div>
+    );
   }
 
   // ============================ Handlers ====================================
@@ -74,35 +90,66 @@ class RoomAddContainer extends Component {
   }
 
   handleChangeInput(key, newValue) {
-    return this.setState({...this.state, [key]: newValue });
+    this.setState({...this.state, [key]: {
+      valid: true,
+      value: newValue,
+    } });
   }
 
   handleSaveClick() {
     console.log('Handle save click');
-    this.props.roomsActions.addRoom(this.state);
+    this.props.roomsActions.addRoom({
+      id: this.state.id.value,
+      key: this.state.key.value,
+      title: this.state.title.value,
+    });
+  }
+
+  handleCheckValid(event) {
+    console.log('Event blur', event);
   }
 
   // ============================ Helpers methods =============================
   generateRandomFieldsValues() {
-    return this.setState({ id: makeId(), key: makeId(), title: makeId() });
+    return this.setState({
+      id: {
+        valid: true,
+        value: makeId(),
+      },
+      key: {
+        valid: true,
+        value: makeId(),
+      },
+      title: {
+        valid: true,
+        value: makeId(),
+      },
+    });
   }
 
   generateFormTextFields() {
-    return fieldsData.map((value, key) =>
-      <TextField key = { key }
-        value = { this.state[value.key] }
-        fullWidth = { true }
-        floatingLabelText = { value.floatText }
-        floatingLabelFixed = { true }
+    return fieldsData.map((value, key) => {
+        return <TextField key = { key }
+          value = { this.state[value['key']].value }
+          fullWidth = { true }
+          floatingLabelText = { value.floatText }
+          floatingLabelFixed = { true }
+          errorText = {(() => {
+            console.log('Error text', this.state[value['key'].valid])
+            return this.state[value['key'].valid] === true
+              ? ''
+              : 'Invalid value'
+          })()}
 
-        onChange = {
-          (event, newValue) =>
-          this.handleChangeInput(value.key, newValue)
-        }
-      />
+          onBlur = { this.handleCheckValid }
+          onChange = {
+            (event, newValue) =>
+            this.handleChangeInput(value.key, newValue)
+          }
+        />
+      }
     );
   }
-          // ##########################################################################
 }
 
 function mapStateToProps(state) {
