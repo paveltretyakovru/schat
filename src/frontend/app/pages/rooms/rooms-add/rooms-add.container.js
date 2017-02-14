@@ -56,10 +56,10 @@ class RoomAddContainer extends Component {
 
   componentWillMount() {
     this.props.setHeaderButtons(
-      <HeaderButtonCloseContainer / >,
+      <HeaderButtonCloseContainer />,
       <HeaderButtonSaveComponent
         handleClick={ this.handleSaveClick.bind(this) }
-      / > ,
+      />
     );
     this.props.headerActions.updateHeaderTitle('Add new room');
   }
@@ -166,4 +166,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-    export default connect(mapStateToProps, mapDispatchToProps)(RoomAddContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomAddContainer);
