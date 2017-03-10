@@ -20,7 +20,8 @@
         "react/jsx-no-undef": 1,
         "react/jsx-uses-react": 1,
         "react/jsx-uses-vars": 1,
-        "comma-dangle": [2, "always-multiline"]
+        "comma-dangle": [2, "always-multiline"],
+        "indent": ["error", 2]
     },
     "globals": {
         "Promise": true,
