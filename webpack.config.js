@@ -62,6 +62,13 @@ module.exports = {
     return [autoprefixer, precss];
   },
 
+  resolve: {
+    root: [
+      path.resolve(__dirname, 'src/shared'),
+      path.resolve(__dirname, 'src/frontend'),      
+    ],
+  },
+
   devServer: {
     hot: true,
     port: 8080,
