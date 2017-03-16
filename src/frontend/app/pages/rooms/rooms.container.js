@@ -41,59 +41,59 @@ const rightIconMenu = (
 );
 
 class IndexContainer extends Component {
-    static path = '/rooms'
+  static path = '/rooms'
 
-    componentWillMount() {
-      this.props.setHeaderButtons(<ButtonMenuComponent />, null);
-      this.props.headerActions.updateHeaderTitle('Encrypted chat');
-    }
+  componentWillMount() {
+    this.props.setHeaderButtons(<ButtonMenuComponent />, null);
+    this.props.headerActions.updateHeaderTitle('Encrypted chat');
+  }
 
-    render() {
-      const { routeToAddRoom } = this.props.roomsActions;
+  render() {
+    const { routeToAddRoom } = this.props.roomsActions;
 
-      const roomsItems = this.props.rooms.list.map(item => {
-        return <ListItem
-          key={item.id}
-          primaryText={item.title}
-          leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
-          rightIconButton={ rightIconMenu }
-        />
-      })
+    const roomsItems = this.props.rooms.list.map(item => {
+      return <ListItem
+        key={item.id}
+        primaryText={item.title}
+        leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
+        rightIconButton={ rightIconMenu }
+      />
+    })
 
-      return(<div style={{position: 'relative'}}>
-          <List
-            className="animated fadeInLeft"
+    return(<div style={{position: 'relative'}}>
+        <List
+          className="animated fadeInLeft"
+        >
+          <Subheader>Rooms list</Subheader>
+          { roomsItems }
+        </List>
+
+        <div className="float-button">
+          <FloatingActionButton
+            // mini={true}
+            onClick={() => routeToAddRoom()}
+            secondary={true}
+            className="animated zoomIn"
           >
-            <Subheader>Rooms list</Subheader>
-            { roomsItems }
-          </List>
-
-          <div className="float-button">
-            <FloatingActionButton
-              // mini={true}
-              onClick={() => routeToAddRoom()}
-              secondary={true}
-              className="animated zoomIn"
-            >
-              <ContentAdd className="animated rotateIn" />
-            </FloatingActionButton>
-          </div>
-      </div>);
-    }
+            <ContentAdd className="animated rotateIn" />
+          </FloatingActionButton>
+        </div>
+    </div>);
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        rooms: state.rooms,
-    }
+  return {
+    rooms: state.rooms,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        appActions: bindActionCreators(AppActions, dispatch),
-        roomsActions: bindActionCreators(RoomsActions, dispatch),
-        headerActions: bindActionCreators(HeaderActions, dispatch),
-    }
+  return {
+    appActions: bindActionCreators(AppActions, dispatch),
+    roomsActions: bindActionCreators(RoomsActions, dispatch),
+    headerActions: bindActionCreators(HeaderActions, dispatch),
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexContainer);

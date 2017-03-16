@@ -8,10 +8,12 @@ const initState = {
 
 export default function(state = initState, action) {
   switch(action.type) {
-    case UPDATE_HEADER_TITLE:
-      return { ...state,  headerTitle: action.payload };
 
-    default:
-      return state;
+  case UPDATE_HEADER_TITLE:
+    return { ...state,  headerTitle: action.payload };
+
+  default:
+    return state;
+
   }
 }

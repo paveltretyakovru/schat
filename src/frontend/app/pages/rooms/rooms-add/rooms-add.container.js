@@ -129,32 +129,31 @@ class RoomAddContainer extends Component {
 
   generateFormTextFields() {
     return fieldsData.map((value, key) => {
-        return <TextField key = { key }
-          value = { this.state[value['key']].value }
-          fullWidth = { true }
-          floatingLabelText = { value.floatText }
-          floatingLabelFixed = { true }
-          errorText = {(() => {
-            console.log('Error text', this.state[value['key'].valid])
-            return this.state[value['key'].valid] === true
-              ? ''
-              : 'Invalid value'
-          })()}
+      return <TextField key = { key }
+        value = { this.state[value['key']].value }
+        fullWidth = { true }
+        floatingLabelText = { value.floatText }
+        floatingLabelFixed = { true }
+        errorText = {(() => {
+          console.log('Error text', this.state[value['key'].valid])
+          return this.state[value['key'].valid] === true
+            ? ''
+            : 'Invalid value'
+        })()}
 
-          onBlur = { this.handleCheckValid }
-          onChange = {
-            (event, newValue) =>
-            this.handleChangeInput(value.key, newValue)
-          }
-        />
-      }
-    );
+        onBlur = { this.handleCheckValid }
+        onChange = {
+          (event, newValue) =>
+          this.handleChangeInput(value.key, newValue)
+        }
+      />
+    });
   }
 }
 
 function mapStateToProps(state) {
   return {
-      app: state.app,
+    app: state.app,
   }
 }
 

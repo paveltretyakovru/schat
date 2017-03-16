@@ -25,11 +25,11 @@ export function configureStore() {
   );
 
   if	(module.hot)	{
-		module.hot.accept('./reducers',	()	=>	{
-			const	nextRootReducer	=	require('./reducers').default;
-			Store.replaceReducer(nextRootReducer);
-		});
-	}
+    module.hot.accept('./reducers',	()	=>	{
+      const	nextRootReducer	=	require('./reducers').default;
+      Store.replaceReducer(nextRootReducer);
+    });
+  }
 
   return Store
 }
