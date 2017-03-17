@@ -5,9 +5,7 @@ import { bindActionCreators } from 'redux';
 
 // material-ui
 import Subheader from 'material-ui/Subheader';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import {List, ListItem} from 'material-ui/List';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
 // actions
@@ -16,6 +14,7 @@ import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
 import ButtonMenuComponent from 'app/shared/buttons/button-menu.component';
+import ButtonFloatAddComponent from 'app/shared/buttons/button-float-add.component';
 
 import { grey400 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
@@ -60,25 +59,16 @@ class RoomsListContainer extends Component {
       />
     })
 
-    return(<div style={{position: 'relative'}}>
-        <List
-          className="animated fadeInLeft"
-        >
+    return(
+      <div style={{position: 'relative'}}>
+        <List className="animated fadeInLeft">
           <Subheader>Rooms list</Subheader>
           { roomsItems }
         </List>
 
-        <div className="float-button">
-          <FloatingActionButton
-            // mini={true}
-            onClick={() => routeToAddRoom()}
-            secondary={true}
-            className="animated zoomIn"
-          >
-            <ContentAdd className="animated rotateIn" />
-          </FloatingActionButton>
-        </div>
-    </div>);
+        <ButtonFloatAddComponent handleAction={routeToAddRoom} />
+      </div>
+    );
   }
 }
 
