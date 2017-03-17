@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import RoomsContainer from './rooms.container';
+import RoomsListContainer from './rooms-list/rooms-list.container';
 import AddRoomsRoutes from './rooms-add/rooms-add.routes';
 
 export default (
     <Route>
-        <Route component={ RoomsContainer } path={ RoomsContainer.path } />
+        <Route component={ RoomsListContainer } path={ RoomsListContainer.path } />
         { AddRoomsRoutes }
     </Route>
 );
