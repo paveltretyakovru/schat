@@ -51,9 +51,9 @@ class IndexContainer extends Component {
   render() {
     const { routeToAddRoom } = this.props.roomsActions;
 
-    const roomsItems = this.props.rooms.list.map(item => {
+    const roomsItems = this.props.rooms.list.map((item, index) => {
       return <ListItem
-        key={item.id}
+        key={index}
         primaryText={item.title}
         leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
         rightIconButton={ rightIconMenu }

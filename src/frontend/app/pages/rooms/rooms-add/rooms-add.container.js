@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import TextField from 'material-ui/TextField';
+import STextField from 'app/shared/form/STextField';
 import FlatButton from 'material-ui/FlatButton';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
@@ -10,7 +10,7 @@ import * as HeaderActions from '../../../shared/header/header.actions';
 import * as RoomsActions from '../rooms.actions';
 
 // Helpers
-import makeId from '../../../../../shared/makeId';
+// import makeId from '../../../../../shared/makeId';
 
 // Components
 import HeaderButtonCloseContainer from './shared/header-buttons/header-button-close.container';
@@ -22,37 +22,23 @@ import './rooms-add.container.css';
 // Array for generating add room form
 const fieldsData = [
   {
-    key: 'key',
-    hintText: 'Room Key',
-    floatText: 'Room Key to encrypt your messages',
+    name: 'key',
+    // required: true,
+    fullWidth: true,
+    floatingLabelText: 'Room Key to encrypt your messages',
+    floatingLabelFixed: true,
   },
   {
-    key: 'title',
-    hintText: 'Room title',
-    floatText: 'Room title for your rooms list',
+    name: 'title',
+    required: true,
+    fullWidth: true,
+    floatingLabelText: 'Room title for your rooms list',
+    floatingLabelFixed: true,      
   },
 ];
 
 class RoomAddContainer extends Component {
   static path = '/rooms/add';
-
-  constructor(props) {
-    super(props);
-    this.state = { 
-      id: {
-        valid: true,
-        value: '',
-      },
-      key: {
-        valid: true,
-        value: '',
-      },
-      title: {
-        valid: true,
-        value: '',
-      },
-    };
-  }  
 
   componentWillMount() {
     this.props.setHeaderButtons(
@@ -65,13 +51,22 @@ class RoomAddContainer extends Component {
   }
 
   render() {
-    let fieldsComponents = this.generateFormTextFields();
+
+    this.fieldsComponents = fieldsData.map(fieldData => {
+      return (
+        <STextField
+          {...fieldData}
+          key={fieldData.name}
+          ref={fieldData.name}
+        />
+      )
+    });
 
     return (
       <div className = "row center-xs animated fadeInLeft">
         <div className = "col-md-4 col-xs-11" >
-          { /* Listing fieldsComponents array */ }
-          { fieldsComponents }
+          { /* Listing this.fieldsComponents array */ }
+          { this.fieldsComponents }
           <div id = "room-add-form-buttons" >
             <FlatButton
               label = "Generate random data"
@@ -89,65 +84,31 @@ class RoomAddContainer extends Component {
     return this.generateRandomFieldsValues();
   }
 
-  handleChangeInput(key, newValue) {
-    this.setState({...this.state, [key]: {
-      valid: true,
-      value: newValue,
-    } });
-  }
-
   handleSaveClick() {
-    console.log('Handle save click');
-    this.props.roomsActions.addRoom({
-      id: this.state.id.value,
-      key: this.state.key.value,
-      title: this.state.title.value,
+    let data = {};
+    let validateFlag = true;
+    this.prepareAllFields(field => {
+      if(!field.validate()) {
+        validateFlag = false;
+      }
+      data[field.props.name] = field.getValue();
     });
-  }
 
-  handleCheckValid(event) {
-    console.log('Event blur', event);
+    return (validateFlag) ? this.props.roomsActions.addRoom(data) : false;
   }
 
   // ============================ Helpers methods =============================
   generateRandomFieldsValues() {
-    return this.setState({
-      id: {
-        valid: true,
-        value: makeId(),
-      },
-      key: {
-        valid: true,
-        value: makeId(),
-      },
-      title: {
-        valid: true,
-        value: makeId(),
-      },
+    this.prepareAllFields(field => {
+      field.setRandomValue(25);
     });
   }
 
-  generateFormTextFields() {
-    return fieldsData.map((value, key) => {
-      return <TextField key = { key }
-        value = { this.state[value['key']].value }
-        fullWidth = { true }
-        floatingLabelText = { value.floatText }
-        floatingLabelFixed = { true }
-        errorText = {(() => {
-          console.log('Error text', this.state[value['key'].valid])
-          return this.state[value['key'].valid] === true
-            ? ''
-            : 'Invalid value'
-        })()}
-
-        onBlur = { this.handleCheckValid }
-        onChange = {
-          (event, newValue) =>
-          this.handleChangeInput(value.key, newValue)
-        }
-      />
-    });
+  prepareAllFields(callback) {
+    for(let i = 0; i < fieldsData.length; ++i) {
+      let field = this.refs[fieldsData[i].name];
+      callback(field);
+    }
   }
 }
 
