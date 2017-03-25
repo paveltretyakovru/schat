@@ -1,0 +1,13 @@
+#rooms-show-container {
+  height: 100%;
+}
+
+#chat-body-container {
+  border: 1px solid red;
+  align-content: space-between;
+  height: 100%;
+}
+
+#chat-body-container .col-md-12 > div {
+  border: 1px solid blue;
+}
