@@ -10,6 +10,7 @@ import LeftMenuComponent from './shared/left-menu.component';
 import ButtonMenuComponent from './shared/buttons/button-menu.component';
 
 import * as AppActions from './app.actions';
+import { routeToRooms } from './pages/rooms/rooms.actions';
 
 import './app.container.css';
 
@@ -30,9 +31,17 @@ class App extends Component {
   }
 
   render() {
+    let menuItems = [
+      {
+        title: 'Created chats',
+        routeDispatch: this.props.routeActions.routeToRooms,
+      },
+    ];
+
     return(<MuiThemeProvider>
       <div id="app-container" className="container">
         <LeftMenuComponent
+          items={menuItems}
           isOpen={this.props.app.isLeftMenuOpen}
           handleSwitch={this.props.appActions.switchLeftMenu}
         />
@@ -90,6 +99,7 @@ function mapStateToProps(state) {
 function mapDisptachToProps(dispatch) {
   return {
     appActions: bindActionCreators(AppActions, dispatch),
+    routeActions: bindActionCreators({routeToRooms}, dispatch),
   }
 }
 

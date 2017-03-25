@@ -72,7 +72,7 @@ class RoomsListContainer extends Component {
   }
 
   handleClickListItem(index) {
-    this.props.roomsActions.routeToRoom(index);
+    this.props.roomsActions.routeToRooms(index);
   }
 }
 

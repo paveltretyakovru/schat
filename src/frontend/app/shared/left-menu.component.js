@@ -6,15 +6,31 @@ import MenuItem from 'material-ui/MenuItem';
 
 class LeftMenuComponent extends Component {
   render() {
+    let itemsList = this.props.items.map((item, index) => {
+      return(
+        <MenuItem
+          key={index}
+          onTouchTap={() => { this.handleClickMenuItem(item) }}
+        >
+          {item.title}
+        </MenuItem>
+      );
+    });
+    
     return(
       <Drawer
         open={this.props.isOpen}
         docked={false}
         onRequestChange={this.props.handleSwitch}
       >
-        <MenuItem>Menu Item</MenuItem>
+        {itemsList}
       </Drawer>
     )
+  }
+
+  handleClickMenuItem(itemData) {
+    itemData.routeDispatch();
+    this.props.handleSwitch();
   }
 }
 

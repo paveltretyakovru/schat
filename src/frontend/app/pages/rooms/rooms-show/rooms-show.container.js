@@ -11,10 +11,16 @@ import * as HeaderActions from 'app/shared/header/header.actions';
 class RoomsShowContainer extends Component {
   static path = '/rooms/:id'
 
+  componentWillMount() {
+    this.props.setHeaderButtons(null, null);
+  }
+
   render() {
+    let roomId = this.props.params.id;
+
     return(
-      <div>
-        Hello. It's some room page {this.props.params.id}
+      <div className="animated fadeInLeft">
+        Hello. It's some room page {roomId}!
       </div>
     );
   }

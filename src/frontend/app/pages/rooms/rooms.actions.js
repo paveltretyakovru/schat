@@ -2,7 +2,7 @@ import { goBack } from 'react-router-redux';
 
 import {
   ADD_ROOM,
-  ROOM_ROUTE,
+  ROOMS_ROUTE,
   ADD_ROOM_ROUTE,
 } from './rooms.constants';
 
@@ -22,8 +22,12 @@ export function routeToAddRoom() {
   }
 }
 
-export function routeToRoom(indexRoom) {
+export function routeToRooms(indexRoom = '') {
   return (dispatch) => {
-    dispatch(push(`${ROOM_ROUTE}${indexRoom}`));
+    console.log('ROUTE TO ROOMS', indexRoom);
+    let route = (indexRoom || indexRoom === 0 )
+      ? `${ROOMS_ROUTE}/${indexRoom}`
+      : ROOMS_ROUTE;
+    dispatch(push(route));
   }
 }
