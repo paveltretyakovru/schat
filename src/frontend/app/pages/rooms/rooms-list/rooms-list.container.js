@@ -53,6 +53,7 @@ class RoomsListContainer extends Component {
     const roomsItems = this.props.rooms.list.map((item, index) => {
       return <ListItem
         key={index}
+        onClick={() => this.handleClickListItem(index)}
         primaryText={item.title}
         leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
         rightIconButton={ rightIconMenu }
@@ -69,6 +70,10 @@ class RoomsListContainer extends Component {
         <ButtonFloatAddComponent handleAction={routeToAddRoom} />
       </div>
     );
+  }
+
+  handleClickListItem(index) {
+    this.props.roomsActions.routeToRoom(index);
   }
 }
 
