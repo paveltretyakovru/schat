@@ -1,9 +1,15 @@
 // Core imports
+import {connect} from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import {bindActionCreators} from 'redux';
 
 import HeaderContainer from './shared/header/header.container';
+import LeftMenuComponent from './shared/left-menu.component';
+import ButtonMenuComponent from './shared/buttons/button-menu.component';
+
+import * as AppActions from './app.actions';
 
 import './app.container.css';
 
@@ -26,6 +32,11 @@ class App extends Component {
   render() {
     return(<MuiThemeProvider>
       <div id="app-container" className="container">
+        <LeftMenuComponent
+          isOpen={this.props.app.isLeftMenuOpen}
+          handleSwitch={this.props.appActions.switchLeftMenu}
+        />
+
         <HeaderContainer
           buttonLeft={this.state.headerButtonLeft}
           buttonRight={this.state.headerButtonRight}
@@ -52,9 +63,11 @@ class App extends Component {
   }
 
   setHeaderButtons(headerButtonLeft, headerButtonRight) {
+    let leftButton = headerButtonLeft ? headerButtonLeft : <ButtonMenuComponent handleCLick={this.props.appActions.switchLeftMenu} />;
+
     this.setState({
       ...this.state,
-      headerButtonLeft: headerButtonLeft,
+      headerButtonLeft: leftButton,
       headerButtonRight: headerButtonRight,
     });
   }
@@ -68,4 +81,16 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    app: state.app,
+  }
+}
+
+function mapDisptachToProps(dispatch) {
+  return {
+    appActions: bindActionCreators(AppActions, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDisptachToProps)(App);

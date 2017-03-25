@@ -5,7 +5,13 @@ import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 
 class ButtonMenuComponent extends Component {
   render() {
-    return(<IconButton className="animated rotateIn" tooltip="Open menu">
+    let handleCLick = this.props.handleCLick;
+
+    return(<IconButton
+      className="animated rotateIn"
+      tooltip="Open menu"
+      onTouchTap={handleCLick}
+    >
       <NavigationMenu color={white} />
     </IconButton>);
   }

@@ -20,7 +20,7 @@ header, footer { flex: 1 !important }
 .float-button {
   top: -29px; /* Adjust to where you want it */
   right: 6%; /* Adjust to where you want it */
-  z-index: 9999;
+  z-index: 1100;
   position: absolute;
 }
 

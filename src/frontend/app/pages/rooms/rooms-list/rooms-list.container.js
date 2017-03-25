@@ -13,7 +13,6 @@ import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
-import ButtonMenuComponent from 'app/shared/buttons/button-menu.component';
 import ButtonFloatAddComponent from 'app/shared/buttons/button-float-add.component';
 
 import { grey400 } from 'material-ui/styles/colors';
@@ -43,7 +42,7 @@ class RoomsListContainer extends Component {
   static path = '/rooms'
 
   componentWillMount() {
-    this.props.setHeaderButtons(<ButtonMenuComponent />, null);
+    this.props.setHeaderButtons(null, null);
     this.props.headerActions.updateHeaderTitle('Encrypted chat');
   }
 

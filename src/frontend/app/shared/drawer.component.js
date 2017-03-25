@@ -1,1 +1,0 @@
-// Drawer left menu component
