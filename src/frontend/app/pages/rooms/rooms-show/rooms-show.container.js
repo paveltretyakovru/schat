@@ -21,6 +21,8 @@ class RoomsShowContainer extends Component {
     this.props.setHeaderButtons(null, null);
   }
 
+  // TODO: componentUnmounted -> remove controlKey
+
   render() {
     let roomId = this.props.params.id;
     let roomData = this.props.rooms.list.find(element => {
@@ -32,7 +34,7 @@ class RoomsShowContainer extends Component {
         <div className="col-xs-11"  id="rooms-show-container">
           <div id="rooms-show-key-field-container">
             <RoomsShowKeyFieldComponent
-              room={roomData}
+              room={roomData || null}
               roomId={roomId}
               handleUpdateControlKey={this.props.roomsActions.updateControlKey}
             />
@@ -40,9 +42,9 @@ class RoomsShowContainer extends Component {
 
           <div id="rooms-show-messages-container">
             <RoomsShowChatMessagesComponent
-              room={roomData}
+              room={roomData || null}
               roomId={roomId}
-              messages={roomData.messages}
+              messages={roomData.messages || null}
             />
           </div>
 
