@@ -13,8 +13,6 @@ import rootReducer from './reducers';
 const router = routerMiddleware(hashHistory);
 const logger = createLogger();
 
-console.log('Test configure store', DevTools);
-
 let middlewares = (NODE_ENV === 'development')
   ? applyMiddleware(logger, thunk, router)
   : applyMiddleware(thunk, router);

@@ -24,7 +24,6 @@ export function routeToAddRoom() {
 
 export function routeToRooms(indexRoom = '') {
   return (dispatch) => {
-    console.log('ROUTE TO ROOMS', indexRoom);
     let route = (indexRoom || indexRoom === 0 )
       ? `${ROOMS_ROUTE}/${indexRoom}`
       : ROOMS_ROUTE;

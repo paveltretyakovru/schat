@@ -32,7 +32,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('TEST APP CONTAINER', NODE_ENV)
     let menuItems = [
       {
         title: 'Created chats',

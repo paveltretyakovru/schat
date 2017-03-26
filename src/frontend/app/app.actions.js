@@ -11,6 +11,5 @@ export function routeToBack() {
 }
 
 export function switchLeftMenu() {
-  console.log('Switch menu');
   return dispatch => dispatch({type: SWITCH_LEFT_MENU});
 }
