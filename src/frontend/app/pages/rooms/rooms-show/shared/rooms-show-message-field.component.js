@@ -56,6 +56,7 @@ class RoomsShowMessageFieldComponent extends Component {
         <IconButton
           id="send-message-button"
           style={styles.small}
+          tooltip="Send message (ctrl/cmd + enter)"
           onTouchTap={this.handleSendMessage.bind(this)}
           iconStyle={{...styles.smallIcon, color: pinkA200}}
         >
