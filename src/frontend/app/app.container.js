@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 
+import DevTools from './shared/devtools';
 import HeaderContainer from './shared/header/header.container';
 import LeftMenuComponent from './shared/left-menu.component';
 import ButtonMenuComponent from './shared/buttons/button-menu.component';
@@ -31,6 +32,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('TEST APP CONTAINER', NODE_ENV)
     let menuItems = [
       {
         title: 'Created chats',
@@ -66,7 +68,7 @@ class App extends Component {
             }
           </div>
         </main>
-
+        { NODE_ENV === 'development' ? <DevTools /> : null }
       </div>
     </MuiThemeProvider>);
   }
