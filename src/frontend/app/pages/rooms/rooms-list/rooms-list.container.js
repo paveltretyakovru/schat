@@ -49,10 +49,10 @@ class RoomsListContainer extends Component {
   render() {
     const { routeToAddRoom } = this.props.roomsActions;
 
-    const roomsItems = this.props.rooms.list.map((item, index) => {
+    const roomsItems = this.props.rooms.list.map((item) => {
       return <ListItem
-        key={index}
-        onClick={() => this.handleClickListItem(index)}
+        key={item.id}
+        onClick={() => this.handleClickListItem(item.id)}
         primaryText={item.title}
         leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
         rightIconButton={ rightIconMenu }
@@ -71,8 +71,8 @@ class RoomsListContainer extends Component {
     );
   }
 
-  handleClickListItem(index) {
-    this.props.roomsActions.routeToRooms(index);
+  handleClickListItem(roomId) {
+    this.props.roomsActions.routeToRooms(roomId);
   }
 }
 

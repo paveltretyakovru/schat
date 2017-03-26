@@ -23,11 +23,9 @@ class RoomsShowContainer extends Component {
 
   render() {
     let roomId = this.props.params.id;
-    let chatMessagesComponent = <RoomsShowChatMessagesComponent
-      messages={this.props.rooms.messages}
-    />
-
-    window.tst = chatMessagesComponent;
+    let roomData = this.props.rooms.list.find(element => {
+      return element.id === roomId;
+    });
 
     return(
       <div className="animated fadeInLeft row center-xs" id="rooms-show-wrapper">
@@ -37,11 +35,15 @@ class RoomsShowContainer extends Component {
           </div>
 
           <div id="rooms-show-messages-container">
-            {chatMessagesComponent}      
+            <RoomsShowChatMessagesComponent
+              roomId={roomId}
+              messages={roomData.messages}
+            />
           </div>
 
           <div id="rooms-show-message-text-field">
             <RoomsShowMessageFieldComponent
+              roomId={roomId}
               handleAddMessage={this.props.roomsActions.addMessage}
             />
           </div>

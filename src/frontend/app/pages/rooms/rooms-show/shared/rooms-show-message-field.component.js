@@ -29,16 +29,16 @@ class RoomsShowMessageFieldComponent extends Component {
   }
 
   componentDidMount() {
-    let element = document.getElementById('send-message-text-field');
+    let sendMessageTextFieldElement = document.getElementById('send-message-text-field');
 
-    Mousetrap(element).bind(
+    Mousetrap(sendMessageTextFieldElement).bind(
       ['ctrl+enter', 'command+enter'], this.handleSendMessage.bind(this)
     );
   }
 
   componentWillUnmount() {
-    let element = document.getElementById('send-message-text-field');
-    Mousetrap(element).unbind(['ctrl+enter', 'command+enter']);
+    let sendMessageTextFieldElement = document.getElementById('send-message-text-field');
+    Mousetrap(sendMessageTextFieldElement).unbind(['ctrl+enter', 'command+enter']);
   }
 
   render() {
@@ -73,7 +73,10 @@ class RoomsShowMessageFieldComponent extends Component {
   }
 
   handleSendMessage() {
-    this.props.handleAddMessage(this.state.message);
+    this.props.handleAddMessage({
+      roomId: this.props.roomId,
+      message: this.state.message,
+    });
     this.setState({...this.state, message: ''});
   }
 }

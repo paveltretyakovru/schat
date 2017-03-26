@@ -12,6 +12,7 @@ import { push } from 'react-router-redux';
 import makeId from 'makeId';
 
 export function addRoom(data) {
+  console.log('ADD ROOM', data);
   return dispatch => {
     dispatch({ type: ADD_ROOM, payload: data });
     dispatch(goBack());
@@ -34,15 +35,16 @@ export function routeToRooms(indexRoom = '') {
   }
 }
 
-export function addMessage(message = '') {
+export function addMessage(data) {
   return dispatch => {
-    if(message) {
+    if(data.message) {
       dispatch({
         type: ADD_MESSAGE,
         payload: {
           id: makeId(),
           me: true,
-          message: message,
+          roomId: data.roomId,
+          message: data.message,
         },
       });
     }
