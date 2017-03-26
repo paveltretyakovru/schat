@@ -4,13 +4,19 @@ class RoomsShowChatMessagesComponent extends Component{
   render() {
     return(
       <div>
-        <div className="message-wrapper them">
-          <div className="text-wrapper animated fadeIn">Or maybe just give it a like!</div>
-        </div>
-
-        <div className="message-wrapper me">
-          <div className="text-wrapper animated fadeIn">test</div>
-        </div>
+        {
+          this.props.messages.map(message => {
+            let classNames = `message-wrapper ${message.me ? 'me' : 'them'}`;
+            
+            return(
+              <div key={message.id} className={classNames}>
+                <div className="text-wrapper animated fadeIn">
+                  {message.message}
+                </div>
+              </div>
+            );
+          })
+        }
       </div>
     );
   }

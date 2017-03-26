@@ -32,7 +32,9 @@ class RoomsShowContainer extends Component {
           </div>
 
           <div id="rooms-show-messages-container">
-            <RoomsShowChatMessagesComponent />
+            <RoomsShowChatMessagesComponent
+              messages={this.props.rooms.messages}
+            />
           </div>
 
           <div id="rooms-show-message-text-field">

@@ -10,6 +10,18 @@ const initState = {
       title: 'Titile room title',
     },
   ],
+  messages: [
+    {
+      id: 'aslerjfsdklfjwe123',
+      me: true,
+      message: 'Hello my friend',
+    },
+    {
+      id: 'aslerjfsdklfjwe',
+      me: false,
+      message: 'Hi! How are you?',
+    },
+  ],
 }
 
 export default function(state = initState, action) {
