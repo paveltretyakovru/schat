@@ -10,7 +10,7 @@ class RoomsShowKeyFieldComponent extends Component {
         <TextField
           type="password"
           fullWidth={true}
-          floatingLabelText="Chat key"
+          floatingLabelText="Secret chat key"
         />
       </div>
     );

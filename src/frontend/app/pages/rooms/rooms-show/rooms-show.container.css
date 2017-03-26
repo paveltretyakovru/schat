@@ -1,13 +1,29 @@
+#rooms-show-wrapper {
+  margin: 0;
+  height: 100%;
+}
+
 #rooms-show-container {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-#chat-body-container {
-  border: 1px solid red;
-  align-content: space-between;
-  height: 100%;
+#rooms-show-key-field-container {
+  flex-grow: 1;
 }
 
-#chat-body-container .col-md-12 > div {
-  border: 1px solid blue;
+#rooms-show-messages-container {
+  flex-grow: 25;
+  min-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 16px 0 16px 0;
+  padding: 16px 16px 16px 0;
+  text-align: justify;
+}
+
+#rooms-show-message-text-field {
+  flex-grow: 1;
+  max-height: 300px;
 }
