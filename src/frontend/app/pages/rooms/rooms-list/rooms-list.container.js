@@ -50,13 +50,13 @@ class RoomsListContainer extends Component {
     const { routeToAddRoom } = this.props.roomsActions;
 
     const roomsItems = this.props.rooms.list.map((item) => {
-      return <ListItem
+      return (<ListItem
         key={item.id}
-        onClick={() => this.handleClickListItem(item.id)}
+        onClick={() => this.handleClickListItem(item)}
         primaryText={item.title}
         leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
         rightIconButton={ rightIconMenu }
-      />
+      />);
     })
 
     return(

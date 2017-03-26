@@ -9,11 +9,21 @@ class RoomsShowKeyFieldComponent extends Component {
       <div>
         <TextField
           type="password"
+          onChange={this.handleUpdateControlKey.bind(this)}
           fullWidth={true}
-          floatingLabelText="Secret chat key"
+          floatingLabelText="Secret key"
         />
       </div>
     );
+  }
+
+  handleUpdateControlKey(e) {
+    let currentTarget = e.currentTarget;
+
+    this.props.handleUpdateControlKey({
+      roomId: this.props.roomId,
+      controlKey: currentTarget.value,
+    });
   }
 }
 

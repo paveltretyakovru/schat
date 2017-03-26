@@ -31,11 +31,15 @@ class RoomsShowContainer extends Component {
       <div className="animated fadeInLeft row center-xs" id="rooms-show-wrapper">
         <div className="col-xs-11"  id="rooms-show-container">
           <div id="rooms-show-key-field-container">
-            <RoomsShowKeyFieldComponent roomId={roomId} />
+            <RoomsShowKeyFieldComponent
+              roomId={roomId}
+              handleUpdateControlKey={this.props.roomsActions.updateControlKey}
+            />
           </div>
 
           <div id="rooms-show-messages-container">
             <RoomsShowChatMessagesComponent
+              room={roomData}
               roomId={roomId}
               messages={roomData.messages}
             />

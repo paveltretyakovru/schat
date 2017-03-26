@@ -5,6 +5,7 @@ import {
   ADD_MESSAGE,
   ROOMS_ROUTE,
   ADD_ROOM_ROUTE,
+  UPDATE_CONTROL_KEY,
 } from './rooms.constants';
 
 import { push } from 'react-router-redux';
@@ -26,11 +27,9 @@ export function routeToAddRoom() {
   }
 }
 
-export function routeToRooms(indexRoom = '') {
+export function routeToRooms(room = '') {
   return (dispatch) => {
-    let route = (indexRoom || indexRoom === 0 )
-      ? `${ROOMS_ROUTE}/${indexRoom}`
-      : ROOMS_ROUTE;
+    let route = (room.id) ? `${ROOMS_ROUTE}/${room.id}` : ROOMS_ROUTE;
     dispatch(push(route));
   }
 }
@@ -48,5 +47,17 @@ export function addMessage(data) {
         },
       });
     }
+  }
+}
+
+export function updateControlKey(data) {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_CONTROL_KEY,
+      payload: {
+        roomId: data.roomId || '',
+        controlKey: data.controlKey || '',
+      },
+    });
   }
 }
