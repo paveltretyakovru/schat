@@ -2,11 +2,14 @@ import { goBack } from 'react-router-redux';
 
 import {
   ADD_ROOM,
+  ADD_MESSAGE,
   ROOMS_ROUTE,
   ADD_ROOM_ROUTE,
 } from './rooms.constants';
 
 import { push } from 'react-router-redux';
+
+import makeId from 'makeId';
 
 export function addRoom(data) {
   return dispatch => {
@@ -28,5 +31,20 @@ export function routeToRooms(indexRoom = '') {
       ? `${ROOMS_ROUTE}/${indexRoom}`
       : ROOMS_ROUTE;
     dispatch(push(route));
+  }
+}
+
+export function addMessage(message = '') {
+  return dispatch => {
+    if(message) {
+      dispatch({
+        type: ADD_MESSAGE,
+        payload: {
+          id: makeId(),
+          me: true,
+          message: message,
+        },
+      });
+    }
   }
 }

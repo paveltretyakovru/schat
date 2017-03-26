@@ -1,5 +1,6 @@
 import {
   ADD_ROOM,
+  ADD_MESSAGE,
 } from './rooms.constants';
 
 const initState = {
@@ -28,6 +29,12 @@ export default function(state = initState, action) {
   switch(action.type) {
   case ADD_ROOM:
     return { ...state, list: [ ...state.list, action.payload ] };
+  
+  case ADD_MESSAGE:{
+    let messagesCopy = state.messages.slice();
+    messagesCopy.push(action.payload);
+    return { ...state, messages: messagesCopy};
+  }
 
   default:
     return { ...state };

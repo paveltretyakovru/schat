@@ -40,6 +40,14 @@ const styles = {
 };
 
 class RoomsShowMessageFieldComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: '',
+    }
+  }
+
   render() {
     return(
       <div style={containerStyle}>
@@ -48,15 +56,24 @@ class RoomsShowMessageFieldComponent extends Component {
           fullWidth={true}
           hintText="Message..."
           multiLine={true}
+          onChange={this.handleChangeTextField.bind(this)}
         />
         <IconButton
           style={styles.small}
+          onTouchTap={() => this.props.handleAddMessage(this.state.message)}
           iconStyle={{...styles.smallIcon, color: pinkA200}}
         >
           <ContentSend />
         </IconButton>
       </div>
     );
+  }
+
+  handleChangeTextField(e, newValue) {
+    this.setState({
+      ...this.state,
+      message: newValue,
+    })
   }
 }
 

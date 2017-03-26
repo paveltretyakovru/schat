@@ -1,6 +1,12 @@
+import $ from 'jquery';
+import scrollDown from 'scroll-down';
 import React, {Component} from 'react';
 
 class RoomsShowChatMessagesComponent extends Component{
+  componentDidUpdate() {
+    scrollDown($('#rooms-show-messages-container'));
+  }
+
   render() {
     return(
       <div>
