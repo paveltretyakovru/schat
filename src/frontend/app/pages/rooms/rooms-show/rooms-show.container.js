@@ -32,6 +32,7 @@ class RoomsShowContainer extends Component {
         <div className="col-xs-11"  id="rooms-show-container">
           <div id="rooms-show-key-field-container">
             <RoomsShowKeyFieldComponent
+              room={roomData}
               roomId={roomId}
               handleUpdateControlKey={this.props.roomsActions.updateControlKey}
             />
