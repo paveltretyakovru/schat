@@ -29,6 +29,16 @@ class RoomsShowContainer extends Component {
       return element.id === roomId;
     });
 
+    if(!roomData) {
+      return(
+        <div className="row">
+          <div className="col-xs-11">
+            404. The chat was not founded.
+          </div>
+        </div>
+      );
+    }
+
     return(
       <div className="animated fadeInLeft row center-xs" id="rooms-show-wrapper">
         <div className="col-xs-11"  id="rooms-show-container">

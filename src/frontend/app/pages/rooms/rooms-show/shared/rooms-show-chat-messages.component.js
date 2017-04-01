@@ -10,15 +10,22 @@ class RoomsShowChatMessagesComponent extends Component{
   }
 
   render() {
+    let { room } = this.props;
+
     return(
       <div>
         {
           this.props.messages.map(message => {
             let classNames = `message-wrapper ${message.me ? 'me' : 'them'}`;
-            let bytes = AES.decrypt(message.message, this.props.room.controlKey);
-            let plaintext = bytes.toString(CryptoJS.enc.Utf8);
 
-            console.log('MESSAGES PLAIN', message.message || null, this.props.room.controlKey || null, plaintext || null);
+            {/* Decoding message*/}
+            try {
+              if(!room.controlKey) throw new Error();
+              let bytes = AES.decrypt(message.message, room.controlKey);
+              var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+            } catch(e) {
+              plaintext = '';
+            }
 
             return(
               <div key={message.id} className={classNames}>
