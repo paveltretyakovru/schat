@@ -34,6 +34,16 @@ export function routeToRooms(room = '') {
   }
 }
 
+export const routeToRoomsList = () => {
+  return (dispatch) => {
+    try {
+      dispatch(push(ROOMS_ROUTE));
+    } catch (e) {
+      console.info('Catch route to rooms list');
+    }
+  }
+}
+
 export function addMessage(data) {
   return dispatch => {
     if(data.message) {

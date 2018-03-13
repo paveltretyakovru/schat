@@ -8,6 +8,7 @@ import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
+import ButtonNavigateRoomsList from '../../../shared/buttons/button-navigate-rooms-list.component';
 import RoomsShowKeyFieldComponent from './shared/rooms-show-key-field.component';
 import RoomsShowChatMessagesComponent from './shared/rooms-show-chat-messages.component';
 import RoomsShowMessageFieldComponent from './shared/rooms-show-message-field.component';
@@ -18,16 +19,16 @@ class RoomsShowContainer extends Component {
   static path = '/rooms/:id'
 
   componentWillMount() {
-    this.props.setHeaderButtons(null, null);
+    const { roomData } = this.getRoom();
+
+    this.props.setHeaderButtons(null, <ButtonNavigateRoomsList />);
+    this.props.headerActions.updateHeaderTitle(`EC. ${roomData.title}`);
   }
 
   // TODO: componentUnmounted -> remove controlKey
 
   render() {
-    let roomId = this.props.params.id;
-    let roomData = this.props.rooms.list.find(element => {
-      return element.id === roomId;
-    });
+    const { roomId, roomData } = this.getRoom();
 
     if(!roomData) {
       return(
@@ -67,6 +68,15 @@ class RoomsShowContainer extends Component {
         </div>
       </div>
     );
+  }
+
+  getRoom() {
+    return {
+      roomId: this.props.params.id || false,
+      roomData: this.props.rooms.list.find(element => {
+        return element.id === this.props.params.id;
+      }),
+    }
   }
 }
 

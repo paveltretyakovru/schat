@@ -5,7 +5,10 @@ import React, {Component} from 'react';
 class HeaderContainer extends Component {
   getStyle() {
     return {
-      iconStyleRight: {marginTop: 16},
+      iconStyleRight: {
+        display: 'flex',
+        alignItems: 'center',
+      },
     }
   }
 

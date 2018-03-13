@@ -11,7 +11,7 @@ import LeftMenuComponent from './shared/left-menu.component';
 import ButtonMenuComponent from './shared/buttons/button-menu.component';
 
 import * as AppActions from './app.actions';
-import { routeToRooms } from './pages/rooms/rooms.actions';
+import { routeToRoomsList } from './pages/rooms/rooms.actions';
 
 import './app.container.css';
 
@@ -34,8 +34,8 @@ class App extends Component {
   render() {
     let menuItems = [
       {
-        title: 'Created chats',
-        routeDispatch: this.props.routeActions.routeToRooms,
+        title: 'Rooms List',
+        routeDispatch: this.props.routeActions.routeToRoomsList,
       },
     ];
 
@@ -100,7 +100,7 @@ function mapStateToProps(state) {
 function mapDisptachToProps(dispatch) {
   return {
     appActions: bindActionCreators(AppActions, dispatch),
-    routeActions: bindActionCreators({routeToRooms}, dispatch),
+    routeActions: bindActionCreators({routeToRoomsList}, dispatch),
   }
 }
 
