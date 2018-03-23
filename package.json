@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node node_modules/nodemon/bin/nodemon.js --watch server.js --watch src/backend server.js",
     "front": "webpack-dev-server",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "lan-front": "HOST=192.168.0.2 webpack-dev-server"
   },
   "repository": {
     "type": "git",

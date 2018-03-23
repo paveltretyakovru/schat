@@ -4,12 +4,13 @@ var webpack = require('webpack')
 var autoprefixer = require('autoprefixer');
 var WebpackNotifierPlugin = require('webpack-notifier');
 
+const HOST = process.env.HOST || 'localhost'
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const SERVER_HOST = process.env.SERVER_HOST || 'http://localhost:3001'
 
 const ENTRY = (NODE_ENV == 'development')
   ? [
-    'webpack-dev-server/client?http://localhost:8080/',
+    `webpack-dev-server/client?http://${HOST}:8080/`,
     'webpack/hot/dev-server',
     'babel-polyfill',
     './src/frontend/index',
@@ -40,17 +41,17 @@ module.exports = {
   module: {
     preLoaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loaders: ['eslint'],
         include: [path.resolve(__dirname, 'src')],
       },
     ],
     loaders: [
       {
+        test: /\.jsx?$/,
+        plugins: ['transform-runtime'],
         loaders: ['react-hot', 'babel-loader'],
         include: [path.resolve(__dirname, 'src')],
-        test: /\.js$/,
-        plugins: ['transform-runtime'],
       },
       {
         test: /\.css$/,
@@ -67,12 +68,13 @@ module.exports = {
       path.resolve(__dirname, 'src/shared'),
       path.resolve(__dirname, 'src/frontend'),      
     ],
+    extensions: ['', '.js', '.jsx'],
   },
 
   devServer: {
     hot: true,
     port: 8080,
-    host: 'localhost',
+    host: HOST,
     contentBase: `${__dirname}/public`,
     // proxy: { '**': 'http://localhost:3001' },
   },
