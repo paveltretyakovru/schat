@@ -1,9 +1,14 @@
 html, body { height: 100% }
 body { font-family: 'Roboto', sans-serif; overflow: hidden }
 
-main { display: flex; flex: 6 !important }
+main { display: flex; flex: 6 !important; }
 header { max-height: 64px; min-height: 64px; }
 header, footer { flex: 1 !important }
+
+main, header {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
 
 /* IDS */
 #root { height: 100% }
