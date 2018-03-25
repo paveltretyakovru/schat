@@ -87,3 +87,24 @@
   top: 0;
   right: -9px;
 }
+
+.rooms-show__header-title {
+  cursor: pointer;
+}
+.rooms-show__header-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rooms-show__header-title-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rooms-show__container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

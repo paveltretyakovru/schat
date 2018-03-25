@@ -17,7 +17,8 @@ class ButtonFavorComponent extends Component {
     const handleClick = this.props.handleClick;
 
     return(<IconButton
-      className="animated rotateIn"
+      // className="animated rotateIn"
+      className="animated slideInDown"
       tooltip="Add to favor"
       onTouchTap={() => this.setState({...this.state, active: handleClick()})}
     >

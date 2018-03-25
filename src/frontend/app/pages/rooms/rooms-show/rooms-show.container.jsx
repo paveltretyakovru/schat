@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+// import IconShare from 'material-ui/svg-icons/social/share';
+
+// const shareIcon = <div><IconShare /></div>;
+
 // actions
 import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
+import {ButtonBuildComponent} from '../../../shared/buttons/button-build.component';
+import {ButtonShareComponent} from '../../../shared/buttons/button-share.component';
 import ButtonFavorComponent from '../../../shared/buttons/button-favor.component';
 import RoomsShowKeyFieldComponent from './shared/rooms-show-key-field.component';
 import RoomsShowChatMessagesComponent from './shared/rooms-show-chat-messages.component';
@@ -17,6 +24,10 @@ import './rooms-show.container.css';
 
 class RoomsShowContainer extends Component {
   static path = '/rooms/:id'
+
+  state = {
+    selectedIndex: 0,
+  };
   
   componentWillMount() {
     const room = this.getRoom()
@@ -32,9 +43,16 @@ class RoomsShowContainer extends Component {
       />
     );
     this.props.headerActions.updateHeaderTitle(
-      <span
-        onClick={ this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId) }
-      >{room.roomData.title}</span>
+      <div className="rooms-show__header-title-wrapper">
+        <span
+          onTouchTap={ this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId) }
+          className="rooms-show__header-title"
+        >{room.roomData.title}
+        </span>
+        <div className="rooms-show__header-title-buttons">
+          <ButtonBuildComponent touchHandler={ this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId) } />
+        </div>
+      </div>
     );
   }
 
@@ -54,31 +72,39 @@ class RoomsShowContainer extends Component {
     }
 
     return(
-      <div className="animated fadeInLeft row center-xs" id="rooms-show-wrapper">
-        <div className="col-xs-10"  id="rooms-show-container">
-          <div id="rooms-show-key-field-container">
-            <RoomsShowKeyFieldComponent
-              room={roomData || null}
-              roomId={roomId}
-              handleUpdateControlKey={this.props.roomsActions.updateControlKey}
-            />
-          </div>
+      <div className="rooms-show__container">
+        <div className="animated fadeInLeft row center-xs" id="rooms-show-wrapper">
+          <div className="col-xs-10"  id="rooms-show-container">
+            <div id="rooms-show-key-field-container">
+              <RoomsShowKeyFieldComponent
+                room={roomData || null}
+                roomId={roomId}
+                handleUpdateControlKey={this.props.roomsActions.updateControlKey}
+              />
+            </div>
 
-          <div id="rooms-show-messages-container">
-            <RoomsShowChatMessagesComponent
-              room={roomData || null}
-              roomId={roomId}
-              messages={roomData.messages || null}
-            />
-          </div>
+            <div id="rooms-show-messages-container">
+              <RoomsShowChatMessagesComponent
+                room={roomData || null}
+                roomId={roomId}
+                messages={roomData.messages || null}
+              />
+            </div>
 
-          <div id="rooms-show-message-text-field">
-            <RoomsShowMessageFieldComponent
-              roomId={roomId}
-              handleAddMessage={this.props.roomsActions.addMessage}
-            />
+            <div id="rooms-show-message-text-field">
+              <RoomsShowMessageFieldComponent
+                roomId={roomId}
+                handleAddMessage={this.props.roomsActions.addMessage}
+              />
+            </div>
           </div>
         </div>
+
+        <BottomNavigation className="animated slideInUp" selectedIndex={this.state.selectedIndex}>
+          <BottomNavigationItem
+            icon={<ButtonShareComponent />}
+          />
+        </BottomNavigation>
       </div>
     );
   }
