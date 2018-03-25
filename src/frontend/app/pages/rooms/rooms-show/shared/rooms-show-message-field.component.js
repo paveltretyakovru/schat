@@ -8,6 +8,9 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 
 const containerStyle = {
   display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  width: '100%',
 }
 
 const styles = {
@@ -55,7 +58,7 @@ class RoomsShowMessageFieldComponent extends Component {
         />
         <IconButton
           id="send-message-button"
-          style={styles.small}
+          style={{...styles.small, margin: '0px !important', padding: '0px !important'}}
           tooltip="Send message (ctrl/cmd + enter)"
           onTouchTap={this.handleSendMessage.bind(this)}
           iconStyle={{...styles.smallIcon, color: pinkA200}}

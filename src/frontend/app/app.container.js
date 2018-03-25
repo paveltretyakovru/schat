@@ -5,6 +5,14 @@ import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 
+// Footer
+import {Tabs, Tab} from 'material-ui/Tabs';
+import { white } from 'material-ui/styles/colors';
+import IconChat from 'material-ui/svg-icons/communication/chat';
+import IconAttachFile from 'material-ui/svg-icons/editor/attach-file';
+import {ButtonShareComponent} from './shared/buttons/button-share.component';
+import {ButtonBuildComponent} from './shared/buttons/button-build.component';
+
 import DevTools from './shared/devtools';
 import HeaderContainer from './shared/header/header.container';
 import LeftMenuComponent from './shared/left-menu.component';
@@ -77,6 +85,25 @@ class App extends Component {
             }
           </div>
         </main>
+
+        <Tabs
+            className="animated slideInUp rooms-show__button-tabs"
+            initialSelectedIndex={2}
+          >
+
+            <Tab icon={<IconAttachFile color={white} />} />
+
+            <Tab icon={<ButtonShareComponent />} />
+            
+            <Tab icon={<IconChat color={white} />} />
+
+            <Tab icon={
+              <ButtonBuildComponent 
+                // touchHandler={this.props.roomsActions.routeToRoomSettings.bind(this)}
+              />
+            }/>
+
+          </Tabs>
         { NODE_ENV === 'development' ? <DevTools /> : null }
       </div>
     </MuiThemeProvider>);

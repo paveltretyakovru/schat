@@ -28,6 +28,9 @@
 #rooms-show-message-text-field {
   flex-grow: 1;
   max-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .message-wrapper {
@@ -107,4 +110,10 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.rooms-show__button-tabs {
+  -webkit-box-shadow: 1px -5px 10px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px -5px 10px -5px rgba(0,0,0,0.75);
+  box-shadow: 1px -5px 10px -5px rgba(0,0,0,0.75);
 }

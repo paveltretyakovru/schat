@@ -23,6 +23,8 @@ class RoomsShowChatMessagesComponent extends Component{
               if(!room.key) throw new Error();
               let bytes = AES.decrypt(message.message, room.key);
               var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+              console.log('Plain text', plaintext)
             } catch(e) {
               plaintext = '';
             }

@@ -9,7 +9,6 @@ export class ButtonBuildComponent extends Component {
       <IconButton
         onTouchTap={() => this.props.touchHandler()}
         tooltip="Chat settings"
-        className="animated slideInDown"
       >
         <ActionBuild color={white} />
       </IconButton>

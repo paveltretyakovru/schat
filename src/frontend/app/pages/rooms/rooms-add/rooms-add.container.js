@@ -47,7 +47,7 @@ class RoomAddContainer extends Component {
         handleClick={ this.handleSaveClick.bind(this) }
       />
     );
-    this.props.headerActions.updateHeaderTitle('Add new room');
+    this.props.headerActions.updateHeaderTitle('Add Room');
   }
 
   render() {
@@ -69,9 +69,15 @@ class RoomAddContainer extends Component {
           { this.fieldsComponents }
           <div id = "room-add-form-buttons" >
             <FlatButton
-              label = "Generate random data"
+              label = "Create Room"
               primary = { true }
-              onClick = { this.handleClickGenerateRandomData.bind(this) }
+              onTouchTap = { this.handleSaveClick.bind(this) }
+            />
+
+            <FlatButton
+              label = "Random values"
+              secondary = { true }
+              onTouchTap = { this.handleClickGenerateRandomData.bind(this) }
             />
           </div>
         </div>
@@ -100,7 +106,7 @@ class RoomAddContainer extends Component {
   // ============================ Helpers methods =============================
   generateRandomFieldsValues() {
     this.prepareAllFields(field => {
-      field.setRandomValue(25);
+      field.setRandomValue(5);
     });
   }
 

@@ -3,18 +3,12 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-// import IconShare from 'material-ui/svg-icons/social/share';
-
-// const shareIcon = <div><IconShare /></div>;
 
 // actions
 import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
-import {ButtonBuildComponent} from '../../../shared/buttons/button-build.component';
-import {ButtonShareComponent} from '../../../shared/buttons/button-share.component';
 import ButtonFavorComponent from '../../../shared/buttons/button-favor.component';
 import RoomsShowKeyFieldComponent from './shared/rooms-show-key-field.component';
 import RoomsShowChatMessagesComponent from './shared/rooms-show-chat-messages.component';
@@ -46,14 +40,11 @@ class RoomsShowContainer extends Component {
           className="rooms-show__header-title"
         >{room.roomData.title}
         </span>
-        <div className="rooms-show__header-title-buttons">
-          <ButtonBuildComponent touchHandler={ this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId) } />
-        </div>
       </div>
     );
   }
 
-  // TODO: componentUnmounted -> remove controlKey
+  // TODO: componentUnmounted -> remove controlKey | fixed
 
   render() {
     const { roomId, roomData } = this.getRoom();
@@ -97,12 +88,6 @@ class RoomsShowContainer extends Component {
             </div>
           </div>
         </div>
-
-        <BottomNavigation className="animated slideInUp">
-          <BottomNavigationItem
-            icon={<ButtonShareComponent />}
-          />
-        </BottomNavigation>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { blue500, lightBlue500 } from 'material-ui/styles/colors';
+import { white, lightBlue50 } from 'material-ui/styles/colors';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import IconShare from 'material-ui/svg-icons/social/share';
@@ -38,9 +38,9 @@ export class ButtonShareComponent extends Component {
     return(
       <div className="button-share__wrapper">
         <IconShare
-          color={blue500}
+          color={white}
           onTouchTap={this.handleOpen}
-          hoverColor={lightBlue500}
+          hoverColor={lightBlue50}
         />
 
         <Dialog
