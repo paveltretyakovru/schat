@@ -46,14 +46,10 @@ export default function(state = initState, action) {
       return element.id === action.payload.roomId;
     });
 
-    const message = action.payload.message
-    // let encryptedMessage = AES.encrypt(action.payload.message, findRoom.key);
-
     findRoom.messages.push({
       id: action.payload.id,
       me: action.payload.me,
-      // message: encryptedMessage.toString(),
-      message: message,
+      message: action.payload.message,
     });
     return { ...state, list: roomsListCopy};
   }

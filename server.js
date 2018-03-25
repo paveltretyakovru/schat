@@ -14,6 +14,10 @@ io.on('connection', (socket) => {
 
   app.set('socket', socket)
 
+  io.clients((error, clients) => {
+    console.log('Clients server', clients)
+  })
+
   socket.on('disconnect', () => {
     console.log('user disconnected')
   });
