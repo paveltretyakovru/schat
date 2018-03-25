@@ -1,10 +1,10 @@
 import makeId from 'makeId';
-import AES from 'crypto-js/aes';
 import SHA256 from 'crypto-js/sha256';
 
 import {
   ADD_ROOM,
   ADD_MESSAGE,
+  SET_CURRENT_ROOM,
   TOGGLE_ROOM_FAVOR,
   UPDATE_CONTROL_KEY,
 } from './rooms.constants';
@@ -16,12 +16,12 @@ const initState = {
       key: SHA256('key').toString(),
       title: 'Titile room title',
       favor: false,
-      controlKey: '',
       
       messages: [],
       
     },
   ],
+  current: null,
 }
 
 export default function(state = initState, action) {
@@ -36,7 +36,6 @@ export default function(state = initState, action) {
           key: SHA256(action.payload.key).toString(),
           title: action.payload.title,
           messages: [],
-          controlKey: '',
         },
       ],
     };
@@ -47,12 +46,14 @@ export default function(state = initState, action) {
       return element.id === action.payload.roomId;
     });
 
-    let encryptedMessage = AES.encrypt(action.payload.message, findRoom.key);
+    const message = action.payload.message
+    // let encryptedMessage = AES.encrypt(action.payload.message, findRoom.key);
 
     findRoom.messages.push({
       id: action.payload.id,
       me: action.payload.me,
-      message: encryptedMessage.toString(),
+      // message: encryptedMessage.toString(),
+      message: message,
     });
     return { ...state, list: roomsListCopy};
   }
@@ -63,7 +64,7 @@ export default function(state = initState, action) {
       return element.id === action.payload.roomId;
     });
 
-    findRoom.controlKey = SHA256(action.payload.controlKey).toString();
+    findRoom.key = SHA256(action.payload.key).toString();
     return {...state, list: roomsListCopy}
   }
 
@@ -76,6 +77,13 @@ export default function(state = initState, action) {
     findRoom.favor = !findRoom.favor
 
     return {...state, list: roomsListCopy, current: findRoom}
+  }
+
+  case SET_CURRENT_ROOM: {
+    return {
+      ...state,
+      current: state.list.findIndex(e => e.id === action.payload.room.id),
+    }
   }
 
   default:

@@ -74,11 +74,17 @@ class RoomsShowMessageFieldComponent extends Component {
   }
 
   handleSendMessage() {
-    this.props.handleAddMessage({
-      roomId: this.props.roomId,
-      message: this.state.message,
-    });
-    this.setState({...this.state, message: ''});
+    this.props.sendMessageHandler(this.state.message, this.props.room)
+      .then((res) => {
+        console.log('sendMessage the promise', { res })
+
+        if(res.data.success) {
+          const {message, roomId} = res.data.data
+          this.props.addMessageHandler({message, roomId});
+        }
+
+        this.setState({...this.state, message: ''})
+      })
   }
 }
 

@@ -24,13 +24,10 @@ import './rooms-show.container.css';
 
 class RoomsShowContainer extends Component {
   static path = '/rooms/:id'
-
-  state = {
-    selectedIndex: 0,
-  };
   
   componentWillMount() {
     const room = this.getRoom()
+    this.props.roomsActions.setCurrentRoom(room)
 
     this.props.setHeaderButtons(
       null,
@@ -79,7 +76,7 @@ class RoomsShowContainer extends Component {
               <RoomsShowKeyFieldComponent
                 room={roomData || null}
                 roomId={roomId}
-                handleUpdateControlKey={this.props.roomsActions.updateControlKey}
+                handleUpdateKey={this.props.roomsActions.updateKey}
               />
             </div>
 
@@ -93,14 +90,15 @@ class RoomsShowContainer extends Component {
 
             <div id="rooms-show-message-text-field">
               <RoomsShowMessageFieldComponent
-                roomId={roomId}
-                handleAddMessage={this.props.roomsActions.addMessage}
+                room={roomData}
+                addMessageHandler={this.props.roomsActions.addMessage}
+                sendMessageHandler={this.props.sendMessage}
               />
             </div>
           </div>
         </div>
 
-        <BottomNavigation className="animated slideInUp" selectedIndex={this.state.selectedIndex}>
+        <BottomNavigation className="animated slideInUp">
           <BottomNavigationItem
             icon={<ButtonShareComponent />}
           />
@@ -128,6 +126,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     appActions: bindActionCreators(AppActions, dispatch),
+    sendMessage: RoomsActions.sendMessage,
     roomsActions: bindActionCreators(RoomsActions, dispatch),
     headerActions: bindActionCreators(HeaderActions, dispatch),
   }

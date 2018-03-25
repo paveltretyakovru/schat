@@ -20,8 +20,8 @@ class RoomsShowChatMessagesComponent extends Component{
 
             {/* Decoding message*/}
             try {
-              if(!room.controlKey) throw new Error();
-              let bytes = AES.decrypt(message.message, room.controlKey);
+              if(!room.key) throw new Error();
+              let bytes = AES.decrypt(message.message, room.key);
               var plaintext = bytes.toString(CryptoJS.enc.Utf8);
             } catch(e) {
               plaintext = '';

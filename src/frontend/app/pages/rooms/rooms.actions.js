@@ -1,11 +1,16 @@
-import { goBack } from 'react-router-redux';
+import AES from 'crypto-js/aes';
+import {post} from 'axios'
+// import {isEmpty} from 'ramda'
+import {goBack} from 'react-router-redux'
 
 import {
   ADD_ROOM,
   ADD_MESSAGE,
   ROOMS_ROUTE,
   ADD_ROOM_ROUTE,
+  SET_CURRENT_ROOM,
   TOGGLE_ROOM_FAVOR,
+  SEND_MESSAGE_ROUTE,
   UPDATE_CONTROL_KEY,
 } from './rooms.constants';
 
@@ -56,8 +61,21 @@ export const routeToRoomSettings = (roomId = '') => {
   }
 }
 
+export const sendMessage = (message = '', room = null) => {
+  const encryptedMessage = AES.encrypt(message, room.key);
+
+  console.log('Send message action',{ room }, encryptedMessage.toString())
+
+  return post(
+    SEND_MESSAGE_ROUTE,
+    {
+      roomId: room.id,
+      message: encryptedMessage.toString(),
+    })
+}
+
 export function addMessage(data) {
-  return dispatch => {
+  return (dispatch) => {
     if(data.message) {
       dispatch({
         type: ADD_MESSAGE,
@@ -72,13 +90,13 @@ export function addMessage(data) {
   }
 }
 
-export function updateControlKey(data) {
+export function updateKey(data) {
   return dispatch => {
     dispatch({
       type: UPDATE_CONTROL_KEY,
       payload: {
         roomId: data.roomId || '',
-        controlKey: data.controlKey || '',
+        key: data.key || '',
       },
     });
   }
@@ -90,5 +108,16 @@ export const toogleRoomFavor = (roomId = '') => {
       type: TOGGLE_ROOM_FAVOR,
       payload: { roomId },
     })
+  }
+}
+
+export const setCurrentRoom = (room = false) => {
+  if(room) {
+    return dispatch => {
+      dispatch({
+        type: SET_CURRENT_ROOM,
+        payload: { room },
+      })
+    }
   }
 }

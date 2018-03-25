@@ -9,7 +9,7 @@ class RoomsShowKeyFieldComponent extends Component {
       <div>
         <TextField
           type="password"
-          onChange={this.handleUpdateControlKey.bind(this)}
+          onChange={this.handleUpdateKey.bind(this)}
           fullWidth={true}
           floatingLabelText="Secret key"
         />
@@ -17,12 +17,12 @@ class RoomsShowKeyFieldComponent extends Component {
     );
   }
 
-  handleUpdateControlKey(e) {
+  handleUpdateKey(e) {
     let currentTarget = e.currentTarget;
 
-    this.props.handleUpdateControlKey({
+    this.props.handleUpdateKey({
       roomId: this.props.roomId,
-      controlKey: currentTarget.value,
+      key: currentTarget.value,
     });
   }
 }

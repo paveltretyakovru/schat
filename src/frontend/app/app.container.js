@@ -15,6 +15,8 @@ import { routeToRoomsList } from './pages/rooms/rooms.actions';
 
 import './app.container.css';
 
+injectTapEventPlugin();
+
 class App extends Component {
   static path = '/';
 
@@ -25,11 +27,19 @@ class App extends Component {
       headerButtonLeft: null,
       headerButtonRight: null,
     }
+
+    this.props.socket.on('message', (res) => {
+      console.log('Geted server message:', res)
+    })
+
+    this.props.socket.on('newMessage', (res) => {
+      console.log('New message', res)
+    })
   }
 
-  componentWillMount() {
-    injectTapEventPlugin();
-  }
+  // componentWillMount() {
+  //   injectTapEventPlugin();
+  // }
 
   render() {
     let menuItems = [
@@ -94,6 +104,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     app: state.app,
+    socket: state.app.socket,
   }
 }
 
