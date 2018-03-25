@@ -6,6 +6,8 @@ class HeaderContainer extends Component {
   getStyle() {
     return {
       iconStyleRight: {
+        margin: '0px',
+        padding: '0px',
         display: 'flex',
         alignItems: 'center',
       },

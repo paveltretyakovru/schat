@@ -42,7 +42,7 @@ class RoomsShowContainer extends Component {
 
     return(
       <div className="animated fadeInLeft row center-xs" id="rooms-show-wrapper">
-        <div className="col-xs-11"  id="rooms-show-container">
+        <div className="col-xs-10"  id="rooms-show-container">
           <div id="rooms-show-key-field-container">
             <RoomsShowKeyFieldComponent
               room={roomData || null}

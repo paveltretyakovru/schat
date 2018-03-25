@@ -14,7 +14,7 @@ class ButtonNavigateRoomsList extends Component {
       <IconButton
         onClick={() => this.props.routeToRoomsList()}
         tooltip="Go to Rooms List"
-        // className="animated rotateIn"
+        className="animated rotateIn"
       >
         <NavigationArrowBack color={white} />
       </IconButton>
