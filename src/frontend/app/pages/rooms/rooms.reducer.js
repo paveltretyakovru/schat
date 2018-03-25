@@ -5,6 +5,7 @@ import SHA256 from 'crypto-js/sha256';
 import {
   ADD_ROOM,
   ADD_MESSAGE,
+  TOGGLE_ROOM_FAVOR,
   UPDATE_CONTROL_KEY,
 } from './rooms.constants';
 
@@ -13,11 +14,12 @@ const initState = {
     {
       id: 'idrooom3242342',
       key: SHA256('key').toString(),
-      controlKey: '',
       title: 'Titile room title',
+      favor: false,
+      controlKey: '',
       
       messages: [],
-
+      
     },
   ],
 }
@@ -63,6 +65,17 @@ export default function(state = initState, action) {
 
     findRoom.controlKey = SHA256(action.payload.controlKey).toString();
     return {...state, list: roomsListCopy}
+  }
+
+  case TOGGLE_ROOM_FAVOR: {
+    const roomsListCopy = state.list.slice();
+    const findRoom = roomsListCopy.find(element => {
+      return element.id === action.payload.roomId;
+    });
+
+    findRoom.favor = !findRoom.favor
+
+    return {...state, list: roomsListCopy, current: findRoom}
   }
 
   default:

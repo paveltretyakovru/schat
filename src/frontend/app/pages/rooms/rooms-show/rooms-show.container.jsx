@@ -8,7 +8,7 @@ import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
-import ButtonNavigateRoomsList from '../../../shared/buttons/button-navigate-rooms-list.component';
+import ButtonFavorComponent from '../../../shared/buttons/button-favor.component';
 import RoomsShowKeyFieldComponent from './shared/rooms-show-key-field.component';
 import RoomsShowChatMessagesComponent from './shared/rooms-show-chat-messages.component';
 import RoomsShowMessageFieldComponent from './shared/rooms-show-message-field.component';
@@ -17,12 +17,25 @@ import './rooms-show.container.css';
 
 class RoomsShowContainer extends Component {
   static path = '/rooms/:id'
-
+  
   componentWillMount() {
-    const { roomData } = this.getRoom();
+    const room = this.getRoom()
 
-    this.props.setHeaderButtons(null, <ButtonNavigateRoomsList />);
-    this.props.headerActions.updateHeaderTitle(`EC. ${roomData.title}`);
+    this.props.setHeaderButtons(
+      null,
+      <ButtonFavorComponent
+        active={room.roomData.favor}
+        handleClick={() => {
+          this.props.roomsActions.toogleRoomFavor(room.roomId)
+          return room.roomData.favor
+        }} 
+      />
+    );
+    this.props.headerActions.updateHeaderTitle(
+      <span
+        onClick={ this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId) }
+      >{room.roomData.title}</span>
+    );
   }
 
   // TODO: componentUnmounted -> remove controlKey

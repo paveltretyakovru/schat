@@ -5,6 +5,7 @@ import {
   ADD_MESSAGE,
   ROOMS_ROUTE,
   ADD_ROOM_ROUTE,
+  TOGGLE_ROOM_FAVOR,
   UPDATE_CONTROL_KEY,
 } from './rooms.constants';
 
@@ -44,6 +45,17 @@ export const routeToRoomsList = () => {
   }
 }
 
+export const routeToRoomSettings = (roomId = '') => {
+  return (dispatch) => {
+    try {
+      const route = (roomId) ? `${ROOMS_ROUTE}/${roomId}/settings` : ROOMS_ROUTE
+      dispatch(push(route))
+    } catch (e) {
+      console.info('Catch route to rooms list');
+    }
+  }
+}
+
 export function addMessage(data) {
   return dispatch => {
     if(data.message) {
@@ -69,5 +81,14 @@ export function updateControlKey(data) {
         controlKey: data.controlKey || '',
       },
     });
+  }
+}
+
+export const toogleRoomFavor = (roomId = '') => {
+  return dispatch => {
+    dispatch({
+      type: TOGGLE_ROOM_FAVOR,
+      payload: { roomId },
+    })
   }
 }
