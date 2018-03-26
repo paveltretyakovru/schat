@@ -1,4 +1,8 @@
-.rooms-settings__paper {
-  /* height: 93%; */
-  margin-top: 16px;
+.rooms-settings__wrapper {
+  height: 100%;
+  padding: 16px;
 }
+
+/* .rooms-settings__paper {
+  margin-top: 16px;
+} */

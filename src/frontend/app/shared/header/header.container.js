@@ -1,19 +1,11 @@
-import AppBar from 'material-ui/AppBar';
-import {connect} from 'react-redux';
-import React, {Component} from 'react';
+import AppBar from 'material-ui/AppBar'
+import {connect} from 'react-redux'
+import React, {Component} from 'react'
+
+import './header.container.css'
 
 class HeaderContainer extends Component {
-  getStyle() {
-    return {
-      iconStyleRight: {
-        marginRight:' -16px',
-        marginTop: '5px',
-      },
-    }
-  }
-
   render() {
-    const { iconStyleRight } = this.getStyle();
     const { headerTitle } = this.props;
 
     return (
@@ -22,7 +14,6 @@ class HeaderContainer extends Component {
         className="header__container"
         iconElementLeft={ this.props.buttonLeft }
         iconElementRight={ this.props.buttonRight }
-        iconStyleRight={ iconStyleRight }
       />
     );
   }

@@ -1,5 +1,5 @@
 import { white } from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
+// import IconButton from 'material-ui/IconButton';
 import React, { Component } from 'react';
 import Star from 'material-ui/svg-icons/toggle/star';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
@@ -16,16 +16,11 @@ class ButtonFavorComponent extends Component {
   render() {
     const handleClick = this.props.handleClick;
 
-    return(<IconButton
-      // className="animated rotateIn"
-      className="animated slideInDown"
-      tooltip="Add to favor"
-      onTouchTap={() => this.setState({...this.state, active: handleClick()})}
-    >
-      {
-        this.state.active ? <Star color={white} /> : <StarBorder color={white} />
-      }
-    </IconButton>);
+    if (this.state.active) {
+      return <Star color={white} onTouchTap={() => this.setState({...this.state, active: handleClick()})} />
+    } else {
+      return <StarBorder color={white} onTouchTap={() => this.setState({...this.state, active: handleClick()})} />
+    }
   }
 }
 

@@ -1,6 +1,10 @@
 .message-field__container {
   display: flex;
-  padding: 16px;
+  padding: 0px 16px;
   flex-direction: column;
   justify-content: center;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 93%;
 }

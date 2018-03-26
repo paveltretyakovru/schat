@@ -12,7 +12,7 @@ import IconShare from 'material-ui/svg-icons/social/share'
 import IconAttachFile from 'material-ui/svg-icons/editor/attach-file'
 import IconSettings from 'material-ui/svg-icons/action/settings'
 
-// import DevTools from './shared/devtools';
+import DevTools from './shared/devtools';
 import HeaderContainer from './shared/header/header.container';
 import LeftMenuComponent from './shared/left-menu.component';
 import ButtonMenuComponent from './shared/buttons/button-menu.component';
@@ -64,7 +64,7 @@ class App extends Component {
     const routeToSettings = this.props.routeActions.routeToRoomSettings.bind(this, this.props.params.id)
 
     const tabs = (
-      <Tabs className="animated slideInUp" initialSelectedIndex={2}>
+      <Tabs className="animated slideInDown chat-tabs-menu" initialSelectedIndex={2}>
         <Tab icon={<IconAttachFile />} />
         <Tab icon={<IconShare />} />
         <Tab icon={<IconChat />} onActive={routeToRoom} />
@@ -81,38 +81,37 @@ class App extends Component {
         />
 
         <div className="app__wrapper">
-          <HeaderContainer
-            buttonLeft={this.state.headerButtonLeft}
-            buttonRight={this.state.headerButtonRight}
-          />
+          <div className="app__navigation">
+            <HeaderContainer
+              buttonLeft={this.state.headerButtonLeft}
+              buttonRight={this.state.headerButtonRight}
+            />
 
-          {/* <main> */}
-            {/* { this.props.children } */}
+            {/* Tabs menu */}
             {
-              React.cloneElement(
-                this.props.children,
-                {
-                  setHeaderButtons: ::this.setHeaderButtons,
-                  setHeaderButtonLeft: ::this.setHeaderButtonLeft,
-                  setHeaderButtonRight: ::this.setHeaderButtonRight,
+              (() => {
+                if(typeof this.props.params.id !== 'undefined') {
+                  return(tabs)
                 }
-              )
+              })()
             }
-          {/* </main> */}
-          
-          {/* Bottom menu */}
+          </div>
+
           {
-            (() => {
-              if(typeof this.props.params.id !== 'undefined') {
-                return(tabs)
+            React.cloneElement(
+              this.props.children,
+              {
+                setHeaderButtons: ::this.setHeaderButtons,
+                setHeaderButtonLeft: ::this.setHeaderButtonLeft,
+                setHeaderButtonRight: ::this.setHeaderButtonRight,
               }
-            })()
+            )
           }
 
         {/* app__wrapper */}
         </div>
 
-        {/* { NODE_ENV === 'development' ? <DevTools /> : null } */}
+        { NODE_ENV === 'development' ? <DevTools /> : null }
       </div>
     </MuiThemeProvider>);
   }
