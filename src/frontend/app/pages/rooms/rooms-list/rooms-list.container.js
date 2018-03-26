@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import Paper from 'material-ui/Paper';
 
 // material-ui
 import Subheader from 'material-ui/Subheader';
@@ -20,6 +21,9 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+
+import './rooms-list.container.css'
+
 const iconButtonElement = (
   <IconButton
     touch={true}
@@ -60,14 +64,17 @@ class RoomsListContainer extends Component {
     })
 
     return(
-      <div style={{position: 'relative'}}>
-        <List className="animated fadeInLeft">
+      <Paper
+        zDepth={1}
+        style={{position: 'relative'}}
+        className="animated bounceInLeft rooms-list__paper"
+      >
+        <List>
           <Subheader>Rooms list</Subheader>
           { roomsItems }
         </List>
-
         <ButtonFloatAddComponent handleAction={routeToAddRoom} />
-      </div>
+      </Paper>
     );
   }
 

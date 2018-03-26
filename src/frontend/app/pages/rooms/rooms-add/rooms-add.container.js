@@ -3,18 +3,15 @@ import STextField from 'app/shared/form/STextField';
 import FlatButton from 'material-ui/FlatButton';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import {Card, CardActions, CardText} from 'material-ui/Card';
 
 // Actions
 import * as AppActions from '../../../app.actions';
 import * as HeaderActions from '../../../shared/header/header.actions';
 import * as RoomsActions from '../rooms.actions';
 
-// Helpers
-// import makeId from '../../../../../shared/makeId';
-
 // Components
 import HeaderButtonCloseContainer from './shared/header-buttons/header-button-close.container';
-import { HeaderButtonSaveComponent } from './shared/header-buttons/header-button-save.component';
 
 // Style sheets
 import './rooms-add.container.css';
@@ -25,15 +22,13 @@ const fieldsData = [
     name: 'key',
     // required: true,
     fullWidth: true,
-    floatingLabelText: 'Room Key to encrypt your messages',
-    floatingLabelFixed: true,
+    hintText: 'Password to encrypting',
   },
   {
     name: 'title',
     required: true,
     fullWidth: true,
-    floatingLabelText: 'Room title for your rooms list',
-    floatingLabelFixed: true,      
+    hintText: 'Room title for your rooms list',
   },
 ];
 
@@ -43,9 +38,6 @@ class RoomAddContainer extends Component {
   componentWillMount() {
     this.props.setHeaderButtons(
       <HeaderButtonCloseContainer />,
-      <HeaderButtonSaveComponent
-        handleClick={ this.handleSaveClick.bind(this) }
-      />
     );
     this.props.headerActions.updateHeaderTitle('Add Room');
   }
@@ -63,24 +55,54 @@ class RoomAddContainer extends Component {
     });
 
     return (
-      <div className = "row center-xs animated fadeInLeft">
-        <div className = "col-md-4 col-xs-11" >
-          { /* Listing this.fieldsComponents array */ }
-          { this.fieldsComponents }
-          <div id = "room-add-form-buttons" >
-            <FlatButton
-              label = "Create Room"
-              primary = { true }
-              onTouchTap = { this.handleSaveClick.bind(this) }
-            />
+      <div className="row animated fadeInLeft rooms-add__create-wrapper">
+        <div className="col-xs-12 col-md-6">
+          <Card className="rooms-add__invite-block">
 
-            <FlatButton
-              label = "Random values"
-              secondary = { true }
-              onTouchTap = { this.handleClickGenerateRandomData.bind(this) }
-            />
-          </div>
+            <CardText>
+              <STextField
+                name="roomId"
+                required={true}
+                fullWidth={true}
+                hintText="Chat room ID"
+              />
+              <STextField
+                name="key"
+                required={true}
+                fullWidth={true}
+                hintText="Chat room Key"
+              />
+            </CardText>
+
+            <CardActions>
+              <FlatButton
+                label = "Connect to existing chat room"
+                primary = { true }
+                onTouchTap = { this.handleSaveClick.bind(this) }
+              />
+            </CardActions>
+          </Card>
         </div>
+        <div className="col-xs-12 col-md-6">        
+          <Card className="rooms-add__create-block">
+            <CardText>{ this.fieldsComponents }</CardText>
+
+            <CardActions id="room-add-form-buttons">
+              <FlatButton
+                label = "Create"
+                primary = { true }
+                onTouchTap = { this.handleSaveClick.bind(this) }
+              />
+
+              <FlatButton
+                label = "Random"
+                secondary = { true }
+                onTouchTap = { this.handleClickGenerateRandomData.bind(this) }
+              />
+            </CardActions>
+          </Card>
+        </div>
+
       </div>
     );
   }

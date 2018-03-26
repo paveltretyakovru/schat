@@ -1,5 +1,12 @@
 #room-add-form-buttons {
-  margin-top: 16px;
   display: flex;
   justify-content: space-evenly;
+}
+
+.rooms-add__invite-block {
+  margin-top: 16px;  
+}
+
+.rooms-add__create-block {
+  margin-top: 16px;    
 }

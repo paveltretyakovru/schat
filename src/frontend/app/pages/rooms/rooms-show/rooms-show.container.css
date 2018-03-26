@@ -1,98 +1,6 @@
-#rooms-show-wrapper {
-  margin: 0;
-  height: 100%;
-}
-
-#rooms-show-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-#rooms-show-key-field-container {
-  flex-grow: 1;
-}
-
-#rooms-show-messages-container {
-  flex-grow: 25;
-  min-height: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  margin: 16px 0 16px 0;
-  padding: 16px;
-  text-align: justify;
-  background-color: #F2F2F2;
-  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-}
-
-#rooms-show-message-text-field {
-  flex-grow: 1;
-  max-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.message-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  margin: 10.66667px 0;
-  padding: 10.66667px 0;
-}
-.message-wrapper .circle-wrapper {
-  height: 42.66667px;
-  width: 42.66667px;
-  border-radius: 50%;
-}
-.message-wrapper .text-wrapper {
-  padding: 10.66667px;
-  min-height: 42.66667px;
-  width: 60%;
-  margin: 0 10.66667px;
-  box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
-  border-radius: 2px;
-  font-weight: 300;
-  position: relative;
-  /* word-break: break-all; */
-  opacity: 0;
-}
-.message-wrapper .text-wrapper:before {
-  content: '';
-  width: 0;
-  height: 0;
-  border-style: solid;
-}
-.message-wrapper.them .circle-wrapper, .message-wrapper.them .text-wrapper {
-  background: #F44336;
-  float: left;
-  color: #ffffff;
-}
-.message-wrapper.them .text-wrapper:before {
-  border-width: 0 10px 10px 0;
-  border-color: transparent #F44336 transparent transparent;
-  position: absolute;
-  top: 0;
-  left: -9px;
-}
-.message-wrapper.me .circle-wrapper, .message-wrapper.me .text-wrapper {
-  background: #FF5722;
-  float: right;
-  color: #333333;
-}
-.message-wrapper.me .text-wrapper {
-  background: #ffffff;
-}
-.message-wrapper.me .text-wrapper:before {
-  border-width: 10px 10px 0 0;
-  border-color: #ffffff transparent transparent transparent;
-  position: absolute;
-  top: 0;
-  right: -9px;
-}
-
 .rooms-show__header-title {
   cursor: pointer;
+  line-height: 54px;
 }
 .rooms-show__header-title-wrapper {
   display: flex;
@@ -110,6 +18,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .rooms-show__button-tabs {

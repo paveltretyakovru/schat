@@ -1,25 +1,16 @@
-html, body { height: 100% }
-body { font-family: 'Roboto', sans-serif; overflow: hidden }
+html, body { height: 100%; }
+body { font-family: 'Roboto', sans-serif;}
 
-main { display: flex; flex: 6 !important; }
-header { max-height: 64px; min-height: 64px; }
-header, footer { flex: 1 !important }
-
-main, header {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
+#root, .theme-container {
+    height: 100%;
 }
 
-/* IDS */
-#root { height: 100% }
-#app-container {
+.app__wrapper {
     height: 100%;
     display: flex;
-    align-items: stretch;
     flex-direction: column;
-}
-#app-content {
-    flex: 3;
+    align-items: stretch;
+    justify-content: space-between;
 }
 
 .float-button {
@@ -28,5 +19,3 @@ main, header {
   z-index: 1100;
   position: absolute;
 }
-
-/* CLASSES */

@@ -6,24 +6,25 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 
 // Footer
-import {Tabs, Tab} from 'material-ui/Tabs';
-import { white } from 'material-ui/styles/colors';
-import IconChat from 'material-ui/svg-icons/communication/chat';
-import IconAttachFile from 'material-ui/svg-icons/editor/attach-file';
-import {ButtonShareComponent} from './shared/buttons/button-share.component';
-import {ButtonBuildComponent} from './shared/buttons/button-build.component';
+import {Tabs, Tab} from 'material-ui/Tabs'
+import IconChat from 'material-ui/svg-icons/communication/chat'
+import IconShare from 'material-ui/svg-icons/social/share'
+import IconAttachFile from 'material-ui/svg-icons/editor/attach-file'
+import IconSettings from 'material-ui/svg-icons/action/settings'
 
-import DevTools from './shared/devtools';
+// import DevTools from './shared/devtools';
 import HeaderContainer from './shared/header/header.container';
 import LeftMenuComponent from './shared/left-menu.component';
 import ButtonMenuComponent from './shared/buttons/button-menu.component';
 
 import * as AppActions from './app.actions';
-import { routeToRoomsList } from './pages/rooms/rooms.actions';
+import {
+  routeToRooms,
+  routeToRoomsList,
+  routeToRoomSettings,
+} from './pages/rooms/rooms.actions';
 
 import './app.container.css';
-
-injectTapEventPlugin();
 
 class App extends Component {
   static path = '/';
@@ -45,9 +46,11 @@ class App extends Component {
     })
   }
 
-  // componentWillMount() {
-  //   injectTapEventPlugin();
-  // }
+  componentWillMount() {
+    try {
+      injectTapEventPlugin();
+    } catch (e) { console.info('injectTapEventPlugin exception') }
+  }
 
   render() {
     let menuItems = [
@@ -57,21 +60,33 @@ class App extends Component {
       },
     ];
 
+    const routeToRoom = this.props.routeActions.routeToRooms.bind(this, { id: this.props.params.id })
+    const routeToSettings = this.props.routeActions.routeToRoomSettings.bind(this, this.props.params.id)
+
+    const tabs = (
+      <Tabs className="animated slideInUp" initialSelectedIndex={2}>
+        <Tab icon={<IconAttachFile />} />
+        <Tab icon={<IconShare />} />
+        <Tab icon={<IconChat />} onActive={routeToRoom} />
+        <Tab icon={<IconSettings />} onActive={routeToSettings} />
+      </Tabs>
+    )
+
     return(<MuiThemeProvider>
-      <div id="app-container" className="container">
+      <div className="theme-container">
         <LeftMenuComponent
           items={menuItems}
           isOpen={this.props.app.isLeftMenuOpen}
           handleSwitch={this.props.appActions.switchLeftMenu}
         />
 
-        <HeaderContainer
-          buttonLeft={this.state.headerButtonLeft}
-          buttonRight={this.state.headerButtonRight}
-        />
+        <div className="app__wrapper">
+          <HeaderContainer
+            buttonLeft={this.state.headerButtonLeft}
+            buttonRight={this.state.headerButtonRight}
+          />
 
-        <main className="row">
-          <div id="app-content" className="col-xs-12 col-md-12">
+          {/* <main> */}
             {/* { this.props.children } */}
             {
               React.cloneElement(
@@ -83,28 +98,21 @@ class App extends Component {
                 }
               )
             }
-          </div>
-        </main>
+          {/* </main> */}
+          
+          {/* Bottom menu */}
+          {
+            (() => {
+              if(typeof this.props.params.id !== 'undefined') {
+                return(tabs)
+              }
+            })()
+          }
 
-        <Tabs
-            className="animated slideInUp rooms-show__button-tabs"
-            initialSelectedIndex={2}
-          >
+        {/* app__wrapper */}
+        </div>
 
-            <Tab icon={<IconAttachFile color={white} />} />
-
-            <Tab icon={<ButtonShareComponent />} />
-            
-            <Tab icon={<IconChat color={white} />} />
-
-            <Tab icon={
-              <ButtonBuildComponent 
-                // touchHandler={this.props.roomsActions.routeToRoomSettings.bind(this)}
-              />
-            }/>
-
-          </Tabs>
-        { NODE_ENV === 'development' ? <DevTools /> : null }
+        {/* { NODE_ENV === 'development' ? <DevTools /> : null } */}
       </div>
     </MuiThemeProvider>);
   }
@@ -138,7 +146,14 @@ function mapStateToProps(state) {
 function mapDisptachToProps(dispatch) {
   return {
     appActions: bindActionCreators(AppActions, dispatch),
-    routeActions: bindActionCreators({routeToRoomsList}, dispatch),
+    routeActions: bindActionCreators(
+      {
+        routeToRooms,
+        routeToRoomsList,
+        routeToRoomSettings,
+      },
+      dispatch
+    ),
   }
 }
 

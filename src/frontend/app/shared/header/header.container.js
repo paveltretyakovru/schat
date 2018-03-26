@@ -6,10 +6,8 @@ class HeaderContainer extends Component {
   getStyle() {
     return {
       iconStyleRight: {
-        margin: '0px',
-        padding: '0px',
-        display: 'flex',
-        alignItems: 'center',
+        marginRight:' -16px',
+        marginTop: '3px',
       },
     }
   }
@@ -19,14 +17,13 @@ class HeaderContainer extends Component {
     const { headerTitle } = this.props;
 
     return (
-      <header className="row">
-        <AppBar
-          title={ headerTitle }
-          iconElementLeft={ this.props.buttonLeft }
-          iconElementRight={ this.props.buttonRight }
-          iconStyleRight={ iconStyleRight }
-        />
-      </header>
+      <AppBar
+        title={ headerTitle }
+        className="header__container"
+        iconElementLeft={ this.props.buttonLeft }
+        iconElementRight={ this.props.buttonRight }
+        iconStyleRight={ iconStyleRight }
+      />
     );
   }
 }

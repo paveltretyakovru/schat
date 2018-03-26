@@ -4,16 +4,18 @@ import CryptoJS from 'crypto-js';
 import scrollDown from 'scroll-down';
 import React, {Component} from 'react';
 
+import './rooms-show-chat-messages.component.css'
+
 class RoomsShowChatMessagesComponent extends Component{
   componentDidUpdate() {
-    scrollDown($('#rooms-show-messages-container'));
+    scrollDown($('.rooms-show-messages__container'));
   }
 
   render() {
     let { room } = this.props;
 
     return(
-      <div>
+      <div className="rooms-show-messages__container">
         {
           this.props.messages.map(message => {
             let classNames = `message-wrapper ${message.me ? 'me' : 'them'}`;
