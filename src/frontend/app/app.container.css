@@ -8,6 +8,9 @@ body { font-family: 'Roboto', sans-serif;}
 .app__wrapper {
     height: 100%;
     display: flex;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;

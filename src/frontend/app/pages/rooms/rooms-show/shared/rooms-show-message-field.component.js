@@ -1,5 +1,8 @@
 import Mousetrap from 'mousetrap';
 import React, { Component } from 'react';
+import TextField from 'material-ui/TextField';
+
+import './rooms-show-message-field.component.css'
 
 class RoomsShowMessageFieldComponent extends Component {
   constructor(props) {
@@ -11,22 +14,30 @@ class RoomsShowMessageFieldComponent extends Component {
   }
 
   componentDidMount() {
-    let sendMessageTextFieldElement = document.getElementById('send-message-text-field');
+    let sendMessageTextFieldElement = document.querySelector('.message-field__container');
 
     Mousetrap(sendMessageTextFieldElement).bind(
-      ['ctrl+enter', 'command+enter'], this.handleSendMessage.bind(this)
+      ['enter'], this.handleSendMessage.bind(this)
     );
   }
 
   componentWillUnmount() {
-    let sendMessageTextFieldElement = document.getElementById('send-message-text-field');
-    Mousetrap(sendMessageTextFieldElement).unbind(['ctrl+enter', 'command+enter']);
+    // 'ctrl+enter', 'command+enter'
+    let sendMessageTextFieldElement = document.querySelector('.message-field__container');
+    Mousetrap(sendMessageTextFieldElement).unbind(['enter']);
   }
 
   render() {
     return(
-      <div>
-        Message input container
+      <div className="message-field__container">
+        <TextField
+          value={this.state.message}
+          hintText="Write message..."
+          fullWidth={true}
+          multiLine={true}
+          onChange={this.handleChangeTextField.bind(this)}
+          className="message-field__input"
+        />
       </div>
     );
   }

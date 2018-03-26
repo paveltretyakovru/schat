@@ -1,8 +1,9 @@
-import $ from 'jquery';
-import AES from 'crypto-js/aes';
-import CryptoJS from 'crypto-js';
-import scrollDown from 'scroll-down';
-import React, {Component} from 'react';
+import $ from 'jquery'
+import AES from 'crypto-js/aes'
+import Paper from 'material-ui/Paper'
+import CryptoJS from 'crypto-js'
+import scrollDown from 'scroll-down'
+import React, {Component} from 'react'
 
 import './rooms-show-chat-messages.component.css'
 
@@ -15,7 +16,7 @@ class RoomsShowChatMessagesComponent extends Component{
     let { room } = this.props;
 
     return(
-      <div className="rooms-show-messages__container">
+      <Paper className="rooms-show-messages__container">
         {
           this.props.messages.map(message => {
             let classNames = `message-wrapper ${message.me ? 'me' : 'them'}`;
@@ -40,7 +41,7 @@ class RoomsShowChatMessagesComponent extends Component{
             );
           })
         }
-      </div>
+      </Paper>
     );
   }
 }
