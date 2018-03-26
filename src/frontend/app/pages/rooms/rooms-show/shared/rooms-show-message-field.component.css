@@ -1,10 +1,24 @@
 .message-field__container {
   display: flex;
-  padding: 0px 16px;
-  flex-direction: column;
+  position: relative;
   justify-content: center;
-  position: fixed;
-  bottom: 0;
   background-color: #fff;
-  width: 93%;
+  align-items: center;
+  max-width: 700px;
+  margin: auto;
+}
+
+.message-field__container-fixed {
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  max-width: 700px;
+  padding-bottom: 16px;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.message-field__input {
+  width: 90% !important;
 }

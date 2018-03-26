@@ -1,6 +1,4 @@
-import $ from 'jquery'
 import AES from 'crypto-js/aes'
-// import Paper from 'material-ui/Paper'
 import CryptoJS from 'crypto-js'
 import React, {Component} from 'react'
 

@@ -30,14 +30,16 @@ class RoomsShowMessageFieldComponent extends Component {
   render() {
     return(
       <div className="message-field__container">
-        <TextField
-          value={this.state.message}
-          hintText="Write message..."
-          fullWidth={true}
-          multiLine={true}
-          onChange={this.handleChangeTextField.bind(this)}
-          className="message-field__input"
-        />
+        <div className="message-field__container-fixed">
+          <TextField
+            value={this.state.message}
+            hintText="Write message..."
+            fullWidth={true}
+            multiLine={true}
+            onChange={this.handleChangeTextField.bind(this)}
+            className="message-field__input"
+          />
+        </div>
       </div>
     );
   }
