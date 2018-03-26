@@ -4,6 +4,7 @@
   overflow-x: hidden;
   margin: 16px;
   padding: 16px;
+  height: 100%;
   text-align: justify;
   background-color: #F2F2F2;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;

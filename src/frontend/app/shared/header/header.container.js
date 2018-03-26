@@ -7,7 +7,7 @@ class HeaderContainer extends Component {
     return {
       iconStyleRight: {
         marginRight:' -16px',
-        marginTop: '3px',
+        marginTop: '5px',
       },
     }
   }
