@@ -55,8 +55,8 @@ class RoomAddContainer extends Component {
     });
 
     return (
-      <div className="row animated fadeInLeft rooms-add__create-wrapper">
-        <div className="col-xs-12 col-md-6">
+      <div className="animated fadeInLeft rooms-add__create-wrapper">
+        <div className="">
           <Card className="rooms-add__invite-block">
 
             <CardText>
@@ -83,7 +83,7 @@ class RoomAddContainer extends Component {
             </CardActions>
           </Card>
         </div>
-        <div className="col-xs-12 col-md-6">        
+        <div>        
           <Card className="rooms-add__create-block">
             <CardText>{ this.fieldsComponents }</CardText>
 

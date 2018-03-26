@@ -34,7 +34,7 @@ class RoomsShowSettingsContainer extends Component {
 
   render() {
     return(
-      <div className="rooms-settings__wrapper animated bounceInUp">
+      <div className="rooms-settings__wrapper animated bounceInLeft">
         <Card className="rooms-settings__paper">
           <CardHeader title="Room settings" />
           <CardText>

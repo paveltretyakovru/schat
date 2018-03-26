@@ -23,6 +23,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 import './rooms-list.container.css'
+import { SearchCreateChatComponent } from './shared/search-create-chat/search-create-chat.component';
 
 const iconButtonElement = (
   <IconButton
@@ -57,24 +58,27 @@ class RoomsListContainer extends Component {
       return (<ListItem
         key={item.id}
         onClick={() => this.handleClickListItem(item)}
-        primaryText={item.title}
         leftIcon={ <CommunicationChatBubble color={ grey400 }/> }
+        primaryText={item.title}
         rightIconButton={ rightIconMenu }
       />);
     })
 
     return(
-      <Paper
-        zDepth={1}
-        style={{position: 'relative'}}
-        className="animated bounceInLeft rooms-list__paper"
-      >
-        <List>
-          <Subheader>Rooms list</Subheader>
-          { roomsItems }
-        </List>
-        <ButtonFloatAddComponent handleAction={routeToAddRoom} />
-      </Paper>
+      <div>
+        <SearchCreateChatComponent />
+
+        <Paper
+          zDepth={1}
+          className="animated bounceInLeft rooms-list__paper"
+        >
+          <List>
+            <Subheader>Rooms list</Subheader>
+            { roomsItems }
+          </List>
+          <ButtonFloatAddComponent handleAction={routeToAddRoom} />
+        </Paper>
+      </div>
     );
   }
 

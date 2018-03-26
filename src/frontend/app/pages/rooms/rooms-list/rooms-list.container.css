@@ -1,5 +1,6 @@
 .rooms-list__paper {
-  margin: 0px 0px;
-  margin-bottom: auto;
+  margin: 0px 16px;
   z-index: 1;
+  position: relative;
+  margin-bottom: auto;
 }

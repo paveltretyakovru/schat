@@ -16,17 +16,17 @@ class RoomsShowChatMessagesComponent extends Component{
       <div className="rooms-show-messages__container">
         {
           this.props.messages.map(message => {
+            let plaintext = ''
             let classNames = `message-wrapper ${message.me ? 'me' : 'them'}`;
 
             {/* Decoding message*/}
             try {
-              if(!room.key) throw new Error();
-              let bytes = AES.decrypt(message.message, room.key);
-              var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-
-              console.log('Plain text', plaintext)
+              if(!room.key) throw new Error('Chat room key is undefined');
+              let bytes = AES.decrypt(message.message, room.key)
+              plaintext = bytes.toString(CryptoJS.enc.Utf8)
             } catch(e) {
               plaintext = '';
+              console.error('Decoding message exception.', e.message)
             }
 
             return(

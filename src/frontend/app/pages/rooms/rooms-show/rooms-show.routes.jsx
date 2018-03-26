@@ -6,7 +6,7 @@ import RoomsShowSettingsContainer from './rooms-show-settings/rooms-show-setting
 
 export default (
 	<Route>
-		<Route component={ RoomsShowContainer } path={ RoomsShowContainer.path } />
-		<Route component={ RoomsShowSettingsContainer } path={ RoomsShowSettingsContainer.path } />
+    <Route component={ RoomsShowContainer } path={ RoomsShowContainer.path } />
+    <Route component={ RoomsShowSettingsContainer } path={ RoomsShowSettingsContainer.path } />
 	</Route>
 );
