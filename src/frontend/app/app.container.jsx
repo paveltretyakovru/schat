@@ -5,13 +5,6 @@ import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 
-// Footer
-import {Tabs, Tab} from 'material-ui/Tabs'
-import IconChat from 'material-ui/svg-icons/communication/chat'
-import IconShare from 'material-ui/svg-icons/social/share'
-import IconAttachFile from 'material-ui/svg-icons/editor/attach-file'
-import IconSettings from 'material-ui/svg-icons/action/settings'
-
 import DevTools from './shared/devtools';
 import HeaderContainer from './shared/header/header.container';
 import LeftMenuComponent from './shared/left-menu.component';
@@ -25,6 +18,7 @@ import {
 } from './pages/rooms/rooms.actions';
 
 import './app.container.css';
+import { TabsMenuComponent } from './shared/tabs-menu/tabs-menu.component';
 
 class App extends Component {
   static path = '/';
@@ -60,16 +54,11 @@ class App extends Component {
       },
     ];
 
-    const routeToRoom = this.props.routeActions.routeToRooms.bind(this, { id: this.props.params.id })
-    const routeToSettings = this.props.routeActions.routeToRoomSettings.bind(this, this.props.params.id)
-
-    const tabs = (
-      <Tabs className="animated slideInDown chat-tabs-menu" initialSelectedIndex={2}>
-        <Tab icon={<IconAttachFile />} />
-        <Tab icon={<IconShare />} />
-        <Tab icon={<IconChat />} onActive={routeToRoom} />
-        <Tab icon={<IconSettings />} onActive={routeToSettings} />
-      </Tabs>
+    const tabsMenu = (
+      <TabsMenuComponent
+        routeToRoom={ this.props.routeActions.routeToRooms.bind(this, { id: this.props.params.id }) }
+        routeToSettings={ this.props.routeActions.routeToRoomSettings.bind(this, this.props.params.id) }
+      />
     )
 
     return(<MuiThemeProvider>
@@ -87,14 +76,7 @@ class App extends Component {
               buttonRight={this.state.headerButtonRight}
             />
 
-            {/* Tabs menu */}
-            {
-              (() => {
-                if(typeof this.props.params.id !== 'undefined') {
-                  return(tabs)
-                }
-              })()
-            }
+            { (typeof this.props.params.id !== 'undefined') ? tabsMenu : null }
           </div>
 
           {
@@ -107,8 +89,6 @@ class App extends Component {
               }
             )
           }
-
-        {/* app__wrapper */}
         </div>
 
         { NODE_ENV === 'development' ? <DevTools /> : null }

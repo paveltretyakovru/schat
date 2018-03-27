@@ -8,7 +8,7 @@ export class SearchCreateChatComponent extends Component {
     return(
       <div className="search-create-chat">
         <TextField
-          hintText="Enter ID to connect existing chat or enter title to create new chat"
+          hintText="Enter ID to connect or title to create new chat"
           fullWidth={true}
           floatingLabelText="Search or create chat room..."
         />

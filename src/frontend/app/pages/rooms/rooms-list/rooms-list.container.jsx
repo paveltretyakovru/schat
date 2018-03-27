@@ -14,7 +14,7 @@ import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
-import ButtonFloatAddComponent from 'app/shared/buttons/button-float-add.component';
+// import ButtonFloatAddComponent from 'app/shared/buttons/button-float-add.component';
 
 import { grey400 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
@@ -52,7 +52,7 @@ class RoomsListContainer extends Component {
   }
 
   render() {
-    const { routeToAddRoom } = this.props.roomsActions;
+    // const { routeToAddRoom } = this.props.roomsActions;
 
     const roomsItems = this.props.rooms.list.map((item) => {
       return (<ListItem
@@ -76,7 +76,7 @@ class RoomsListContainer extends Component {
             <Subheader>Rooms list</Subheader>
             { roomsItems }
           </List>
-          <ButtonFloatAddComponent handleAction={routeToAddRoom} />
+          {/* <ButtonFloatAddComponent handleAction={routeToAddRoom} /> */}
         </Paper>
       </div>
     );

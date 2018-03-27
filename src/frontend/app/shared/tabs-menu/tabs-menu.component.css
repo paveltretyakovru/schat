@@ -1,0 +1,9 @@
+.chat-tabs-menu {
+	margin-bottom: auto;
+	max-width: 700px;
+	margin: auto;
+}
+
+.chat-tabs-menu div:first-child {
+	border-radius: 0px 0px 3px 3px;
+}

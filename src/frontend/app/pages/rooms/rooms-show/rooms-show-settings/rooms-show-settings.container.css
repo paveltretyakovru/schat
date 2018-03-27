@@ -1,8 +1,11 @@
 .rooms-settings__wrapper {
   height: 100%;
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
 }
 
-/* .rooms-settings__paper {
-  margin-top: 16px;
-} */
+.rooms-settings__paper {
+  width: 90%;
+}
