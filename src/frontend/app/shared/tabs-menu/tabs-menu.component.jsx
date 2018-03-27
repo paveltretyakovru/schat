@@ -12,7 +12,7 @@ import './tabs-menu.component.css'
 export class TabsMenuComponent extends Component {
   render() {
     return(
-      <Tabs className="animated slideInDown chat-tabs-menu" initialSelectedIndex={2}>
+      <Tabs className="animated slideInUp chat-tabs-menu" initialSelectedIndex={2}>
         <Tab icon={<IconAttachFile />} />
         <Tab icon={<IconShare />} />
         <Tab icon={<IconChat />} onActive={this.props.routeToRoom} />

@@ -10,7 +10,7 @@
 
 .message-field__container-fixed {
   width: 100%;
-  bottom: 0;
+  bottom: 48px;
   display: flex;
   position: fixed;
   max-width: 700px;

@@ -37,7 +37,7 @@ class RoomsShowMessageFieldComponent extends Component {
             fullWidth={true}
             multiLine={true}
             onChange={this.handleChangeTextField.bind(this)}
-            className="message-field__input"
+            className="message-field__input animated slideInUp"
           />
         </div>
       </div>

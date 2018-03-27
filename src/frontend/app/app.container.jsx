@@ -31,13 +31,8 @@ class App extends Component {
       headerButtonRight: null,
     }
 
-    this.props.socket.on('message', (res) => {
-      console.log('Geted server message:', res)
-    })
-
-    this.props.socket.on('newMessage', (res) => {
-      console.log('New message', res)
-    })
+    this.props.socket.on('message', (res) => console.log('Server message:', res))
+    this.props.socket.on('newMessage', (res) => console.log('New message', res))
   }
 
   componentWillMount() {
