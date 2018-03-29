@@ -1,0 +1,1 @@
+export const stub = (dispatch) => dispatch({type: ''})
