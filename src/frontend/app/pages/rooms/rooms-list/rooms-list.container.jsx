@@ -66,7 +66,7 @@ class RoomsListContainer extends Component {
 
     return(
       <div>
-        <SearchCreateChatComponent />
+        <SearchCreateChatComponent socket={this.props.socket} />
 
         <Paper
           zDepth={1}
@@ -90,6 +90,7 @@ class RoomsListContainer extends Component {
 function mapStateToProps(state) {
   return {
     rooms: state.rooms,
+    socket: state.app.socket,
   }
 }
 

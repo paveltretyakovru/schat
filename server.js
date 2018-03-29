@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 // Routers
 const appRouter = require('./src/backend/app.router')
 const userRouter = require('./src/backend/user/user.router')
+const roomsRouter = require('./src/backend/rooms/rooms.router')(app)
 
 io.on('connection', (socket) => {
   console.log('a user connected')
@@ -32,7 +33,7 @@ app.use(bodyParser())
 
 app.use('/', appRouter)
 app.use('/user', userRouter)
-app.use('/rooms', require('./src/backend/rooms/rooms.router')(app))
+app.use('/rooms', roomsRouter)
 app.use('/messages', require('./src/backend/messages/messages.router')(app))
 
 http.listen(app.get('port'), app.get('host'), (error) => {

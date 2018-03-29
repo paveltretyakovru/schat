@@ -1,14 +1,14 @@
 // Core imports
+import {white} from 'material-ui/styles/colors'
 import {connect} from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
+import ActionHome from 'material-ui/svg-icons/action/home';
 
 import DevTools from './shared/devtools';
 import HeaderContainer from './shared/header/header.container';
-import LeftMenuComponent from './shared/left-menu.component';
-import ButtonMenuComponent from './shared/buttons/button-menu.component';
 
 import * as AppActions from './app.actions';
 import {
@@ -42,27 +42,22 @@ class App extends Component {
   }
 
   render() {
-    let menuItems = [
-      {
-        title: 'Rooms List',
-        routeDispatch: this.props.routeActions.routeToRoomsList,
-      },
-    ];
-
     const tabsMenu = (
       <TabsMenuComponent
-        routeToRoom={ this.props.routeActions.routeToRooms.bind(this, { id: this.props.params.id }) }
-        routeToSettings={ this.props.routeActions.routeToRoomSettings.bind(this, this.props.params.id) }
+        routeToRoom={
+          this.props.routeActions
+            .routeToRooms.bind(this, { id: this.props.params.id })
+        }
+
+        routeToSettings={
+          this.props.routeActions
+            .routeToRoomSettings.bind(this, this.props.params.id)
+        }
       />
     )
 
     return(<MuiThemeProvider>
       <div className="theme-container">
-        <LeftMenuComponent
-          items={menuItems}
-          isOpen={this.props.app.isLeftMenuOpen}
-          handleSwitch={this.props.appActions.switchLeftMenu}
-        />
 
         <div className="app__wrapper">
           <div className="app__navigation">
@@ -92,7 +87,12 @@ class App extends Component {
   }
 
   setHeaderButtons(headerButtonLeft, headerButtonRight) {
-    let leftButton = headerButtonLeft ? headerButtonLeft : <ButtonMenuComponent handleCLick={this.props.appActions.switchLeftMenu} />;
+    // <ButtonMenuComponent handleCLick={this.props.appActions.switchLeftMenu}
+    let leftButton = <ActionHome color={white} />
+
+    if (headerButtonLeft) {
+      leftButton = headerButtonLeft
+    }
 
     this.setState({
       ...this.state,
