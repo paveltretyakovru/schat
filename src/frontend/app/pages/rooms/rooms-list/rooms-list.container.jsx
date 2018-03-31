@@ -23,7 +23,6 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 import './rooms-list.container.css'
-import { SearchCreateChatComponent } from './shared/search-create-chat/search-create-chat.component';
 
 const iconButtonElement = (
   <IconButton
@@ -46,14 +45,7 @@ const rightIconMenu = (
 class RoomsListContainer extends Component {
   static path = '/rooms'
 
-  componentWillMount() {
-    this.props.setHeaderButtons(null, null);
-    this.props.headerActions.updateHeaderTitle('Encrypted chat');
-  }
-
   render() {
-    // const { routeToAddRoom } = this.props.roomsActions;
-
     const roomsItems = this.props.rooms.list.map((item) => {
       return (<ListItem
         key={item.id}
@@ -66,17 +58,16 @@ class RoomsListContainer extends Component {
 
     return(
       <div>
-        <SearchCreateChatComponent socket={this.props.socket} />
-
         <Paper
           zDepth={1}
           className="animated bounceInLeft rooms-list__paper"
         >
+
           <List>
             <Subheader>Rooms list</Subheader>
             { roomsItems }
           </List>
-          {/* <ButtonFloatAddComponent handleAction={routeToAddRoom} /> */}
+          
         </Paper>
       </div>
     );

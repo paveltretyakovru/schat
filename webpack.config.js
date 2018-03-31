@@ -1,8 +1,7 @@
-var path = require('path')
-var precss = require('precss');
-var webpack = require('webpack')
-var autoprefixer = require('autoprefixer');
-var WebpackNotifierPlugin = require('webpack-notifier');
+const path = require('path')
+const webpack = require('webpack')
+const WebpackNotifierPlugin = require('webpack-notifier')
+// const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const HOST = process.env.HOST || 'localhost'
 const NODE_ENV = process.env.NODE_ENV || 'development'
@@ -37,6 +36,7 @@ module.exports = {
     new WebpackNotifierPlugin({title: 'Webpack!', alwaysNotify: true}),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    // new ExtractTextPlugin('./main.css', { allChunks: true }),
   ],
   module: {
     preLoaders: [
@@ -54,13 +54,10 @@ module.exports = {
         include: [path.resolve(__dirname, 'src')],
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader',
+        test: /\.(scss|css)$/,
+        loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap'],
       },
     ],
-  },
-  postcss: function () {
-    return [autoprefixer, precss];
   },
 
   resolve: {

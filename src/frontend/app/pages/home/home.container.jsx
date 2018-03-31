@@ -1,8 +1,10 @@
 import {connect} from 'react-redux'
-import react, {Component} from 'react'
+import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 
 import * as homeActions from './home.actions'
+
+import {SearchCreateChatComponent} from './shared/search-create-chat/search-create-chat.component'
 
 class HomeContainer extends Component {
   static path = '/'
@@ -10,7 +12,7 @@ class HomeContainer extends Component {
   render() {
     return(
       <div className="home-container">
-        Home page container
+        <SearchCreateChatComponent />
       </div>
     )
   }

@@ -1,16 +1,17 @@
 // Core imports
 import {white} from 'material-ui/styles/colors'
-import {connect} from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import React, { Component } from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import {bindActionCreators} from 'redux';
-import ActionHome from 'material-ui/svg-icons/action/home';
+import {connect} from 'react-redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import React, { Component } from 'react'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+import {bindActionCreators} from 'redux'
+import ActionHome from 'material-ui/svg-icons/action/home'
 
-import DevTools from './shared/devtools';
-import HeaderContainer from './shared/header/header.container';
+import DevTools from './shared/devtools'
+import HeaderContainer from './shared/header/header.container'
 
-import * as AppActions from './app.actions';
+import * as AppActions from './app.actions'
+import {routeToHome} from './pages/home/home.actions'
 import {
   routeToRooms,
   routeToRoomsList,
@@ -88,7 +89,12 @@ class App extends Component {
 
   setHeaderButtons(headerButtonLeft, headerButtonRight) {
     // <ButtonMenuComponent handleCLick={this.props.appActions.switchLeftMenu}
-    let leftButton = <ActionHome color={white} />
+    let leftButton = (
+      <ActionHome
+        color={white}
+        onTouchTap={this.props.routeActions.routeToHome.bind(this)}
+      />
+    )
 
     if (headerButtonLeft) {
       leftButton = headerButtonLeft
@@ -122,6 +128,7 @@ function mapDisptachToProps(dispatch) {
     appActions: bindActionCreators(AppActions, dispatch),
     routeActions: bindActionCreators(
       {
+        routeToHome,
         routeToRooms,
         routeToRoomsList,
         routeToRoomSettings,
