@@ -1,0 +1,16 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  
+  &__card-wrapper {
+    width: 100%;
+    padding: 0px 16px;
+    max-width: 500px;
+  }
+
+  &__actions-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}

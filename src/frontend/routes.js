@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
+import AuthRoutes from './app/pages/auth/auth.routes'
 import RoomsRoutes from './app/pages/rooms/rooms.routes'
 
 import AppContainer from './app/app.container'
@@ -11,6 +12,7 @@ export default (
   <Route path={ AppContainer.path } component={ AppContainer }>
       <IndexRoute component={ HomeContainer } />
       
+      { AuthRoutes }
       { RoomsRoutes }
       
       <Route path="*" component={ Page404Component } />
