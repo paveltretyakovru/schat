@@ -1,16 +1,18 @@
 .auth-container {
+  height: 100%;
   display: flex;
-  justify-content: center;
-  margin-top: 16px;
-  
-  &__card-wrapper {
-    width: 100%;
-    padding: 0px 16px;
-    max-width: 500px;
+  flex-direction: column;
+  justify-content: start;
+
+  &__finger-wrapper {
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
   }
 
-  &__actions-wrapper {
+  &__route-buttons {
     display: flex;
-    justify-content: center;
+    margin-top: 64px;
+    justify-content: space-evenly;
   }
 }

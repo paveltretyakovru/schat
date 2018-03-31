@@ -81,6 +81,7 @@ module.exports = {
     port: 8080,
     host: HOST,
     contentBase: `${__dirname}/public`,
+    historyApiFallback: true,
     // proxy: { '**': 'http://localhost:3001' },
   },
 }

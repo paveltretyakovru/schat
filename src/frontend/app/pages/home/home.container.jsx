@@ -2,12 +2,12 @@ import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 
+import {HOME_ROUTE} from './home.constants'
 import * as homeActions from './home.actions'
-
 import {SearchCreateChatComponent} from './shared/search-create-chat/search-create-chat.component'
 
 class HomeContainer extends Component {
-  static path = '/'
+  static path = HOME_ROUTE
 
   render() {
     return(

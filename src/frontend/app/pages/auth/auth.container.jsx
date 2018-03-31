@@ -1,16 +1,18 @@
-import {Link} from 'react-router'
 import {connect} from 'react-redux'
+import {Route, Switch} from 'react-router'
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 
-import {Card, CardActions, CardMedia, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton'
+import FlatButton from 'material-ui/FlatButton'
+import ActionFingerprint from 'material-ui/svg-icons/action/fingerprint'
 
+import {AUTH_ROUTE} from './auth.constants'
 import * as authActions from './auth.actions'
-import {AUTH_ROUTE, AUTH_LOGIN_ROUTE} from './auth.constants'
+import {AuthLoginComponent} from './auth-login/auth-login.component'
 
 import './auth.container.scss'
-import fingerSensorImage from './shared/images/finger-sensor.png'
+// import fingerSensorImage from './shared/images/finger-sensor.png'
 
 // const imgUrl = 'https://goo.gl/Hgd4jm'
 class AuthContainer extends Component {
@@ -24,47 +26,35 @@ class AuthContainer extends Component {
   }
 
   render() {
-    const actions = (
-      <div className="auth-container__actions-wrapper">
-        <CardActions>
-          <Link to={AUTH_LOGIN_ROUTE}>
-            <FlatButton label="Login" primary={true} />
-          </Link>
-        </CardActions>
-      </div>
-    )
+    const largeButtonStyle = {
+      style: { width: 120, height: 120, padding: 30 },
+      iconStyle: { width: 60, height: 60 },
+    }
 
-    const cardImage = (
-      <CardMedia>
-        <img src={fingerSensorImage} alt="" />
-      </CardMedia>
+    const authButtons = (
+      <div className="auth-container__route-buttons">
+        <FlatButton
+          label="Sign in"
+          primary={ true }
+          onTouchTap={ ::this.props.authActions.routeToAuthLogin }
+        />
+        <FlatButton secondary={true} label="Register" />
+      </div>
     )
 
     return(
       <div className="auth-container">
-        <div className="auth-container__card-wrapper">
-          <Card>
-            {/* Auth routes childrens */}
-            { (() => {
-              if (this.props.children) {
-                return(
-                  <CardText>
-                    {
-                      React.cloneElement(
-                        this.props.children,
-                        { authActions: this.props.authActions }
-                      )
-                    }
-                  </CardText>
-                )
-              } else {
-                return cardImage
-              }
-            })() }
 
-            { (this.props.children) ? null : actions }
-          </Card>
+        <div className="auth-container__finger-wrapper">
+          <IconButton { ...largeButtonStyle } disabled={true}>
+            <ActionFingerprint />
+          </IconButton>
         </div>
+
+        <Switch>
+          <Route exact path="/auth" render={ () => ( authButtons ) } />
+          <Route path="/auth/login" component={ AuthLoginComponent } />
+        </Switch>        
 
       </div>
     )

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 
 import {TextField} from 'material-ui'
-import FlatButton from 'material-ui/FlatButton'
 
 import './auth-login.component.scss'
 
@@ -23,29 +22,14 @@ export class AuthLoginComponent extends Component {
         <TextField
           value={this.state.login}
           hintText="Login"
-          fullWidth={true}
           onChange={this.onChangeLoginHandler.bind(this)}
         />
         <TextField
           type="password"
           value={this.state.password}
           hintText="Password"
-          fullWidth={true}
           onChange={this.onChangePasswordHandler.bind(this)}
         />
-
-        <div className="auth-login-component__action-buttons">
-          <FlatButton
-            label="Sign In"
-            primary={true}
-            onTouchTap={this.onClickSignInHandler.bind(this)}
-          />
-          <FlatButton
-            label="Cancel"
-            secondary={true}
-            onTouchTap={this.onClickCancelHandler.bind(this)}
-          />
-        </div>
       </div>
     )
 

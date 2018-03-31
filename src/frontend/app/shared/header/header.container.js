@@ -6,14 +6,14 @@ import './header.container.css'
 
 class HeaderContainer extends Component {
   render() {
-    const { headerTitle } = this.props;
+    const { onLeftIconButtonTouchTap, title } = this.props
 
     return (
       <AppBar
-        title={ headerTitle }
+        title={title}
         className="header__container"
-        iconElementLeft={ this.props.buttonLeft }
-        iconElementRight={ this.props.buttonRight }
+        iconStyleLeft={{marginTop: 0}}
+        onLeftIconButtonTouchTap={onLeftIconButtonTouchTap}
       />
     );
   }

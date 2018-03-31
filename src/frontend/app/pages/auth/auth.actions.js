@@ -3,6 +3,7 @@ import { push } from 'react-router-redux'
 import {
   AUTH_ROUTE,
   AUTH_LOGIN,
+  AUTH_LOGIN_ROUTE,
 } from './auth.constants'
 
 export const login = (data = {login: '', password: ''}) => {
@@ -17,5 +18,11 @@ export const login = (data = {login: '', password: ''}) => {
 export const routeToAuth = () => {
   return (dispatch) => {
     dispatch(push(AUTH_ROUTE));
+  }
+}
+
+export const routeToAuthLogin = () => {
+  return (dispatch) => {
+    dispatch(push(AUTH_LOGIN_ROUTE));
   }
 }
