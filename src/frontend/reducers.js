@@ -1,15 +1,17 @@
 // Libs
-import { routerReducer } from 'react-router-redux';
-import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux'
+import { combineReducers } from 'redux'
 
 // Reducers
-import appReducer from './app/app.reducer';
-import roomsReducer from './app/pages/rooms/rooms.reducer';
-import headerReducer from './app/shared/header/header.reducer';
+import appReducer from './app/app.reducer'
+import roomsReducer from './app/pages/rooms/rooms.reducer'
+import {authReducer} from './app/pages/auth/auth.reducer'
+import headerReducer from './app/shared/header/header.reducer'
 
 export default combineReducers({
   // ...reducers,
   app: appReducer,
+  auth: authReducer,
   rooms: roomsReducer,
   header: headerReducer,
   routing: routerReducer,

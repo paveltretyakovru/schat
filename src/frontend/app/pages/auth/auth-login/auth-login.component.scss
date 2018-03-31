@@ -1,0 +1,10 @@
+.auth-login-component {
+  display: flex;
+  flex-direction: column;
+
+  &__action-buttons {
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-around;
+  }
+}
