@@ -84,7 +84,7 @@ export const updateRegisterData = (data = {login: '', password: '', repassword: 
   }
 }
 
-export const clearReigsterData = () => {
+export const clearRegisterData = () => {
   return (dispatch) => {
     dispatch({type: CLEAR_REGISTER_DATA})
   }

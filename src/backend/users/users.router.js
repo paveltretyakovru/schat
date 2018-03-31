@@ -10,4 +10,16 @@ router.post('/login', (req, res) => {
   res.json({ success: true, message: 'Post login', data: { login, password } })
 })
 
+router.post('/register', (req, res) => {
+  const { login, password, repassword } = req.body
+
+  res.json(
+    {
+      success: true,
+      message: 'Post register',
+      data: { login, password, repassword },
+    }
+  )
+})
+
 module.exports = router

@@ -13,7 +13,7 @@ export class AuthRegisterComponent extends Component {
     this.state = { login: '', password: '', repassword: '' }
     this.enableFinger = this.props.enableFinger
     this.disableFinger = this.props.disableFinger
-    this.updateLoginData = this.props.updateLoginData
+    this.updateRegisterData = this.props.updateRegisterData
   }
 
   render() {
@@ -42,7 +42,11 @@ export class AuthRegisterComponent extends Component {
   }
 
   checkToEnableSubmitFinger() {
-    if ((this.state.login.length > 0) && (this.state.password.length > 0)) {
+    if (
+      (this.state.login.length > 0)
+      && (this.state.password.length > 0)
+      && (this.state.password === this.state.repassword)
+    ) {
       this.enableFinger()
       this.updateRegisterData({
         login: this.state.login,

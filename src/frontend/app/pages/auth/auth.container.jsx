@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
 import ActionFingerprint from 'material-ui/svg-icons/action/fingerprint'
 
-import {AUTH_ROUTE} from './auth.constants'
+import {AUTH_ROUTE, AUTH_LOGIN_ROUTE, AUTH_REGISTER_ROUTE} from './auth.constants'
 import * as authActions from './auth.actions'
 import {routeToHome} from '../home/home.actions'
 import {AuthLoginComponent} from './auth-login/auth-login.component'
@@ -57,16 +57,23 @@ class AuthContainer extends Component {
           <IconButton
             {...largeButtonStyle}
             disabled={!this.props.auth.fingerEnabled}
-            onTouchTap={this.submitLoginHandler.bind(this)}
+            onTouchTap={
+              (this.props.location.pathname === AUTH_LOGIN_ROUTE)
+                ? this.submitLoginHandler.bind(this)
+                : this.submitRegisterHandler.bind(this)
+            }
           >
             <ActionFingerprint color={pink500} />
           </IconButton>
         </div>
 
         <Switch>
-          <Route exact path="/auth" render={ () => ( authButtons ) } />
 
-          <Route path="/auth/login" render={ () => (
+          {/* /auth */}
+          <Route exact path={AUTH_ROUTE} render={ () => ( authButtons ) } />
+
+          {/* /auth/login */}
+          <Route path={AUTH_LOGIN_ROUTE} render={ () => (
             <AuthLoginComponent
               enableFinger={this.props.authActions.enableFinger.bind(this)}
               disableFinger={this.props.authActions.disableFinger.bind(this)}
@@ -74,13 +81,15 @@ class AuthContainer extends Component {
             />
           )} />
 
-          <Route path="/auth/register" render={ () => (
+          {/* /auth/register */}
+          <Route path={AUTH_REGISTER_ROUTE} render={ () => (
             <AuthRegisterComponent
               enableFinger={this.props.authActions.enableFinger.bind(this)}
               disableFinger={this.props.authActions.disableFinger.bind(this)}
               updateRegisterData={this.props.authActions.updateRegisterData.bind(this)}
             />
           )} />
+
         </Switch>        
 
       </div>
@@ -93,6 +102,18 @@ class AuthContainer extends Component {
         if (res.data.success) {
           this.props.authActions.enableAuthenticate()
           this.props.authActions.clearLoginData()
+          this.props.authActions.disableFinger()
+          this.props.homeActions.routeToHome()
+        }
+      })
+  }
+
+  submitRegisterHandler() {
+    authActions.submitRegister(this.props.auth.registerForm)
+      .then((res) => {
+        if (res.data.success) {
+          this.props.authActions.enableAuthenticate()
+          this.props.authActions.clearRegisterData()
           this.props.authActions.disableFinger()
           this.props.homeActions.routeToHome()
         }
