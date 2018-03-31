@@ -1,11 +1,13 @@
 // Core imports
-import {white} from 'material-ui/styles/colors'
 import {connect} from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import React, { Component } from 'react'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
+import {white} from 'material-ui/styles/colors'
+import IconButton from 'material-ui/IconButton'
 import ActionHome from 'material-ui/svg-icons/action/home'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import DevTools from './shared/devtools'
 import HeaderContainer from './shared/header/header.container'
@@ -38,7 +40,8 @@ class App extends Component {
 
   componentWillMount() {
     try {
-      injectTapEventPlugin();
+      this.setHeaderButtons()
+      injectTapEventPlugin()
     } catch (e) { console.info('injectTapEventPlugin exception') }
   }
 
@@ -90,10 +93,12 @@ class App extends Component {
   setHeaderButtons(headerButtonLeft, headerButtonRight) {
     // <ButtonMenuComponent handleCLick={this.props.appActions.switchLeftMenu}
     let leftButton = (
-      <ActionHome
-        color={white}
-        onTouchTap={this.props.routeActions.routeToHome.bind(this)}
-      />
+      <IconButton>
+        <ActionHome
+          color={white}
+          onTouchTap={this.props.routeActions.routeToHome.bind(this)}
+        />
+      </IconButton>
     )
 
     if (headerButtonLeft) {

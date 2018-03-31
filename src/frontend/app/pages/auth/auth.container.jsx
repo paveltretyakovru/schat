@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 
-import {Card, CardActions, CardHeader, CardMedia, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardMedia, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 import * as authActions from './auth.actions'
@@ -33,17 +33,6 @@ class AuthContainer extends Component {
         </CardActions>
       </div>
     )
-    
-    const authChildrenComponents = (
-      <CardText>
-        {
-          React.cloneElement(
-            this.children,
-            { authActions: this.authActions }
-          )
-        }
-      </CardText>
-    )
 
     const cardImage = (
       <CardMedia>
@@ -55,10 +44,24 @@ class AuthContainer extends Component {
       <div className="auth-container">
         <div className="auth-container__card-wrapper">
           <Card>
-            <CardHeader
-              title="Authentication"
-            />
-            { (this.props.children) ? authChildrenComponents : cardImage }
+            {/* Auth routes childrens */}
+            { (() => {
+              if (this.props.children) {
+                return(
+                  <CardText>
+                    {
+                      React.cloneElement(
+                        this.props.children,
+                        { authActions: this.props.authActions }
+                      )
+                    }
+                  </CardText>
+                )
+              } else {
+                return cardImage
+              }
+            })() }
+
             { (this.props.children) ? null : actions }
           </Card>
         </div>
