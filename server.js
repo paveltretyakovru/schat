@@ -27,7 +27,7 @@ mongoose.connect('mongodb://localhost/schat')
 mongoose.connection.once('open', () => console.log('Подключено к mongodb'))
 
 app.use('/', appRouter)
-app.use('/user', usersRouter)
+app.use('/users', usersRouter)
 app.use('/rooms', roomsRouter)
 app.use('/messages', messagesRouter)
 

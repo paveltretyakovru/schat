@@ -2,15 +2,15 @@ import React, {Component} from 'react'
 
 import {TextField} from 'material-ui'
 
-import './auth-login.component.scss'
+import './auth-register.component.scss'
 
-export class AuthLoginComponent extends Component {
-  static path = '/auth/login'
+export class AuthRegisterComponent extends Component {
+  static path = '/auth/register'
 
   constructor(props) {
     super(props)
 
-    this.state = { login: '', password: '' }
+    this.state = { login: '', password: '', repassword: '' }
     this.enableFinger = this.props.enableFinger
     this.disableFinger = this.props.disableFinger
     this.updateLoginData = this.props.updateLoginData
@@ -18,7 +18,7 @@ export class AuthLoginComponent extends Component {
 
   render() {
     return(
-      <div className="auth-login-component">
+      <div className="auth-register-component">
         <TextField
           value={this.state.login}
           hintText="Login"
@@ -30,6 +30,12 @@ export class AuthLoginComponent extends Component {
           hintText="Password"
           onChange={this.onChangePasswordHandler.bind(this)}
         />
+        <TextField
+          type="password"
+          value={this.state.repassword}
+          hintText="Repeat password"
+          onChange={this.onChangeRepasswordHandler.bind(this)}
+        />
       </div>
     )
 
@@ -38,15 +44,17 @@ export class AuthLoginComponent extends Component {
   checkToEnableSubmitFinger() {
     if ((this.state.login.length > 0) && (this.state.password.length > 0)) {
       this.enableFinger()
-      this.updateLoginData({
+      this.updateRegisterData({
         login: this.state.login,
         password: this.state.password,
+        repassword: this.state.repassword,
       })
     } else {
       this.disableFinger()
-      this.updateLoginData({
+      this.updateRegisterData({
         login: this.state.login,
         password: this.state.password,
+        repassword: this.state.repassword,
       })
     }
   }
@@ -63,11 +71,9 @@ export class AuthLoginComponent extends Component {
     })
   }
 
-  onClickSignInHandler() {
-    this.props.authActions.login(this.state)
-  }
-
-  onClickCancelHandler() {
-    this.props.authActions.routeToAuth()
+  onChangeRepasswordHandler = (event) => {
+    this.setState({ ...this.state, repassword: event.target.value }, () => {
+      this.checkToEnableSubmitFinger()
+    })
   }
 }

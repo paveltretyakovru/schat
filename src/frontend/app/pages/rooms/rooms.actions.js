@@ -19,7 +19,6 @@ import { push } from 'react-router-redux';
 import makeId from 'makeId';
 
 export function addRoom(data) {
-  console.log('ADD ROOM', data);
   return dispatch => {
     dispatch({ type: ADD_ROOM, payload: data });
     dispatch(goBack());
@@ -62,9 +61,7 @@ export const routeToRoomSettings = (roomId = '') => {
 }
 
 export const sendMessage = (message = '', room = null) => {
-  const encryptedMessage = AES.encrypt(message, room.key);
-
-  console.log('Send message action',{ room }, encryptedMessage.toString())
+  const encryptedMessage = AES.encrypt(message, room.key)
 
   return post(
     SEND_MESSAGE_ROUTE,
