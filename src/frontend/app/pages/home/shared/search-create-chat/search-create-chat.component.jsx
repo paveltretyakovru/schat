@@ -4,11 +4,33 @@ import Axios from 'axios'
 
 import Paper from 'material-ui/Paper'
 import Subheader from 'material-ui/Subheader'
-import {TextField} from 'material-ui'
+import AutoComplete from 'material-ui/AutoComplete';
 
 import {SERVER_HOST} from '../../../../app.constants'
 
 import './search-create-chat.component.scss'
+import { MenuItem } from 'material-ui';
+
+const dataSource = [
+  {
+    text: 'text-value1',
+    value: (
+      <MenuItem
+        primaryText="text-value1"
+        secondaryText="&#9786;"
+      />
+    ),
+  },
+  {
+    text: 'text-value2',
+    value: (
+      <MenuItem
+        primaryText="text-value2"
+        secondaryText="&#9786;"
+      />
+    ),
+  },
+]
 
 export class SearchCreateChatComponent extends Component {
   componentDidMount() {
@@ -23,11 +45,11 @@ export class SearchCreateChatComponent extends Component {
           <Subheader>Search & Create Rooms</Subheader>
 
           <div className="search-create-chat__input-wrapper">
-            <TextField
+            <AutoComplete
               hintText="Start input room id or title"
-              onChange={ (e, q) => this.onChangeHandler(q) }
+              onNewRequest={ this.onNewRequestHandler.bind(this) }
               fullWidth={true}
-              // floatingLabelText="Search or create chat room..."
+              dataSource={dataSource}
             />
           </div>
 
@@ -37,9 +59,15 @@ export class SearchCreateChatComponent extends Component {
     )
   }
 
-  onChangeHandler(query = '') {
-    console.log('Axios', Axios)
-    Axios.get(`${SERVER_HOST}/rooms/${query}`)
+  onNewRequestHandler(query = '') {
+    const toSearch = query.text !== undefined ? query.text : query
+    
+    console.log('Axios update handler', toSearch)
+    
+    Axios.get(`${SERVER_HOST}/rooms/${toSearch}`)
+      .then((res) => {
+        console.log('Axios res', res.data)
+      })
   }
 }
 

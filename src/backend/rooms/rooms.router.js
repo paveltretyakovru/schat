@@ -6,6 +6,7 @@ module.exports = (app) => {
 
   router.post('/', (req, res) => {
     socket.emit('message', {success: true, message: 'Room was created'})
+    res.json({success: true, message: 'Rooms post'})
   })
 
   router.get('/', (req, res) => {
@@ -13,7 +14,8 @@ module.exports = (app) => {
   })
 
   router.get('/:query', (req, res) => {
-    res.json({success: true, message: 'Rooms search', query: req.params.query})
+    console.log('/rooms/search', req.params.query)
+    res.json({success: true, message: 'Rooms search', query: req.params})
   })
 
   return router
