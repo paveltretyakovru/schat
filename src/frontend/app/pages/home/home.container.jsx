@@ -15,6 +15,7 @@ class HomeContainer extends Component {
       <div className="home-container">
         <SearchCreateChatComponent
           rooms={ this.prepareRoomsList(this.props.rooms.list) }
+          socket={ this.props.app.socket }
           createRoomHandler={this.crateRoomHandler.bind(this)}
           searchRoomHandler={this.searchRoomHandler.bind(this)}
         />
@@ -42,7 +43,11 @@ class HomeContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ app: state.app, rooms: state.rooms })
+const mapStateToProps = (state) => ({
+  app: state.app,
+  rooms: state.rooms,
+})
+
 const mapDispatchToProps = (dispatch) => ({
   homeActions: bindActionCreators(homeActions, dispatch),
 })

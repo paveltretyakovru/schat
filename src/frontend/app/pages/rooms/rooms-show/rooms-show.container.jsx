@@ -19,13 +19,11 @@ class RoomsShowContainer extends Component {
   
   componentWillMount() {
     this.room = this.getRoom()
-    this.props.roomsActions.setCurrentRoom(this.room)
     this.props.headerActions.updateHeaderTitle(this.room.title)
-
-    console.log('Component will mount', { room: this.room, props: this.props })
   }
 
-  // TODO: componentUnmounted -> remove controlKey | fixed
+  componentDidMount() {
+  }
 
   render() {
     if(!this.room) {
@@ -50,9 +48,7 @@ class RoomsShowContainer extends Component {
   }
 
   getRoom() {
-    return this.props.rooms.list.find(element => {
-      return element.id === this.props.match.params.id
-    })
+    return this.props.rooms.list[this.props.rooms.current]
   }
 }
 

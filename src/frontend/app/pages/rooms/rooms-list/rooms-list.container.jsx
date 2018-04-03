@@ -73,8 +73,9 @@ class RoomsListContainer extends Component {
     );
   }
 
-  handleClickListItem(roomId) {
-    this.props.roomsActions.routeToRooms(roomId);
+  handleClickListItem(room) {
+    this.props.roomsActions.setCurrentRoom(room)
+    this.props.roomsActions.routeToRooms(room)
   }
 }
 

@@ -35,13 +35,9 @@ class App extends Component {
   }
 
   render() {
-    const homeRender = () => {
-      if (!this.props.auth.authenticated) {
-        return <Redirect to="/auth" />
-      } else {
-        return <HomeContainer />
-      }
-    }
+    const auth = this.props.auth.authenticated
+    const homeRender = () => !auth ? <Redirect to="/auth" /> : <HomeContainer />
+    const roomRender = () => !auth ? <Redirect to="/auth" /> : <RoomsShowContainer />
 
     return(
       <MuiThemeProvider>
@@ -64,9 +60,8 @@ class App extends Component {
             <div className="app__content">
               <Switch>
                 <Route exact path="/" render={homeRender} />
-                <Route path="/auth" component={AuthContainer} />
-                <Route path="/rooms/:id" component={RoomsShowContainer} />
-                
+                <Route path="/auth" component={AuthContainer} / >
+                <Route path="/rooms/:id" render={roomRender} />                
               </Switch>
             </div>
 

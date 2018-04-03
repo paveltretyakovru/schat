@@ -34,8 +34,10 @@ export function routeToAddRoom() {
 
 export function routeToRooms(room = '') {
   return (dispatch) => {
-    let route = (room.id) ? `${ROOMS_ROUTE}/${room.id}` : ROOMS_ROUTE;
-    dispatch(push(route));
+    let route = (room.id) ? `${ROOMS_ROUTE}/${room.id}` : ROOMS_ROUTE
+    console.log('routeToRooms', {room, route});
+    
+    dispatch(push(route))
   }
 }
 
@@ -110,7 +112,7 @@ export const toogleRoomFavor = (roomId = '') => {
 
 export const setCurrentRoom = (room = false) => {
   if(room) {
-    return dispatch => {
+    return (dispatch) => {
       dispatch({
         type: SET_CURRENT_ROOM,
         payload: { room },
