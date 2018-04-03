@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 
 import {HOME_ROUTE} from './home.constants'
 import * as homeActions from './home.actions'
+import * as roomsActions from '../rooms/rooms.actions'
 import {SearchCreateChatComponent} from './shared/search-create-chat/search-create-chat.component'
 import RoomsListContainer from '../rooms/rooms-list/rooms-list.container';
 
@@ -16,6 +17,8 @@ class HomeContainer extends Component {
         <SearchCreateChatComponent
           rooms={ this.prepareRoomsList(this.props.rooms.list) }
           socket={ this.props.app.socket }
+          setCurrentRoom={this.props.roomsActions.setCurrentRoom.bind(this)}
+          routeToRoom={this.props.roomsActions.routeToRooms.bind(this)}
           createRoomHandler={this.crateRoomHandler.bind(this)}
           searchRoomHandler={this.searchRoomHandler.bind(this)}
         />
@@ -28,7 +31,7 @@ class HomeContainer extends Component {
   prepareRoomsList(rooms = []) {
     return rooms.map((room) => {
       return {
-        id: room.id,
+        room: room,
         text: room.title,
       }
     })
@@ -50,6 +53,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   homeActions: bindActionCreators(homeActions, dispatch),
+  roomsActions: bindActionCreators(roomsActions, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)

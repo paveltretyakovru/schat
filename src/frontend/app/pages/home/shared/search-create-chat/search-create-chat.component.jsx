@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import Axios from 'axios'
 
 import Paper from 'material-ui/Paper'
 import Subheader from 'material-ui/Subheader'
-import AutoComplete from 'material-ui/AutoComplete';
-
-import {SERVER_HOST} from '../../../../app.constants'
+import AutoComplete from 'material-ui/AutoComplete'
 
 import './search-create-chat.component.scss'
 import { MenuItem } from 'material-ui';
@@ -17,16 +14,9 @@ export class SearchCreateChatComponent extends Component {
 
     this.rooms = this.props.rooms
     this.sourceData = this.prepareSourceData(this.rooms)
-
-    console.log('This sourcedata', this.sourceData)
-  }
-
-  componentDidMount() {
-    console.log('search crate', {socket: this.props.socket})
   }
 
   render() {
-    console.log('Search crate chat component render', { rooms: this.props.rooms })
 
     return(
       <div className="search-create-chat">
@@ -53,7 +43,7 @@ export class SearchCreateChatComponent extends Component {
   prepareSourceData(rooms = []) {
     return rooms.map((room) => {
       return {
-        id: room.id,
+        room: room,
         text: room.text,
         value: (
           <MenuItem
@@ -66,21 +56,11 @@ export class SearchCreateChatComponent extends Component {
   }
 
   onNewRequestHandler(chosenRequest = '', index = -1) {
-    console.log('onNewRequestHandler', { chosenRequest, index })
+    if(index !== -1) {
+      const room = this.rooms[index].room
 
-    const toSearch = (chosenRequest.hasOwnProperty('text'))
-      ? chosenRequest.text
-      : chosenRequest
-
-    if (index === -1) {
-      // Creating room
-
-    } else {
-      // Geting existing room
-      Axios.get(`${SERVER_HOST}/rooms/${toSearch}`)
-      .then((res) => {
-        console.log('Axios res', res.data)
-      })
+      this.props.setCurrentRoom(room)
+      this.props.routeToRoom(room)
     }
   }
 
