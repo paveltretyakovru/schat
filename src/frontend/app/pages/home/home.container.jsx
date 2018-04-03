@@ -24,9 +24,10 @@ class HomeContainer extends Component {
     )
   }
 
-  prepareRoomsList() {
-    return this.props.rooms.map((room) => {
+  prepareRoomsList(rooms = []) {
+    return rooms.map((room) => {
       return {
+        id: room.id,
         text: room.title,
       }
     })

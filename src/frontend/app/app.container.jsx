@@ -50,7 +50,6 @@ class App extends Component {
 
             <div className="app__navigation">
               <HeaderContainer
-                title="SChat"
                 onLeftIconButtonTouchTap={ ::this.props.routeActions.routeToHome }
                 />
               <div className="app__navigation-progress-wrapper">

@@ -9,8 +9,6 @@ import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
-// import ButtonFavorComponent from '../../../shared/buttons/button-favor.component';
-// import RoomsShowKeyFieldComponent from './shared/rooms-show-key-field.component';
 import RoomsShowChatMessagesComponent from './shared/rooms-show-chat-messages.component';
 import RoomsShowMessageFieldComponent from './shared/rooms-show-message-field.component';
 
@@ -20,52 +18,30 @@ class RoomsShowContainer extends Component {
   static path = '/rooms/:id'
   
   componentWillMount() {
-    const room = this.getRoom()
-    // const routeToSettings = this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId)
-    this.props.roomsActions.setCurrentRoom(room)
+    this.room = this.getRoom()
+    this.props.roomsActions.setCurrentRoom(this.room)
+    this.props.headerActions.updateHeaderTitle(this.room.title)
 
-    // this.props.setHeaderButtons(
-    //   null,
-    //   <ButtonFavorComponent
-    //     active={room.roomData.favor}
-    //     handleClick={() => {
-    //       this.props.roomsActions.toogleRoomFavor(room.roomId)
-    //       return room.roomData.favor
-    //     }} 
-    //   />
-    // );
-
-    // this.props.headerActions.updateHeaderTitle(
-    //   <span onTouchTap={ routeToSettings } className="rooms-show__header-title">
-    //     { room.roomData.title }
-    //   </span>
-    // );
+    console.log('Component will mount', { room: this.room, props: this.props })
   }
 
   // TODO: componentUnmounted -> remove controlKey | fixed
 
   render() {
-    const { roomId, roomData } = this.getRoom();
-
-    if(!roomData) {
+    if(!this.room) {
       return(<span>404. The chat was not founded.</span>);
     }
 
     return(
       <div className="rooms-show__container">
-        {/* <RoomsShowKeyFieldComponent
-          room={roomData || null}
-          roomId={roomId}
-          handleUpdateKey={this.props.roomsActions.updateKey}
-        /> */}
         <RoomsShowChatMessagesComponent
-          room={roomData || null}
-          roomId={roomId}
-          messages={roomData.messages || null}
+          room={this.room || null}
+          roomId={this.room.id}
+          messages={this.room.messages || null}
         />
 
         <RoomsShowMessageFieldComponent
-          room={roomData}
+          room={this.room}
           addMessageHandler={this.props.roomsActions.addMessage}
           sendMessageHandler={this.props.sendMessage}
         />
@@ -74,19 +50,15 @@ class RoomsShowContainer extends Component {
   }
 
   getRoom() {
-    return {
-      // roomId: this.props.params.id || false,
-      roomId: 'idrooom3242342',
-      roomData: this.props.rooms.list.find(element => {
-        // return element.id === this.props.params.id;
-        return element.id === 'idrooom3242342';
-      }),
-    }
+    return this.props.rooms.list.find(element => {
+      return element.id === this.props.match.params.id
+    })
   }
 }
 
 function mapStateToProps(state) {
   return {
+    app: state.app,
     rooms: state.rooms,
   }
 }

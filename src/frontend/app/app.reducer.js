@@ -4,12 +4,14 @@ import {
   HIDE_PROGRESS,
   SHOW_PROGRESS,
   SWITCH_LEFT_MENU,
+  UPDATE_HEADER_TITLE,
 } from './app.constants';
 
 const socket = io.connect('http://localhost:3002')
 
 const initState = {
   socket,
+  headerTitle: 'SChat',
   showProgress: false,
   isLeftMenuOpen: false,
 }
@@ -26,6 +28,10 @@ export default function(state = initState, action) {
 
   case HIDE_PROGRESS: {
     return { ...state, showProgress: false }
+  }
+
+  case UPDATE_HEADER_TITLE: {
+    return { ...state, headerTitle: action.payload}
   }
 
   default:

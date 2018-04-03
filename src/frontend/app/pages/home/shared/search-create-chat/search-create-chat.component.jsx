@@ -16,6 +16,9 @@ export class SearchCreateChatComponent extends Component {
     super(props)
 
     this.rooms = this.props.rooms
+    this.sourceData = this.prepareSourceData(this.rooms)
+
+    console.log('This sourcedata', this.sourceData)
   }
 
   componentDidMount() {
@@ -28,7 +31,7 @@ export class SearchCreateChatComponent extends Component {
     return(
       <div className="search-create-chat">
 
-        <Paper zDepth={1}>
+        <Paper zDepth={1} className="animated bounceInLeft">
           <Subheader>Search & Create Rooms</Subheader>
 
           <div className="search-create-chat__input-wrapper">
@@ -37,17 +40,7 @@ export class SearchCreateChatComponent extends Component {
               onNewRequest={ this.onNewRequestHandler.bind(this) }
               onUpdateInput={ this.onUpdateInputHandler.bind(this) }
               fullWidth={true}
-              dataSource={this.props.rooms.map((room) => {
-                return {
-                  text: room.title,
-                  value: (
-                    <MenuItem
-                      primaryText={room.title}
-                      secondaryText="&#9786;"
-                    />
-                  ),
-                }
-              })}
+              dataSource={this.sourceData}
             />
           </div>
 
@@ -55,6 +48,21 @@ export class SearchCreateChatComponent extends Component {
 
       </div>
     )
+  }
+
+  prepareSourceData(rooms = []) {
+    return rooms.map((room) => {
+      return {
+        id: room.id,
+        text: room.text,
+        value: (
+          <MenuItem
+            primaryText={room.text}
+            secondaryText="&#9786;"
+          />
+        ),
+      }
+    })
   }
 
   onNewRequestHandler(chosenRequest = '', index = -1) {
