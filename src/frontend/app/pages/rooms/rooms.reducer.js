@@ -18,7 +18,6 @@ const initState = {
       favor: false,
       
       messages: [],
-      
     },
   ],
   current: null,

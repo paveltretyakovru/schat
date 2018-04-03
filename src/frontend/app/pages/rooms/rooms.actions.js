@@ -1,13 +1,19 @@
 import AES from 'crypto-js/aes';
-import {post} from 'axios'
+import {post, get} from 'axios'
 // import {isEmpty} from 'ramda'
 import {goBack} from 'react-router-redux'
+
+import {
+  SHOW_PROGRESS,
+  HIDE_PROGRESS,
+} from '../../app.constants'
 
 import {
   ADD_ROOM,
   ADD_MESSAGE,
   ROOMS_ROUTE,
   ADD_ROOM_ROUTE,
+  SEARCH_ROOM_URL,
   SET_CURRENT_ROOM,
   TOGGLE_ROOM_FAVOR,
   SEND_MESSAGE_ROUTE,
@@ -118,5 +124,14 @@ export const setCurrentRoom = (room = false) => {
         payload: { room },
       })
     }
+  }
+}
+
+export const searchRoom = (query = '') => {
+  return (dispatch) => {
+    dispatch({ type: SHOW_PROGRESS })
+
+    return get(`${SEARCH_ROOM_URL}/${query}`)
+      .then(() => dispatch({ type: HIDE_PROGRESS }))
   }
 }

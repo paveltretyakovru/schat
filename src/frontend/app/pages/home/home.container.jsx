@@ -41,8 +41,12 @@ class HomeContainer extends Component {
 
   }
 
-  searchRoomHandler() {
-
+  searchRoomHandler(query = '') {
+    this.props.roomsActions
+      .searchRoom(query)
+        .then((res) => {
+          console.log('Test to get promise --->', res);
+        })
   }
 }
 

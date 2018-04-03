@@ -13,10 +13,14 @@ export class SearchCreateChatComponent extends Component {
     super(props)
 
     this.rooms = this.props.rooms
-    this.sourceData = this.prepareSourceData(this.rooms)
+    this.state = {
+      sourceData: this.prepareSourceData(this.rooms),
+    }
   }
 
   render() {
+
+    console.log('Search state', this.state);
 
     return(
       <div className="search-create-chat">
@@ -30,7 +34,7 @@ export class SearchCreateChatComponent extends Component {
               onNewRequest={ this.onNewRequestHandler.bind(this) }
               onUpdateInput={ this.onUpdateInputHandler.bind(this) }
               fullWidth={true}
-              dataSource={this.sourceData}
+              dataSource={this.state.sourceData}
             />
           </div>
 
@@ -55,7 +59,7 @@ export class SearchCreateChatComponent extends Component {
     })
   }
 
-  onNewRequestHandler(chosenRequest = '', index = -1) {
+  onNewRequestHandler(choosenRequest = '', index = -1) {
     if(index !== -1) {
       const room = this.rooms[index].room
 
@@ -66,6 +70,7 @@ export class SearchCreateChatComponent extends Component {
 
   onUpdateInputHandler(searchText, dataSource, params) {
     console.log('onUpdateInputHandler', {searchText, dataSource, params})
+    this.props.searchRoomHandler(searchText)
   }
 }
 
