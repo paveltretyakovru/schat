@@ -9,7 +9,7 @@ import * as AppActions from 'app/app.actions';
 import * as RoomsActions from '../rooms.actions';
 import * as HeaderActions from 'app/shared/header/header.actions';
 
-import ButtonFavorComponent from '../../../shared/buttons/button-favor.component';
+// import ButtonFavorComponent from '../../../shared/buttons/button-favor.component';
 // import RoomsShowKeyFieldComponent from './shared/rooms-show-key-field.component';
 import RoomsShowChatMessagesComponent from './shared/rooms-show-chat-messages.component';
 import RoomsShowMessageFieldComponent from './shared/rooms-show-message-field.component';
@@ -21,25 +21,25 @@ class RoomsShowContainer extends Component {
   
   componentWillMount() {
     const room = this.getRoom()
-    const routeToSettings = this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId)
+    // const routeToSettings = this.props.roomsActions.routeToRoomSettings.bind(this, room.roomId)
     this.props.roomsActions.setCurrentRoom(room)
 
-    this.props.setHeaderButtons(
-      null,
-      <ButtonFavorComponent
-        active={room.roomData.favor}
-        handleClick={() => {
-          this.props.roomsActions.toogleRoomFavor(room.roomId)
-          return room.roomData.favor
-        }} 
-      />
-    );
+    // this.props.setHeaderButtons(
+    //   null,
+    //   <ButtonFavorComponent
+    //     active={room.roomData.favor}
+    //     handleClick={() => {
+    //       this.props.roomsActions.toogleRoomFavor(room.roomId)
+    //       return room.roomData.favor
+    //     }} 
+    //   />
+    // );
 
-    this.props.headerActions.updateHeaderTitle(
-      <span onTouchTap={ routeToSettings } className="rooms-show__header-title">
-        { room.roomData.title }
-      </span>
-    );
+    // this.props.headerActions.updateHeaderTitle(
+    //   <span onTouchTap={ routeToSettings } className="rooms-show__header-title">
+    //     { room.roomData.title }
+    //   </span>
+    // );
   }
 
   // TODO: componentUnmounted -> remove controlKey | fixed
@@ -75,9 +75,11 @@ class RoomsShowContainer extends Component {
 
   getRoom() {
     return {
-      roomId: this.props.params.id || false,
+      // roomId: this.props.params.id || false,
+      roomId: 'idrooom3242342',
       roomData: this.props.rooms.list.find(element => {
-        return element.id === this.props.params.id;
+        // return element.id === this.props.params.id;
+        return element.id === 'idrooom3242342';
       }),
     }
   }

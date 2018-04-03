@@ -11,33 +11,20 @@ import {SERVER_HOST} from '../../../../app.constants'
 import './search-create-chat.component.scss'
 import { MenuItem } from 'material-ui';
 
-const dataSource = [
-  {
-    text: 'text-value1',
-    value: (
-      <MenuItem
-        primaryText="text-value1"
-        secondaryText="&#9786;"
-      />
-    ),
-  },
-  {
-    text: 'text-value2',
-    value: (
-      <MenuItem
-        primaryText="text-value2"
-        secondaryText="&#9786;"
-      />
-    ),
-  },
-]
-
 export class SearchCreateChatComponent extends Component {
+  constructor(props) {
+    super(props)
+
+    this.rooms = this.props.rooms
+  }
+
   componentDidMount() {
     console.log('search crate', {socket: this.props.socket})
   }
 
   render() {
+    console.log('Search crate chat component render', { rooms: this.props.rooms })
+
     return(
       <div className="search-create-chat">
 
@@ -48,8 +35,19 @@ export class SearchCreateChatComponent extends Component {
             <AutoComplete
               hintText="Start input room id or title"
               onNewRequest={ this.onNewRequestHandler.bind(this) }
+              onUpdateInput={ this.onUpdateInputHandler.bind(this) }
               fullWidth={true}
-              dataSource={dataSource}
+              dataSource={this.props.rooms.map((room) => {
+                return {
+                  text: room.title,
+                  value: (
+                    <MenuItem
+                      primaryText={room.title}
+                      secondaryText="&#9786;"
+                    />
+                  ),
+                }
+              })}
             />
           </div>
 
@@ -59,15 +57,27 @@ export class SearchCreateChatComponent extends Component {
     )
   }
 
-  onNewRequestHandler(query = '') {
-    const toSearch = query.text !== undefined ? query.text : query
-    
-    console.log('Axios update handler', toSearch)
-    
-    Axios.get(`${SERVER_HOST}/rooms/${toSearch}`)
+  onNewRequestHandler(chosenRequest = '', index = -1) {
+    console.log('onNewRequestHandler', { chosenRequest, index })
+
+    const toSearch = (chosenRequest.hasOwnProperty('text'))
+      ? chosenRequest.text
+      : chosenRequest
+
+    if (index === -1) {
+      // Creating room
+
+    } else {
+      // Geting existing room
+      Axios.get(`${SERVER_HOST}/rooms/${toSearch}`)
       .then((res) => {
         console.log('Axios res', res.data)
       })
+    }
+  }
+
+  onUpdateInputHandler(searchText, dataSource, params) {
+    console.log('onUpdateInputHandler', {searchText, dataSource, params})
   }
 }
 

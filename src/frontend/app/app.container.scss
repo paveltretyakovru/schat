@@ -22,10 +22,14 @@ body { height: 100%; font-family: 'Roboto', sans-serif;}
 		width: 100%;
 		z-index: 1;
 		position: fixed;
+
+		&-progress-wrapper {
+			height: 4px;
+		}
 	}
 
 	&__content {
-		height: 100%;
+		height: calc(100% - 60px);
 		padding-top: 60px;
 	}
 }

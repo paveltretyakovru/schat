@@ -23,8 +23,16 @@ module.exports = class Sockets {
     });
   }
 
-  IO() {
+  getIO() {
     return this.io
+  }
+
+  emit(event = '', data = {}) {
+    return this.io.emit(event, data)
+  }
+
+  on(event = '', callback = () => {}) {
+    return this.io.on(event, callback)
   }
 
 }

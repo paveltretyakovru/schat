@@ -1,4 +1,7 @@
-import { push } from 'react-router-redux'
+// import {post} from 'axios'
+import {push} from 'react-router-redux'
+
+// import {SERVER_HOST} from '../../app.constants'
 
 import {
   HOME_ROUTE,
@@ -8,4 +11,8 @@ export const routeToHome = () => {
   return (dispatch) => {
     dispatch(push(HOME_ROUTE))
   }
+}
+
+export const createNewRoom = () => {
+  
 }

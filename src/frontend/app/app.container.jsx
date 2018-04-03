@@ -4,6 +4,7 @@ import {withRouter, Route, Redirect, Switch} from 'react-router'
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 
+import LinearProgress from 'material-ui/LinearProgress';
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
@@ -22,6 +23,7 @@ import {
 import './app.container.scss';
 import HomeContainer from './pages/home/home.container'
 import AuthContainer from './pages/auth/auth.container'
+import RoomsShowContainer from './pages/rooms/rooms-show/rooms-show.container';
 
 class App extends Component {
   static path = '/'
@@ -50,13 +52,22 @@ class App extends Component {
               <HeaderContainer
                 title="SChat"
                 onLeftIconButtonTouchTap={ ::this.props.routeActions.routeToHome }
-              />
+                />
+              <div className="app__navigation-progress-wrapper">
+                {
+                  (this.props.app.showProgress)
+                    ? <LinearProgress mode="indeterminate" style={{borderRadius: 0}} />
+                    : null
+                }
+              </div>
             </div>
 
             <div className="app__content">
               <Switch>
                 <Route exact path="/" render={homeRender} />
                 <Route path="/auth" component={AuthContainer} />
+                <Route path="/rooms/:id" component={RoomsShowContainer} />
+                
               </Switch>
             </div>
 

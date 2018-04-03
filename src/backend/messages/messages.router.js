@@ -6,7 +6,7 @@ module.exports = (app) => {
     const socket = app.get('socket')
     const { message, roomId } = req.body
 
-    console.log('Messages Post Request -> ', req.body)
+    console.log('Messages Post Request -> ', {body: req.body})
 
     const data = {
       success: true,
