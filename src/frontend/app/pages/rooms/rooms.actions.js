@@ -1,7 +1,7 @@
 import AES from 'crypto-js/aes';
 import {post, get} from 'axios'
 // import {isEmpty} from 'ramda'
-import {goBack} from 'react-router-redux'
+// import {goBack} from 'react-router-redux'
 
 import {
   SHOW_PROGRESS,
@@ -12,6 +12,7 @@ import {
   ADD_ROOM,
   ADD_MESSAGE,
   ROOMS_ROUTE,
+  ADD_ROOM_URL,
   ADD_ROOM_ROUTE,
   SEARCH_ROOM_URL,
   SET_CURRENT_ROOM,
@@ -20,16 +21,25 @@ import {
   UPDATE_CONTROL_KEY,
   CLEAR_SEARCH_ROOMS_RESULT,
   UPDATE_SEARCH_ROOMS_RESULT,
-} from './rooms.constants';
+} from './rooms.constants'
 
-import { push } from 'react-router-redux';
+import { push } from 'react-router-redux'
 
-import makeId from 'makeId';
+import makeId from 'makeId'
 
 export function addRoom(data) {
   return dispatch => {
-    dispatch({ type: ADD_ROOM, payload: data });
-    dispatch(goBack());
+    dispatch({ type: SHOW_PROGRESS })
+
+    post(ADD_ROOM_URL, data)
+      .then(res => {
+        const room = res.data.result.room
+        dispatch({ type: ADD_ROOM, payload: room })
+        dispatch({ type: HIDE_PROGRESS })
+        dispatch({ type: SET_CURRENT_ROOM, payload: { room } })
+        dispatch(push((room.id) ? `${ROOMS_ROUTE}/${room.id}` : ROOMS_ROUTE))
+      })
+
   }
 }
 
@@ -40,12 +50,20 @@ export function routeToAddRoom() {
   }
 }
 
-export function routeToRooms(room = '') {
-  return (dispatch) => {
-    let route = (room.id) ? `${ROOMS_ROUTE}/${room.id}` : ROOMS_ROUTE
-    console.log('routeToRooms', {room, route});
-    
-    dispatch(push(route))
+export const routeToRooms = (room = '') => {
+  return (dispatch, getState) => {
+    const state = getState()
+    const find = state.rooms.list.find(el => el.id === room.id)
+
+    if (typeof find !== 'undefined') {
+      const route = (room.id) ? `${ROOMS_ROUTE}/${room.id}` : ROOMS_ROUTE
+      console.log('routeToRooms', {room, route});
+      
+      dispatch(push(route))
+    } else {
+      console.error('Room not found', room)
+    }
+
   }
 }
 

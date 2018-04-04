@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 
 import Paper from 'material-ui/Paper'
 import Subheader from 'material-ui/Subheader'
+import FlatButton from 'material-ui/FlatButton';
 import AutoComplete from 'material-ui/AutoComplete'
+import { MenuItem, ListItem } from 'material-ui';
 
 import './search-create-chat.component.scss'
-import { MenuItem, ListItem } from 'material-ui';
 
 export class SearchCreateChatComponent extends Component {
   constructor(props) {
@@ -24,11 +25,30 @@ export class SearchCreateChatComponent extends Component {
       this.state.searchText.length === 0
       && this.props.searchResult.length > 0
     ) {
-      this.props.clearSearchResult()
+      this.props.roomsActions.clearSearchRoomsResult()
     }
   }
 
   render() {
+    const { addRoom } = this.props.roomsActions
+
+    const craeteButton = (title) => {
+      return (
+        <div className="search-create-chat__create-room">
+          <div className="search-create-chat__create-room-desc">
+            Nothing founded
+          </div>
+
+          <FlatButton
+            label={`create ${title} room`}
+            secondary={true}
+            onTouchTap={ addRoom.bind(this, {title: title}) }
+            className="search-create-chat__create-room-button"
+          />
+        </div>
+      )
+    }
+
     return(
       <div className="search-create-chat">
 
@@ -45,36 +65,41 @@ export class SearchCreateChatComponent extends Component {
               dataSource={this.state.sourceData}
               onNewRequest={ this.onNewRequestHandler.bind(this) }
               onUpdateInput={ this.onUpdateInputHandler.bind(this) }
-              // floatingLabelText="ID or Title to search or create chat room"
             />
           </div>
 
           {
-            (
-              this.props.searchResult.length > 0
-              && this.state.searchText.length !== 0
-            )
-              ? (
-                <div className="search-create-chat__search-result">
-                  <Subheader>
-                    Search reasult for
-                    <span className="search-create-chat__search-result-query">
-                      {this.state.searchText}
-                    </span>
-                  </Subheader>
-                  {
-                    this.props.searchResult.map((item) => {
+            (() => {
+              if (
+                this.props.searchResult.length > 0
+                && this.state.searchText.length !== 0
+              ) {
+                return (
+                  <div className="search-create-chat__search-result">
+                    <Subheader>
+                      Search reasult for
+                      <span className="search-create-chat__search-result-query">
+                        {this.state.searchText}:
+                      </span>
+                    </Subheader>
+                    { this.props.searchResult.map((item) => {
                       return (
-                        <ListItem
-                          key={item.id}
-                          primaryText={ item.title }
-                        />
+                        (item.id !== 0)
+                          ? (
+                            <ListItem
+                              key={item.id}
+                              primaryText={ item.title }
+                              onTouchTap={
+                                this.onClickSearchItem.bind(this, item)
+                              }
+                            />
+                          ) : craeteButton(item.title)
                       )
-                    })
-                  }
-                </div>
-              )
-              : null
+                    })}
+                  </div>
+                )
+              }
+            })()
           }
 
         </Paper>
@@ -123,15 +148,12 @@ export class SearchCreateChatComponent extends Component {
   onNewRequestHandler(choosenRequest = '', index = -1) {
     if (index !== -1 ) {
       if (choosenRequest.room !== null) {
-        console.log('New search handler', choosenRequest)        
-
         const room = choosenRequest.room.room
 
-        this.props.setCurrentRoom(room)
-        this.props.routeToRoom(room)
+        this.props.roomsActions.setCurrentRoom(room)
+        this.props.roomsActions.routeToRooms(room)
       } else {
-        console.log('New search handler', choosenRequest)
-        this.props.searchRoomHandler(choosenRequest.text)
+        this.props.roomsActions.searchRoom(choosenRequest.text)
       }
     }
   }
@@ -140,6 +162,11 @@ export class SearchCreateChatComponent extends Component {
     this.setState({ ...this.state, searchText: searchText }, () => {
       this.prepareSearchField()
     })
+  }
+
+  onClickSearchItem(room) {
+    this.props.roomsActions.setCurrentRoom(room)
+    this.props.roomsActions.routeToRooms(room)
   }
 }
 

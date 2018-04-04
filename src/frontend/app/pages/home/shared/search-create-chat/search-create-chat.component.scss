@@ -1,3 +1,5 @@
+$secondary: #e91e63;
+
 .search-create-chat {
   margin: 16px 0px;
   padding: 0px 16px;
@@ -14,8 +16,18 @@
     padding: 0px 0px 0px 0px;
 
     &-query {
-      color: #e91e63;
+      color: #000;
       margin-left: 4px;
+    }
+  }
+
+  &__create-room {
+    padding: 0px 16px;
+    display: flex;
+    flex-direction: column;
+
+    &-desc {
+      margin: 8px 0px;
     }
   }
 }

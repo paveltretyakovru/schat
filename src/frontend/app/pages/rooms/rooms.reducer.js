@@ -1,4 +1,4 @@
-import makeId from 'makeId';
+// import makeId from 'makeId';
 import SHA256 from 'crypto-js/sha256';
 
 import {
@@ -29,16 +29,12 @@ const initState = {
 export default function(state = initState, action) {
   switch(action.type) {
   case ADD_ROOM:
+  // key: SHA256(action.payload.key).toString(),  
     return {
       ...state,
       list: [
         ...state.list,
-        {
-          id: makeId(),
-          key: SHA256(action.payload.key).toString(),
-          title: action.payload.title,
-          messages: [],
-        },
+        action.payload,
       ],
     };
   

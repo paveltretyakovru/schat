@@ -6,7 +6,15 @@ module.exports = (app) => {
 
   router.post('/', (req, res) => {
     socket.emit('message', {success: true, message: 'Room was created'})
-    res.json({success: true, message: 'Rooms post'})
+    res.json({success: true, message: 'Rooms post', result: {
+      room: {
+        id: 'random_id',
+        key: '',
+        favor: false,
+        title: req.body.title,
+        messages: [],
+      }
+    }})
   })
 
   router.get('/', (req, res) => {
@@ -19,10 +27,12 @@ module.exports = (app) => {
       success: true,
       message: 'Rooms search',
       query: req.params,
-      result: [{
-        id: 'some id',
-        title: 'some room',
-      }],
+      result: [
+        {
+          id: 0,
+          title: req.params.query,
+        },
+      ],
     })
   })
 

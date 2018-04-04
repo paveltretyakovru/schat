@@ -18,11 +18,7 @@ class HomeContainer extends Component {
           rooms={ this.prepareRoomsList(this.props.rooms.list) }
           socket={ this.props.app.socket }
           searchResult= { this.props.rooms.searchResult }
-          setCurrentRoom={this.props.roomsActions.setCurrentRoom.bind(this)}
-          routeToRoom={this.props.roomsActions.routeToRooms.bind(this)}
-          createRoomHandler={this.crateRoomHandler.bind(this)}
-          searchRoomHandler={this.searchRoomHandler.bind(this)}
-          clearSearchResult={this.props.roomsActions.clearSearchRoomsResult.bind(this)}
+          roomsActions={this.props.roomsActions}
         />
 
         <RoomsListContainer />
@@ -37,14 +33,6 @@ class HomeContainer extends Component {
         text: room.title,
       }
     })
-  }
-
-  crateRoomHandler() {
-
-  }
-
-  searchRoomHandler(query = '') {
-    this.props.roomsActions.searchRoom(query)
   }
 }
 

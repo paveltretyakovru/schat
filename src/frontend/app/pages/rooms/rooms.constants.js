@@ -1,6 +1,7 @@
 import {SERVER_HOST} from '../../app.constants'
 
 export const ADD_ROOM = 'ADD_ROOM'
+export const ADD_ROOM_URL = `${SERVER_HOST}/rooms`
 
 export const ROOMS_ROUTE = '/rooms'
 export const SEARCH_ROOM_URL = `${SERVER_HOST}/rooms`
