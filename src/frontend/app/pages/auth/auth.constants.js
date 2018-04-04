@@ -15,5 +15,5 @@ export const AUTH_LOGIN_POST_URL = `${SERVER_HOST}/users/login`
 
 export const AUTH_REGISTER_ROUTE = '/auth/register'
 export const CLEAR_REGISTER_DATA = 'CLEAR_LOGIN_DATA'
-export const UPDATE_REGISTER_DATA = 'UPDATE_LOGIN_DATA'
+export const UPDATE_REGISTER_DATA = 'UPDATE_REGISTER_DATA'
 export const AUTH_REGISTER_POST_URL = `${SERVER_HOST}/users/register`
