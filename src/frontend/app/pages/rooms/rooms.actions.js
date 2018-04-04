@@ -18,6 +18,7 @@ import {
   TOGGLE_ROOM_FAVOR,
   SEND_MESSAGE_ROUTE,
   UPDATE_CONTROL_KEY,
+  UPDATE_SEARCH_ROOMS_RESULT,
 } from './rooms.constants';
 
 import { push } from 'react-router-redux';
@@ -131,7 +132,13 @@ export const searchRoom = (query = '') => {
   return (dispatch) => {
     dispatch({ type: SHOW_PROGRESS })
 
-    return get(`${SEARCH_ROOM_URL}/${query}`)
-      .then(() => dispatch({ type: HIDE_PROGRESS }))
+    get(`${SEARCH_ROOM_URL}/${query}`)
+      .then((res) => {
+        dispatch({ type: HIDE_PROGRESS })
+        dispatch({
+          type: UPDATE_SEARCH_ROOMS_RESULT,
+          payload: res.data.result,
+        })
+      })
   }
 }

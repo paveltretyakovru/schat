@@ -6,7 +6,7 @@ import Subheader from 'material-ui/Subheader'
 import AutoComplete from 'material-ui/AutoComplete'
 
 import './search-create-chat.component.scss'
-import { MenuItem } from 'material-ui';
+import { MenuItem, ListItem } from 'material-ui';
 
 export class SearchCreateChatComponent extends Component {
   constructor(props) {
@@ -14,14 +14,12 @@ export class SearchCreateChatComponent extends Component {
 
     this.rooms = this.props.rooms
     this.state = {
+      searchText: '',
       sourceData: this.prepareSourceData(this.rooms),
     }
   }
 
   render() {
-
-    console.log('Search state', this.state);
-
     return(
       <div className="search-create-chat">
 
@@ -30,13 +28,34 @@ export class SearchCreateChatComponent extends Component {
 
           <div className="search-create-chat__input-wrapper">
             <AutoComplete
-              hintText="Start input room id or title"
-              onNewRequest={ this.onNewRequestHandler.bind(this) }
-              onUpdateInput={ this.onUpdateInputHandler.bind(this) }
+              hintText="Search or crate chat room"
               fullWidth={true}
               dataSource={this.state.sourceData}
+              onNewRequest={ this.onNewRequestHandler.bind(this) }
+              onUpdateInput={ this.onUpdateInputHandler.bind(this) }
+              // floatingLabelText="Search or crate chat room"
             />
           </div>
+
+          {
+            (this.props.searchResult.length > 0)
+              ? (
+                <div className="search-create-chat__search-result">
+                  <Subheader>Search reasult</Subheader>
+                  {
+                    this.props.searchResult.map((item) => {
+                      return (
+                        <ListItem
+                          key={item.id}
+                          primaryText={ item.title }
+                        />
+                      )
+                    })
+                  }
+                </div>
+              )
+              : null
+          }
 
         </Paper>
 
@@ -59,18 +78,48 @@ export class SearchCreateChatComponent extends Component {
     })
   }
 
-  onNewRequestHandler(choosenRequest = '', index = -1) {
-    if(index !== -1) {
-      const room = this.rooms[index].room
+  prepareSearchField() {
+    const sourceData = this.state.sourceData
+    const searchDataSourceFiled = {
+      room: null,
+      text: this.state.searchText,
+      value: (
+        <MenuItem
+          primaryText={`Search: ${this.state.searchText}`}
+          secondaryText="&#9786;"
+        />
+      ),
+    }
 
-      this.props.setCurrentRoom(room)
-      this.props.routeToRoom(room)
+    if (sourceData[sourceData.length - 1].room === null) {
+      sourceData[sourceData.length - 1] = searchDataSourceFiled
+    } else {
+      sourceData[sourceData.length] = searchDataSourceFiled
+    }
+
+    this.setState({ ...this.state, sourceData: sourceData })
+  }
+
+  onNewRequestHandler(choosenRequest = '', index = -1) {
+    if (index !== -1 ) {
+      if (choosenRequest.room !== null) {
+        console.log('New search handler', choosenRequest)        
+
+        const room = choosenRequest.room.room
+
+        this.props.setCurrentRoom(room)
+        this.props.routeToRoom(room)
+      } else {
+        console.log('New search handler', choosenRequest)
+        this.props.searchRoomHandler(choosenRequest.text)
+      }
     }
   }
 
-  onUpdateInputHandler(searchText, dataSource, params) {
-    console.log('onUpdateInputHandler', {searchText, dataSource, params})
-    this.props.searchRoomHandler(searchText)
+  onUpdateInputHandler(searchText) {
+    this.setState({ ...this.state, searchText: searchText }, () => {
+      this.prepareSearchField()
+    })
   }
 }
 

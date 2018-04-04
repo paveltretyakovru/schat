@@ -7,6 +7,7 @@ import {
   SET_CURRENT_ROOM,
   TOGGLE_ROOM_FAVOR,
   UPDATE_CONTROL_KEY,
+  UPDATE_SEARCH_ROOMS_RESULT,
 } from './rooms.constants';
 
 const initState = {
@@ -21,6 +22,7 @@ const initState = {
     },
   ],
   current: null,
+  searchResult: [],
 }
 
 export default function(state = initState, action) {
@@ -78,6 +80,13 @@ export default function(state = initState, action) {
     return {
       ...state,
       current: state.list.findIndex(e => e.id === action.payload.room.id),
+    }
+  }
+
+  case UPDATE_SEARCH_ROOMS_RESULT: {
+    return {
+      ...state,
+      searchResult: action.payload,
     }
   }
 

@@ -15,7 +15,15 @@ module.exports = (app) => {
 
   router.get('/:query', (req, res) => {
     console.log('/rooms/search', req.params.query)
-    res.json({success: true, message: 'Rooms search', query: req.params})
+    res.json({
+      success: true,
+      message: 'Rooms search',
+      query: req.params,
+      result: [{
+        id: 'some id',
+        title: 'some room',
+      }],
+    })
   })
 
   return router

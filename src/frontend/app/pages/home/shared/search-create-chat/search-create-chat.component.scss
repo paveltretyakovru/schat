@@ -3,6 +3,10 @@
   padding: 0px 16px;
 
   &__input-wrapper {
-    padding: 0px 16px 16px 16px;
+    padding: 0px 16px 0px 16px;
+  }
+
+  &__search-result {
+    padding: 0px 0px 16px 0px;    
   }
 }

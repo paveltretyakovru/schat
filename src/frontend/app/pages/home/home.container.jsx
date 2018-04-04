@@ -17,6 +17,7 @@ class HomeContainer extends Component {
         <SearchCreateChatComponent
           rooms={ this.prepareRoomsList(this.props.rooms.list) }
           socket={ this.props.app.socket }
+          searchResult= { this.props.rooms.searchResult }
           setCurrentRoom={this.props.roomsActions.setCurrentRoom.bind(this)}
           routeToRoom={this.props.roomsActions.routeToRooms.bind(this)}
           createRoomHandler={this.crateRoomHandler.bind(this)}
@@ -42,11 +43,7 @@ class HomeContainer extends Component {
   }
 
   searchRoomHandler(query = '') {
-    this.props.roomsActions
-      .searchRoom(query)
-        .then((res) => {
-          console.log('Test to get promise --->', res);
-        })
+    this.props.roomsActions.searchRoom(query)
   }
 }
 
