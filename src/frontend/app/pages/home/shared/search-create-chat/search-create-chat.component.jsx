@@ -82,20 +82,32 @@ export class SearchCreateChatComponent extends Component {
                         {this.state.searchText}:
                       </span>
                     </Subheader>
-                    { this.props.searchResult.map((item) => {
-                      return (
-                        (item.id !== 0)
-                          ? (
-                            <ListItem
-                              key={item.id}
-                              primaryText={ item.title }
-                              onTouchTap={
-                                this.onClickSearchItem.bind(this, item)
-                              }
-                            />
-                          ) : craeteButton(item.title)
-                      )
-                    })}
+                    {
+                      (() => {
+                        if (
+                          this.props.searchResult.length === 1
+                          && this.props.searchResult[0].id === 0
+                        ) {
+                          return craeteButton(this.props.searchResult[0].title)
+                        } else {
+                          return this.props.searchResult.map((item, index) => {
+                            return (
+                              (item.id !== 0)
+                                ? (
+                                  <ListItem
+                                    key={index}
+                                    primaryText={ item.title }
+                                    onTouchTap={
+                                      this.onClickSearchItem.bind(this, item)
+                                    }
+                                  />
+                                ) : craeteButton(item.title)
+                            )
+                          })
+                        }
+                      })()
+                      
+                    }
                   </div>
                 )
               }

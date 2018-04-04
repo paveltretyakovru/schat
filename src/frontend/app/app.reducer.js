@@ -11,7 +11,7 @@ const socket = io.connect('http://localhost:3002')
 
 const initState = {
   socket,
-  headerTitle: 'SChat',
+  headerTitle: 'Encrypted chat',
   showProgress: false,
   isLeftMenuOpen: false,
 }

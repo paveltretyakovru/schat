@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 
 import {HOME_ROUTE} from './home.constants'
+import * as appActions from '../../app.actions'
 import * as homeActions from './home.actions'
 import * as roomsActions from '../rooms/rooms.actions'
 import {SearchCreateChatComponent} from './shared/search-create-chat/search-create-chat.component'
@@ -10,6 +11,12 @@ import RoomsListContainer from '../rooms/rooms-list/rooms-list.container';
 
 class HomeContainer extends Component {
   static path = HOME_ROUTE
+  
+  constructor(props) {
+    super(props)
+
+    this.props.appActions.updateHeaderTitle()
+  }
 
   render() {
     return(
@@ -42,6 +49,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  appActions: bindActionCreators(appActions, dispatch),
   homeActions: bindActionCreators(homeActions, dispatch),
   roomsActions: bindActionCreators(roomsActions, dispatch),
 })
