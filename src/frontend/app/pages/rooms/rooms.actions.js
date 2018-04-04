@@ -18,6 +18,7 @@ import {
   TOGGLE_ROOM_FAVOR,
   SEND_MESSAGE_ROUTE,
   UPDATE_CONTROL_KEY,
+  CLEAR_SEARCH_ROOMS_RESULT,
   UPDATE_SEARCH_ROOMS_RESULT,
 } from './rooms.constants';
 
@@ -141,4 +142,8 @@ export const searchRoom = (query = '') => {
         })
       })
   }
+}
+
+export const clearSearchRoomsResult = () => {
+  return dispatch => dispatch({type: CLEAR_SEARCH_ROOMS_RESULT})
 }

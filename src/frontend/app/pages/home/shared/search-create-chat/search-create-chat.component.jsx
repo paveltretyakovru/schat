@@ -19,29 +19,49 @@ export class SearchCreateChatComponent extends Component {
     }
   }
 
+  componentWillUpdate() {
+    if (
+      this.state.searchText.length === 0
+      && this.props.searchResult.length > 0
+    ) {
+      this.props.clearSearchResult()
+    }
+  }
+
   render() {
     return(
       <div className="search-create-chat">
 
-        <Paper zDepth={1} className="animated bounceInLeft">
+        <Paper
+          zDepth={1}
+          className="animated bounceInLeft search-create-chat__paper"
+        >
           <Subheader>Search & Create Rooms</Subheader>
 
           <div className="search-create-chat__input-wrapper">
             <AutoComplete
-              hintText="Search or crate chat room"
+              hintText="ID or Title chat room"
               fullWidth={true}
               dataSource={this.state.sourceData}
               onNewRequest={ this.onNewRequestHandler.bind(this) }
               onUpdateInput={ this.onUpdateInputHandler.bind(this) }
-              // floatingLabelText="Search or crate chat room"
+              // floatingLabelText="ID or Title to search or create chat room"
             />
           </div>
 
           {
-            (this.props.searchResult.length > 0)
+            (
+              this.props.searchResult.length > 0
+              && this.state.searchText.length !== 0
+            )
               ? (
                 <div className="search-create-chat__search-result">
-                  <Subheader>Search reasult</Subheader>
+                  <Subheader>
+                    Search reasult for
+                    <span className="search-create-chat__search-result-query">
+                      {this.state.searchText}
+                    </span>
+                  </Subheader>
                   {
                     this.props.searchResult.map((item) => {
                       return (

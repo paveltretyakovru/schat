@@ -2,11 +2,20 @@
   margin: 16px 0px;
   padding: 0px 16px;
 
+  &__paper {
+    padding-bottom: 16px;
+  }
+
   &__input-wrapper {
     padding: 0px 16px 0px 16px;
   }
 
   &__search-result {
-    padding: 0px 0px 16px 0px;    
+    padding: 0px 0px 0px 0px;
+
+    &-query {
+      color: #e91e63;
+      margin-left: 4px;
+    }
   }
 }

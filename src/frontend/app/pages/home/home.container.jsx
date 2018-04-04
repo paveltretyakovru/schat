@@ -22,6 +22,7 @@ class HomeContainer extends Component {
           routeToRoom={this.props.roomsActions.routeToRooms.bind(this)}
           createRoomHandler={this.crateRoomHandler.bind(this)}
           searchRoomHandler={this.searchRoomHandler.bind(this)}
+          clearSearchResult={this.props.roomsActions.clearSearchRoomsResult.bind(this)}
         />
 
         <RoomsListContainer />

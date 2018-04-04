@@ -7,6 +7,7 @@ import {
   SET_CURRENT_ROOM,
   TOGGLE_ROOM_FAVOR,
   UPDATE_CONTROL_KEY,
+  CLEAR_SEARCH_ROOMS_RESULT,
   UPDATE_SEARCH_ROOMS_RESULT,
 } from './rooms.constants';
 
@@ -87,6 +88,13 @@ export default function(state = initState, action) {
     return {
       ...state,
       searchResult: action.payload,
+    }
+  }
+
+  case CLEAR_SEARCH_ROOMS_RESULT: {
+    return {
+      ...state,
+      searchResult: [],
     }
   }
 
