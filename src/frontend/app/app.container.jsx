@@ -24,6 +24,7 @@ import './app.container.scss';
 import HomeContainer from './pages/home/home.container'
 import AuthContainer from './pages/auth/auth.container'
 import RoomsShowContainer from './pages/rooms/rooms-show/rooms-show.container';
+import { Snackbar } from 'material-ui';
 
 class App extends Component {
   static path = '/'
@@ -66,6 +67,13 @@ class App extends Component {
             </div>
 
           </div>
+
+          <Snackbar
+            open={this.props.app.snackMessage.length !== 0}
+            message={this.props.app.snackMessage}
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+          />
 
           { NODE_ENV === 'development' ? <DevTools /> : null }
         </div>

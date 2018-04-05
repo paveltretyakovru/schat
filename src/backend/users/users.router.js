@@ -8,31 +8,21 @@ router.get('/', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  const { login, password } = req.body
-  res.json({ success: true, message: 'Post login', data: { login, password } })
+  
 })
 
 router.post('/register', (req, res) => {
   try {
     const { login, password, repassword } = req.body
-
-    console.log('REGISTER ---->', {login, password})
+    const user = new User({ login: login, password: password })
 
     if (password !== repassword) throw new Error('Invalid password and repassword')
 
-    const user = new User({ login: login, password: password })
-
     user.save((err, model) => {
       if (err) throw new Error('Error on save user ' + err.message)
-
-      res.json(
-        {
-          success: true,
-          message: 'User was created',
-          data: model,
-        }
-      )
+      res.json({ success: true, message: 'User was created', data: model })
     })
+
   } catch (error) {
     console.log(error.message)
 
