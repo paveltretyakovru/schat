@@ -29,6 +29,8 @@ class AuthContainer extends Component {
   }
 
   render() {
+    const { submitRegister } = this.props.authActions
+
     const largeButtonStyle = {
       style: { width: 120, height: 120, padding: 30 },
       iconStyle: { width: 60, height: 60 },
@@ -60,7 +62,7 @@ class AuthContainer extends Component {
             onTouchTap={
               (this.props.location.pathname === AUTH_LOGIN_ROUTE)
                 ? this.submitLoginHandler.bind(this)
-                : this.submitRegisterHandler.bind(this)
+                : submitRegister.bind(this, this.props.auth.registerForm)
             }
           >
             <ActionFingerprint color={pink500} />
@@ -102,18 +104,6 @@ class AuthContainer extends Component {
         if (res.data.success) {
           this.props.authActions.enableAuthenticate()
           this.props.authActions.clearLoginData()
-          this.props.authActions.disableFinger()
-          this.props.homeActions.routeToHome()
-        }
-      })
-  }
-
-  submitRegisterHandler() {
-    authActions.submitRegister(this.props.auth.registerForm)
-      .then((res) => {
-        if (res.data.success) {
-          this.props.authActions.enableAuthenticate()
-          this.props.authActions.clearRegisterData()
           this.props.authActions.disableFinger()
           this.props.homeActions.routeToHome()
         }

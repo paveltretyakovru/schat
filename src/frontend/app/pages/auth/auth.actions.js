@@ -1,6 +1,9 @@
 import {post} from 'axios'
 import {push} from 'react-router-redux'
 
+import {dispatchServerRequest} from '../../shared/helpers/dispatch-server-request'
+import {HOME_ROUTE} from '../home/home.constants'
+
 import {
   AUTH_ROUTE,
   AUTH_LOGIN,
@@ -75,7 +78,28 @@ export const routeToAuthRegister = () => {
 }
 
 export const submitRegister = (data = {login: '', password: '', repassword: ''}) => {
-  return post(AUTH_REGISTER_POST_URL, data)
+  
+  const request = dispatchServerRequest({
+    url: AUTH_REGISTER_POST_URL,
+    data: data,
+    method: 'post',
+    
+    callback: (dispatch, res) => {
+      dispatch({type: CLEAR_REGISTER_DATA})
+      dispatch({ type: DISABLE_FINGER })
+
+      if (res.data.success) {
+        dispatch({type: ENABLE_AUTHENTICATE})
+        dispatch(push(HOME_ROUTE))
+      }
+    },
+    
+    error: (dispatch, res) => {
+      console.log('dispatchServerRequest error result', res)
+    },
+  })
+
+  return request
 }
 
 export const updateRegisterData = (data = {login: '', password: '', repassword: ''}) => {

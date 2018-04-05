@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const User = require('./User')
+const prepareMongoMessage = require('../shared/helpers/prepare-mongo-message')
 
 router.get('/', (req, res) => {
   res.json({ router: '/users/' })
@@ -19,8 +20,17 @@ router.post('/register', (req, res) => {
     if (password !== repassword) throw new Error('Invalid password and repassword')
 
     user.save((err, model) => {
-      if (err) throw new Error('Error on save user ' + err.message)
-      res.json({ success: true, message: 'User was created', data: model })
+      try {
+        if (err) throw new Error('Error on save user ' + err.message)
+        res.json({ success: true, message: 'User was created', data: model })
+      } catch (errorSave) {
+        const message = prepareMongoMessage(errorSave.message, {
+          exists: 'User already exists',
+        })
+
+        res.status(500)
+        res.json({ success: false, message: message })
+      }
     })
 
   } catch (error) {
