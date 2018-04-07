@@ -61,7 +61,7 @@ class AuthContainer extends Component {
             disabled={!this.props.auth.fingerEnabled}
             onTouchTap={
               (this.props.location.pathname === AUTH_LOGIN_ROUTE)
-                ? this.submitLoginHandler.bind(this)
+                ? this.props.authActions.submitLogin.bind(this, this.props.auth.loginForm)
                 : submitRegister.bind(this, this.props.auth.registerForm)
             }
           >

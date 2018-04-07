@@ -1,4 +1,4 @@
-import {post} from 'axios'
+// import {post} from 'axios'
 import {push} from 'react-router-redux'
 
 import {dispatchServerRequest} from '../../shared/helpers/dispatch-server-request'
@@ -49,7 +49,27 @@ export const enableFinger = () => dispatch => dispatch({ type: ENABLE_FINGER })
 export const disableFinger = () => dispatch => dispatch({ type: DISABLE_FINGER })
 
 export const submitLogin = (data = {login: '', password: ''}) => {
-  return post(AUTH_LOGIN_POST_URL, data)
+  const request = dispatchServerRequest({
+    url: AUTH_LOGIN_POST_URL,
+    data: data,
+    method: 'post',
+    
+    callback: (dispatch, res) => {
+      dispatch({type: CLEAR_LOGIN_DATA})
+      dispatch({ type: DISABLE_FINGER })
+
+      if (res.data.success) {
+        dispatch({type: ENABLE_AUTHENTICATE})
+        dispatch(push(HOME_ROUTE))
+      }
+    },
+    
+    error: (dispatch, res) => {
+      console.log('dispatchServerRequest error result', res)
+    },
+  })
+
+  return request
 }
 
 export const updateLoginData = (data = {login: '', password: ''}) => {
@@ -83,16 +103,8 @@ export const submitRegister = (data = {login: '', password: '', repassword: ''})
     url: AUTH_REGISTER_POST_URL,
     data: data,
     method: 'post',
-    
-    callback: (dispatch, res) => {
-      dispatch({type: CLEAR_REGISTER_DATA})
-      dispatch({ type: DISABLE_FINGER })
-
-      if (res.data.success) {
-        dispatch({type: ENABLE_AUTHENTICATE})
-        dispatch(push(HOME_ROUTE))
-      }
-    },
+    callbackDispatches: [{ type: CLEAR_REGISTER_DATA }, { type: DISABLE_FINGER }],
+    successDispatches: [{ type: ENABLE_AUTHENTICATE }, () => push(HOME_ROUTE)],
     
     error: (dispatch, res) => {
       console.log('dispatchServerRequest error result', res)

@@ -9,7 +9,32 @@ router.get('/', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  
+  const { login, password } = req.body
+
+  try {
+    const query = User.where({login})
+    query.findOne((err, user) => {
+      try {
+        if(user.authenticate(password)) {
+          console.log('Successfull user login', user.id)
+          res.json({success: true, message: `${login}, your welcome!`})
+        } else {
+          console.log('Invalid user password', { login, password })
+          res.json({success: false, message: 'Invalid login or/and password'})
+        }
+      } catch (qerr){
+        const message = prepareMongoMessage(qerr.message, {
+          exists: 'User already exists',
+        })
+
+        res.json({ success: false, message: message })
+      }
+    })
+  } catch (e) {
+    console.log(`EXCEPTION. post to /users/auth => ${e.message}`, {login, password})
+    res.status(500)
+    res.json({ success: false, message: e.message })
+  }
 })
 
 router.post('/register', (req, res) => {

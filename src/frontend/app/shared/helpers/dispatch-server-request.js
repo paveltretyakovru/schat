@@ -15,6 +15,9 @@ import {
  *  @param {string} options.method type of http method
  *  @param {function} options.error fialed callback function for server exception
  *  @param {function} options.callback success callback function for server response
+ *  @param {functions} options.success callback if res.data.success === true
+ *  @param {array} options.successDispataches dispatches props before success calling
+ *  @param {array} options.callbackDispatches dispathces props before callback calling
  *  @return function(dispatch)
  */
 export const dispatchServerRequest = (options) => {
@@ -22,7 +25,10 @@ export const dispatchServerRequest = (options) => {
   const data = options.data || {}
   const error = options.error || (() => {})
   const method = options.method || 'get'
+  const success = options.success
   const callback = options.callback || (() => {})
+  const successDispataches = options.successDispataches || []
+  const callbackDispatches = options.callbackDispatches || []
 
   return (dispatch) => {
     dispatch({ type: SHOW_PROGRESS })
@@ -39,6 +45,24 @@ export const dispatchServerRequest = (options) => {
 
           setTimeout(() => snack(''), 4500)
           hideProgress()
+
+          if(callbackDispatches.length > 0) {
+            callbackDispatches.forEach(callbackDispatch => {
+              dispatch(callbackDispatch)
+            });
+          }
+
+          if (res.data.success) {
+            if (typeof success !== 'undefined') { success(dispatch, res) }
+            if (Array.isArray(successDispataches) && successDispataches.length > 0) {
+              successDispataches.forEach(successDispatch => dispatch(
+                (typeof successDispatch.type !== undefined)
+                  ? successDispatch
+                  : successDispatch()
+              ))
+            }
+          }
+
           callback(dispatch, res)
         })
         .catch((res) => {
