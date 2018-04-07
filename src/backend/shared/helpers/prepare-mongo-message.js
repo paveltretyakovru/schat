@@ -11,6 +11,11 @@ const prepareMongoMessage = (message = '', messages = {}) => {
       title: 'exists',
       message: 'Entry already exists',
     },
+    {
+      reg: 'of null',
+      title: 'not found',
+      message: 'Entry not founded',
+    },
   ]
 
   for (let i = 0; i < codes.length; i++) {

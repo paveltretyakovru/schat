@@ -23,8 +23,9 @@ router.post('/login', (req, res) => {
           res.json({success: false, message: 'Invalid login or/and password'})
         }
       } catch (qerr){
-        const message = prepareMongoMessage(qerr.message, {
+        const message = prepareMongoMessage(qerr.message,{
           exists: 'User already exists',
+          'not found': 'Invalid login or/and password',
         })
 
         res.json({ success: false, message: message })
