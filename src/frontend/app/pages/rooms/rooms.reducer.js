@@ -28,73 +28,73 @@ const initState = {
 
 export default function(state = initState, action) {
   switch(action.type) {
-  case ADD_ROOM:
-  // key: SHA256(action.payload.key).toString(),  
-    return {
-      ...state,
-      list: [
-        ...state.list,
-        action.payload,
-      ],
-    };
-  
-  case ADD_MESSAGE: {
-    let roomsListCopy = state.list.slice();
-    let findRoom = roomsListCopy.find(element => {
-      return element.id === action.payload.roomId;
-    });
+    case ADD_ROOM:
+    // key: SHA256(action.payload.key).toString(),  
+      return {
+        ...state,
+        list: [
+          ...state.list,
+          action.payload,
+        ],
+      };
+    
+    case ADD_MESSAGE: {
+      let roomsListCopy = state.list.slice();
+      let findRoom = roomsListCopy.find(element => {
+        return element.id === action.payload.roomId;
+      });
 
-    findRoom.messages.push({
-      id: action.payload.id,
-      me: action.payload.me,
-      message: action.payload.message,
-    });
-    return { ...state, list: roomsListCopy};
-  }
-
-  case UPDATE_CONTROL_KEY: {
-    let roomsListCopy = state.list.slice();
-    let findRoom = roomsListCopy.find(element => {
-      return element.id === action.payload.roomId;
-    });
-
-    findRoom.key = SHA256(action.payload.key).toString();
-    return {...state, list: roomsListCopy}
-  }
-
-  case TOGGLE_ROOM_FAVOR: {
-    const roomsListCopy = state.list.slice();
-    const findRoom = roomsListCopy.find(element => {
-      return element.id === action.payload.roomId;
-    });
-
-    findRoom.favor = !findRoom.favor
-
-    return {...state, list: roomsListCopy, current: findRoom}
-  }
-
-  case SET_CURRENT_ROOM: {
-    return {
-      ...state,
-      current: state.list.findIndex(e => e.id === action.payload.room.id),
+      findRoom.messages.push({
+        id: action.payload.id,
+        me: action.payload.me,
+        message: action.payload.message,
+      });
+      return { ...state, list: roomsListCopy};
     }
-  }
 
-  case UPDATE_SEARCH_ROOMS_RESULT: {
-    return {
-      ...state,
-      searchResult: action.payload,
+    case UPDATE_CONTROL_KEY: {
+      let roomsListCopy = state.list.slice();
+      let findRoom = roomsListCopy.find(element => {
+        return element.id === action.payload.roomId;
+      });
+
+      findRoom.key = SHA256(action.payload.key).toString();
+      return {...state, list: roomsListCopy}
     }
-  }
 
-  case CLEAR_SEARCH_ROOMS_RESULT: {
-    return {
-      ...state,
-      searchResult: [],
+    case TOGGLE_ROOM_FAVOR: {
+      const roomsListCopy = state.list.slice();
+      const findRoom = roomsListCopy.find(element => {
+        return element.id === action.payload.roomId;
+      });
+
+      findRoom.favor = !findRoom.favor
+
+      return {...state, list: roomsListCopy, current: findRoom}
     }
-  }
 
-  default:
-    return { ...state };
+    case SET_CURRENT_ROOM: {
+      return {
+        ...state,
+        current: state.list.findIndex(e => e.id === action.payload.room.id),
+      }
+    }
+
+    case UPDATE_SEARCH_ROOMS_RESULT: {
+      return {
+        ...state,
+        searchResult: action.payload,
+      }
+    }
+
+    case CLEAR_SEARCH_ROOMS_RESULT: {
+      return {
+        ...state,
+        searchResult: [],
+      }
+    }
+
+    default:
+      return { ...state };
   }
 }

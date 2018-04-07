@@ -1,16 +1,19 @@
 const app = new (require('express'))()
 const http = require('http').Server(app)
-const notifier = require('node-notifier')
 const cors = require('cors')
-const bodyParser = require('body-parser')
+const notifier = require('node-notifier')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 // Classes
 const Sockets = require('./src/backend/sockets/Sockets')
 const sockets = new Sockets({app: app, http: http})
 
+// Helpers
+const getServerHost = require('./src/backend/shared/helpers/getServerHost')
+
 app.set('port', process.env.PORT || 3002)
-app.set('host', process.env.SERVER_HOST || 'localhost')
+app.set('host', process.env.SERVER_HOST || getServerHost())
 app.set('socket', sockets)
 app.set('frontHost', process.env.FRONT_HOST || 'http://localhost:8080')
 
@@ -35,6 +38,10 @@ http.listen(app.get('port'), app.get('host'), (error) => {
   let mess = (error) ? error : `Server: ${app.get('host')}:${app.get('port')}/`;
 
   if (!error) {
+    console.log('Server started on', {
+      host: app.get('host'),
+      port: app.get('port'),
+    })
     notifier.notify(`${mess}`);
   }
 })

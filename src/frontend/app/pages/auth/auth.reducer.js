@@ -22,18 +22,18 @@ const initState = {
 export const authReducer = (state = initState, action) => {
 
   switch(action.type) {
-  case AUTH_LOGIN: { return { ...state, login: action.payload.login || '' } }
+    case AUTH_LOGIN: { return { ...state, login: action.payload.login || '' } }
 
-  case ENABLE_FINGER: { return { ...state, fingerEnabled: true } }
+    case ENABLE_FINGER: { return { ...state, fingerEnabled: true } }
 
-  case DISABLE_FINGER: { return { ...state, fingerEnabled: false } }
-  case ENABLE_AUTHENTICATE: { return { ...state, authenticated: true }}
-  case UPDATE_LOGIN_DATA: { return { ...state, loginForm: action.payload } }
+    case DISABLE_FINGER: { return { ...state, fingerEnabled: false } }
+    case ENABLE_AUTHENTICATE: { return { ...state, authenticated: true }}
+    case UPDATE_LOGIN_DATA: { return { ...state, loginForm: action.payload } }
 
-  case CLEAR_LOGIN_DATA: { return { ...state, loginForm: { login: '', password: '' }} }
-  case UPDATE_REGISTER_DATA: { return { ...state, registerForm: action.payload } }
-  case CLEAR_REGISTER_DATA: { return { ...state, registerForm: { login: '', password: '', repassword: '' }} }
+    case CLEAR_LOGIN_DATA: { return { ...state, loginForm: { login: '', password: '' }} }
+    case UPDATE_REGISTER_DATA: { return { ...state, registerForm: action.payload } }
+    case CLEAR_REGISTER_DATA: { return { ...state, registerForm: { login: '', password: '', repassword: '' }} }
 
-  default: return { ...state }
+    default: return { ...state }
   }
 }

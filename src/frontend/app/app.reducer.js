@@ -20,27 +20,27 @@ const initState = {
 
 export default function(state = initState, action) {
   switch(action.type) {
-  case SWITCH_LEFT_MENU: {
-    return { ...state, isLeftMenuOpen: !state.isLeftMenuOpen }
-  }
-    
-  case SHOW_PROGRESS: {
-    return { ...state, showProgress: true }
-  }
+    case SWITCH_LEFT_MENU: {
+      return { ...state, isLeftMenuOpen: !state.isLeftMenuOpen }
+    }
+      
+    case SHOW_PROGRESS: {
+      return { ...state, showProgress: true }
+    }
 
-  case HIDE_PROGRESS: {
-    return { ...state, showProgress: false }
-  }
+    case HIDE_PROGRESS: {
+      return { ...state, showProgress: false }
+    }
 
-  case UPDATE_HEADER_TITLE: {
-    return { ...state, headerTitle: action.payload || ''}
-  }
+    case UPDATE_HEADER_TITLE: {
+      return { ...state, headerTitle: action.payload || ''}
+    }
 
-  case UPDATE_SNACK_MESSAGE: {
-    return { ...state, snackMessage: action.payload || '' }
-  }
+    case UPDATE_SNACK_MESSAGE: {
+      return { ...state, snackMessage: action.payload || '' }
+    }
 
-  default:
-    return { ...state };
+    default:
+      return { ...state };
   }
 }
