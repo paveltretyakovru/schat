@@ -9,7 +9,8 @@ const SERVER_HOST = process.env.SERVER_HOST || 'http://schat.app:3002'
 
 const ENTRY = (NODE_ENV == 'development')
   ? [
-    `webpack-dev-server/client?http://${HOST}:8080/`,
+    // `webpack-dev-server/client?http://${HOST}:8080/`,
+    `webpack-dev-server/client?http://${HOST}/`,
     'webpack/hot/dev-server',
     'babel-polyfill',
     './src/frontend/index',
@@ -60,10 +61,7 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         loader: 'url-loader',
-        options: {
-          limit: 15000,
-          name: '[name].[ext]',
-        },
+        options: { limit: 15000, name: '[name].[ext]' },
       },
     ],
   },
@@ -82,5 +80,11 @@ module.exports = {
     host: HOST,
     contentBase: `${__dirname}/public`,
     historyApiFallback: true,
+
+    // headers: {
+    //   'Access-Control-Allow-Origin': 'http://schat.app',
+    //   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+    //   'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+    // },
   },
 }

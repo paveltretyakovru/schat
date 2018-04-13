@@ -11,6 +11,8 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
   const { login, password } = req.body
 
+  console.log('Rotue to /login')
+
   try {
     const query = User.where({login})
     query.findOne((err, user) => {

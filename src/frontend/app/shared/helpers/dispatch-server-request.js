@@ -29,7 +29,15 @@ export const dispatchServerRequest = (options) => {
   const callback = options.callback || (() => {})
   const successDispataches = options.successDispataches || []
   const callbackDispatches = options.callbackDispatches || []
-  const postConfig = {method: 'post', url: url, data: data, withCredentials: true}
+  
+  const tokenStr = 'Harry Potter And Secret Room!'
+  const postConfig = {
+    url: url,
+    data: data,
+    method: 'post',
+    headers: { 'Authorization' : `Bearer ${tokenStr}` },
+    withCredentials: true,
+  }
 
   return (dispatch) => {
     dispatch({ type: SHOW_PROGRESS })
