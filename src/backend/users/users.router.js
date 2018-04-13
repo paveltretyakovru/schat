@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const jwt = require('jsonwebtoken')
 
 const User = require('./User')
 const prepareMongoMessage = require('../shared/helpers/prepare-mongo-message')
@@ -11,14 +12,17 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
   const { login, password } = req.body
 
-  console.log('Rotue to /login')
+  const user = req.user
+
+  console.log('Rotue to /login', user)
 
   try {
     const query = User.where({login})
     query.findOne((err, user) => {
       try {
         if(user.authenticate(password)) {
-          res.json({success: true, message: `${login}, your welcome!`})
+          const token = jwt.sign({ login }, 'Harry Potter And Secret Room')
+          res.json({token, success: true, message: `Hallo, ${login}!`})
         } else {
           console.log('Invalid user password', { login, password })
           res.json({success: false, message: 'Invalid login or/and password'})

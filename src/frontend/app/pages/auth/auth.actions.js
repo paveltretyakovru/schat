@@ -23,6 +23,7 @@ import {
   UPDATE_REGISTER_DATA,
   AUTH_REGISTER_POST_URL,
 } from './auth.constants'
+import { UPDATE_TOKEN } from '../../app.constants';
 
 export const login = (data = {login: '', password: ''}) => {
   return (dispatch) => {
@@ -59,8 +60,13 @@ export const submitLogin = (data = {login: '', password: ''}) => {
       dispatch({ type: DISABLE_FINGER })
 
       if (res.data.success) {
-        dispatch({type: ENABLE_AUTHENTICATE})
-        dispatch(push(HOME_ROUTE))
+        if (typeof res.data.token !== 'undefined') {
+          dispatch({ type: UPDATE_TOKEN, payload: res.data.token })
+          dispatch({type: ENABLE_AUTHENTICATE})
+          dispatch(push(HOME_ROUTE))
+        } else {
+          console.error('Необработанная ошибка!')
+        }
       }
     },
     

@@ -6,12 +6,14 @@ import {
   SWITCH_LEFT_MENU,
   UPDATE_HEADER_TITLE,
   UPDATE_SNACK_MESSAGE,
+  UPDATE_TOKEN,
 } from './app.constants';
 
 // const socket = io.connect('http://localhost:3002')
 
 const initState = {
   // socket,
+  token: '',
   headerTitle: 'Encrypted chat',
   showProgress: false,
   snackMessage: '',
@@ -38,6 +40,10 @@ export default function(state = initState, action) {
 
     case UPDATE_SNACK_MESSAGE: {
       return { ...state, snackMessage: action.payload || '' }
+    }
+
+    case UPDATE_TOKEN: {
+      return { ...state, token: action.payload || '' }      
     }
 
     default:

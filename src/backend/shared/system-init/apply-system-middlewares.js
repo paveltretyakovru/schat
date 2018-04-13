@@ -18,6 +18,6 @@ module.exports = (app) => {
   }
 
   app.use(bodyParser())
-  app.use(jwt(configs.jwt).unless({path: ['/users/login']}))
   app.use(cors(configs.cors))
+  app.use(jwt(configs.jwt).unless({path: ['/users/login']}))
 }
