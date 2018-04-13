@@ -82,7 +82,7 @@ class RoomsListContainer extends Component {
 function mapStateToProps(state) {
   return {
     rooms: state.rooms,
-    socket: state.app.socket,
+    // socket: state.app.socket,
   }
 }
 

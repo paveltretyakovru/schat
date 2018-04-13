@@ -1,4 +1,4 @@
-import {get, post} from 'axios'
+import axios, {get} from 'axios'
 
 import {
   SERVER_HOST,
@@ -29,6 +29,7 @@ export const dispatchServerRequest = (options) => {
   const callback = options.callback || (() => {})
   const successDispataches = options.successDispataches || []
   const callbackDispatches = options.callbackDispatches || []
+  const postConfig = {method: 'post', url: url, data: data, withCredentials: true}
 
   return (dispatch) => {
     dispatch({ type: SHOW_PROGRESS })
@@ -76,7 +77,7 @@ export const dispatchServerRequest = (options) => {
     
     switch (method) {
       case 'get'  : return responseHandler(get(url))
-      case 'post' : return responseHandler(post(url, data))
+      case 'post' : return responseHandler(axios(postConfig))
       default     : return responseHandler(get(url))
     }
 

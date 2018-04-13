@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 import Paper from 'material-ui/Paper'
 import Subheader from 'material-ui/Subheader'
@@ -182,6 +182,6 @@ export class SearchCreateChatComponent extends Component {
   }
 }
 
-SearchCreateChatComponent.propTypes = {
-  socket: PropTypes.object,
-}
+// SearchCreateChatComponent.propTypes = {
+//   socket: PropTypes.object,
+// }

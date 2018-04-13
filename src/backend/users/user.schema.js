@@ -5,9 +5,6 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     set: function(password) {
-
-      console.log('Set user schema passowrd:')
-
       this._password = password
       this.salt = this.makeSalt()
       this.hashed_password = this.encryptPassword(password)
@@ -22,11 +19,6 @@ userSchema.methods.encryptPassword = function (password) {
 }
 
 userSchema.methods.authenticate = function (plainText) {
-  console.log(
-    'Authenticate ---->',
-    plainText, this.encryptPassword(plainText),
-    this.password
-  )
   return this.encryptPassword(plainText) === this.password
 }
 

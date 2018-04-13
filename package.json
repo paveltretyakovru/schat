@@ -8,7 +8,7 @@
     "server": "node node_modules/nodemon/bin/nodemon.js --watch server.js --watch src/backend server.js",
     "front": "webpack-dev-server",
     "build": "NODE_ENV=production webpack",
-    "lan-front": "HOST=192.168.0.2 webpack-dev-server"
+    "lan-front": "HOST=schat.app webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -57,9 +57,11 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.20.0",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "crypto-js": "^3.1.9-1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "history": "^4.7.2",
     "import": "0.0.6",
     "jquery": "^3.2.1",

@@ -3,9 +3,9 @@ const webpack = require('webpack')
 const WebpackNotifierPlugin = require('webpack-notifier')
 // const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-const HOST = process.env.HOST || 'localhost'
+const HOST = process.env.HOST || 'schat.app'
 const NODE_ENV = process.env.NODE_ENV || 'development'
-const SERVER_HOST = process.env.SERVER_HOST || 'http://localhost:3001'
+const SERVER_HOST = process.env.SERVER_HOST || 'http://schat.app:3002'
 
 const ENTRY = (NODE_ENV == 'development')
   ? [
@@ -82,6 +82,5 @@ module.exports = {
     host: HOST,
     contentBase: `${__dirname}/public`,
     historyApiFallback: true,
-    // proxy: { '**': 'http://localhost:3001' },
   },
 }

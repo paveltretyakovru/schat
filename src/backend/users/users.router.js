@@ -16,14 +16,14 @@ router.post('/login', (req, res) => {
     query.findOne((err, user) => {
       try {
         if(user.authenticate(password)) {
-          console.log('Successfull user login', user.id)
+          res.cookie('name', 'tobi');
           res.json({success: true, message: `${login}, your welcome!`})
         } else {
           console.log('Invalid user password', { login, password })
           res.json({success: false, message: 'Invalid login or/and password'})
         }
       } catch (qerr){
-        const message = prepareMongoMessage(qerr.message,{
+        const message = prepareMongoMessage(qerr.message, {
           exists: 'User already exists',
           'not found': 'Invalid login or/and password',
         })

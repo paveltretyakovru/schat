@@ -1,4 +1,4 @@
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 import {
   HIDE_PROGRESS,
@@ -8,10 +8,10 @@ import {
   UPDATE_SNACK_MESSAGE,
 } from './app.constants';
 
-const socket = io.connect('http://localhost:3002')
+// const socket = io.connect('http://localhost:3002')
 
 const initState = {
-  socket,
+  // socket,
   headerTitle: 'Encrypted chat',
   showProgress: false,
   snackMessage: '',

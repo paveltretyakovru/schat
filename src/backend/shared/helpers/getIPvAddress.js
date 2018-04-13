@@ -15,11 +15,13 @@ const getIPvAddress = () => {
   
       if (alias >= 1) {
         // this single interface has multiple ipv4 addresses
-        console.log('alias >= 1', ifname + ':' + alias, iface.address)
+        console.log(
+          `interface has multiple ipv4 addresses ${ifname}:${alias}.${iface.address}`
+        )
         ips.push(iface.address)
       } else {
         // this interface has only one ipv4 adress
-        console.log('alias ELSE', ifname, iface.address)
+        console.log('interface has only one ipv4 adress', ifname, iface.address)
         ips.push(iface.address)
       }
 

@@ -86,7 +86,7 @@ function mapStateToProps(state) {
   return {
     app: state.app,
     auth: state.auth,
-    socket: state.app.socket,
+    // socket: state.app.socket,
   }
 }
 

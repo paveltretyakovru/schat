@@ -23,7 +23,7 @@ class HomeContainer extends Component {
       <div className="home-container">
         <SearchCreateChatComponent
           rooms={ this.prepareRoomsList(this.props.rooms.list) }
-          socket={ this.props.app.socket }
+          // socket={ this.props.app.socket }
           searchResult= { this.props.rooms.searchResult }
           roomsActions={this.props.roomsActions}
         />
