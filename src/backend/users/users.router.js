@@ -16,7 +16,6 @@ router.post('/login', (req, res) => {
     query.findOne((err, user) => {
       try {
         if(user.authenticate(password)) {
-          res.cookie('name', 'tobi');
           res.json({success: true, message: `${login}, your welcome!`})
         } else {
           console.log('Invalid user password', { login, password })

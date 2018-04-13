@@ -97,14 +97,17 @@ export const routeToAuthRegister = () => {
   }
 }
 
-export const submitRegister = (data = {login: '', password: '', repassword: ''}) => {
-  
+export const submitRegister = (data = {
+  login: '',
+  password: '',
+  repassword: '',
+}) => {  
   const request = dispatchServerRequest({
     url: AUTH_REGISTER_POST_URL,
     data: data,
     method: 'post',
-    callbackDispatches: [{ type: CLEAR_REGISTER_DATA }, { type: DISABLE_FINGER }],
-    successDispatches: [{ type: ENABLE_AUTHENTICATE }, () => push(HOME_ROUTE)],
+    callbackDispatches: [{type: CLEAR_REGISTER_DATA}, {type: DISABLE_FINGER}],
+    successDispatches: [{type: ENABLE_AUTHENTICATE}, () => push(HOME_ROUTE)],
     
     error: (dispatch, res) => {
       console.log('dispatchServerRequest error result', res)
@@ -114,11 +117,13 @@ export const submitRegister = (data = {login: '', password: '', repassword: ''})
   return request
 }
 
-export const updateRegisterData = (data = {login: '', password: '', repassword: ''}) => {
-  return (dispatch) => {
-    dispatch({type: UPDATE_REGISTER_DATA, payload: data})
+export const updateRegisterData = (
+  data = {
+    login: '',
+    password: '',
+    repassword: '',
   }
-}
+) => (dispatch) => dispatch({type: UPDATE_REGISTER_DATA, payload: data})
 
 export const clearRegisterData = () => {
   return (dispatch) => {

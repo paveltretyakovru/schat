@@ -1,11 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-module.exports = (app) => {
-  const socket = app.get('socket')
-
+module.exports = () => {
   router.post('/', (req, res) => {
-    socket.emit('message', {success: true, message: 'Room was created'})
     res.json({success: true, message: 'Rooms post', result: {
       room: {
         id: 'random_id',
@@ -13,7 +10,7 @@ module.exports = (app) => {
         favor: false,
         title: req.body.title,
         messages: [],
-      }
+      },
     }})
   })
 
